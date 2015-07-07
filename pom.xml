@@ -27,6 +27,15 @@
             <version>${motech.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-osgi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-osgi</artifactId>
+        </dependency>
+
 
     </dependencies>
 
@@ -43,18 +52,18 @@
                         <Context-Path>odk</Context-Path>
                         <Resource-Path>odk/resources</Resource-Path>
                         <Import-Package>
+                            net.sf.cglib.core,
+                            net.sf.cglib.proxy,
+                            net.sf.cglib.reflect,
+                            org.aopalliance.aop,
                             org.motechproject.admin.domain,
                             org.motechproject.admin.messages,
                             org.motechproject.config.service,
-                            org.motechproject.event.listener,
-                            org.motechproject.mds.service,
                             *
                         </Import-Package>
                         <Export-Package>
-                            org.motechproject.dhis2.service;version=${project.version},
-                            org.motechproject.dhis2.repository;version=${project.version},
-                            org.motechproject.dhis2.domain;version=${project.version},
-                            org.motechproject.dhis2.web;version=${project.version},
+                            org.motechproject.odk.service;version=${project.version},
+                            org.motechproject.odk.web;version=${project.version},
                         </Export-Package>
                     </instructions>
                 </configuration>
