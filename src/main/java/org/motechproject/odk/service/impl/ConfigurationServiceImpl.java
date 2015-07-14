@@ -2,6 +2,7 @@ package org.motechproject.odk.service.impl;
 
 
 import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.service.ConfigurationService;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
     /*Hard wired for now*/
     private static final String ODK = "odk";
-    private static final Configuration ODK_CONFIG =  new Configuration(ODK_FORMLIST_URL, "username","password",ODK);
-    private static final Configuration ONA_CONFIG = new Configuration(null,null,null,null);
+    private static final Configuration ODK_CONFIG =  new Configuration(ODK_FORMLIST_URL, "username","password", ODK, ConfigurationType.ODK);
+    private static final Configuration ONA_CONFIG = new Configuration(null,null,null,null, null);
 
 
     @Override

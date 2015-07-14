@@ -2,8 +2,8 @@ package org.motechproject.odk.web;
 
 
 import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.service.factory.FormDefinitionImportServiceFactory;
 import org.motechproject.odk.service.ConfigurationService;
-import org.motechproject.odk.service.FormDefinitionImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SyncController {
 
     @Autowired
-    FormDefinitionImportService formDefinitionImportService;
+    FormDefinitionImportServiceFactory formDefinitionImportServiceFactory;
 
     @Autowired
     ConfigurationService configurationService;
@@ -28,7 +28,7 @@ public class SyncController {
     public void syncForms (@PathVariable("config") String config) {
 
         Configuration configuration = configurationService.getConfigByName(config);
-        boolean success = formDefinitionImportService.importForms(configuration);
+        boolean success = formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
 
     }
 }

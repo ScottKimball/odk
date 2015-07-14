@@ -6,12 +6,15 @@ public class Configuration {
     private String username;
     private String password;
     private String name;
+    private ConfigurationType type;
 
-    public Configuration(String url, String username, String password, String name) {
+
+    public Configuration(String url, String username, String password, String name, ConfigurationType type) {
         this.url = url;
         this.username = username;
         this.password = password;
         this.name = name;
+        this.type = type;
     }
 
     public String getUrl() {
@@ -46,4 +49,11 @@ public class Configuration {
         this.name = name;
     }
 
+    public ConfigurationType getType() {
+        return type;
+    }
+
+    public void setType(ConfigurationType type) {
+        this.type = type;
+    }
 }
