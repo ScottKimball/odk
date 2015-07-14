@@ -4,6 +4,8 @@ package org.motechproject.odk.service;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.xml.SimpleNamespaceContext;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -15,14 +17,18 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+@Component
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
+
+    @Autowired
+    private TasksService tasksService;
 
     @Override
     public boolean importForms (Configuration config) {
@@ -31,6 +37,9 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             List<String> formUrls = getFormUrls(config);
             List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls);
             List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions);
+            modifyFormDefinitionForImplementation(formDefinitions);
+            tasksService.updateTasksChannel(formDefinitions,config);
+
             return true;
         } catch (Exception e) {
             LOGGER.error(e.toString());
@@ -93,4 +102,5 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
     protected abstract List<String> getFormUrls (Configuration configuration) throws Exception;
     protected abstract List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception;
+    protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
 }

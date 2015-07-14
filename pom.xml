@@ -36,7 +36,13 @@
             <artifactId>httpcore-osgi</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>${motech.groupId}</groupId>
+            <artifactId>motech-tasks</artifactId>
+            <version>${motech.version}</version>
+            <optional>true</optional>
+        </dependency>
+        
     </dependencies>
 
 

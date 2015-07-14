@@ -7,6 +7,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 
+import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.slf4j.Logger;
@@ -35,6 +36,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -87,5 +90,15 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
         return urls;
     }
 
+    @Override
+    protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
+
+        for (FormDefinition formDefinition: formDefinitions) {
+            for (FormDefinition.FormField formField : formDefinition.getFormFields()) {
+                String[] array = formField.getName().split("/");
+                formField.setName(array[array.length - 1]);
+            }
+        }
+    }
 }
