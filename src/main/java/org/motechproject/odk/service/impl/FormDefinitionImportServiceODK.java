@@ -10,6 +10,7 @@ import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
+import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.motechproject.odk.tasks.ODKConstants;
 
 
 @Service
@@ -45,6 +47,7 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
 
     private HttpClient client;
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(FormDefinitionImportServiceODK.class);
+
 
     @Autowired
     public FormDefinitionImportServiceODK(HttpClientBuilderFactory httpClientBuilderFactory) {
@@ -93,12 +96,19 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
-
         for (FormDefinition formDefinition: formDefinitions) {
             for (FormDefinition.FormField formField : formDefinition.getFormFields()) {
                 String[] array = formField.getName().split("/");
                 formField.setName(array[array.length - 1]);
             }
+
+            List<FormDefinition.FormField> formFields = formDefinition.getFormFields();
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
+            formFields.add(new FormDefinition.FormField(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
     }
 }

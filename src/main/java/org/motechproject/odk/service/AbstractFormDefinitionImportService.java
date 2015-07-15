@@ -90,11 +90,8 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
                     formField.setType(type.getNodeValue());
                     formDefinition.getFormFields().add(formField);
                 }
-
             }
-
             formDefinitions.add(formDefinition);
-
         }
         return formDefinitions;
 

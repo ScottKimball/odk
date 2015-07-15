@@ -27,6 +27,14 @@ public class FormDefinition {
         private String name;
         private String type;
 
+        public FormField(String name, String type) {
+            this.name = name;
+            this.type = type;
+        }
+
+        public FormField() {
+        }
+
         public String getName() {
             return name;
         }

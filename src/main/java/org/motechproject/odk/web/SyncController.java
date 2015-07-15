@@ -26,7 +26,6 @@ public class SyncController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void syncForms (@PathVariable("config") String config) {
-
         Configuration configuration = configurationService.getConfigByName(config);
         boolean success = formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
 

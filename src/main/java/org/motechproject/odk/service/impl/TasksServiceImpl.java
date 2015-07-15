@@ -25,7 +25,7 @@ public class TasksServiceImpl implements TasksService {
 
     @Override
     public void updateTasksChannel(List<FormDefinition> formDefinitions, Configuration configuration) {
-        ChannelRequestBuilder channelRequestBuilder = new ChannelRequestBuilder(bundleContext, formDefinitions);
+        ChannelRequestBuilder channelRequestBuilder = new ChannelRequestBuilder(bundleContext, formDefinitions, configuration);
         channelService.registerChannel(channelRequestBuilder.build());
     }
 }
