@@ -4,6 +4,7 @@ package org.motechproject.odk.service;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         put("orx", "http://openrosa.org/xforms");
         put("xsd", "http://www.w3.org/2001/XMLSchema");
     }};
+
 
 
     @Autowired
@@ -73,33 +75,34 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
         for (String xmlFormDefinition: xmlFormDefinitions) {
             FormDefinition formDefinition = new FormDefinition(configName);
-            formDefinition.setFormFields(new ArrayList<FormField>());
-
             InputSource inputSource = new InputSource(new ByteArrayInputStream(xmlFormDefinition.getBytes()));
-
             String title = xPath.compile("/h:html/h:head/h:title").evaluate(inputSource);
             formDefinition.setTitle(title);
-
             inputSource = new InputSource(new ByteArrayInputStream(xmlFormDefinition.getBytes()));
             NodeList nodeList = (NodeList) xPath.compile("/h:html/h:head/xForms:model/xForms:bind").evaluate(inputSource, XPathConstants.NODESET);
-
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
-                Node type = namedNodeMap.getNamedItem("type");
-                Node readOnly = namedNodeMap.getNamedItem("readonly");
-
-                if (readOnly == null && type != null) {
-
-                    FormField formField = new FormField();
-                    formField.setName(namedNodeMap.getNamedItem("nodeset").getNodeValue());
-                    formField.setType(type.getNodeValue());
-                    formDefinition.getFormFields().add(formField);
-                }
-            }
+            formDefinition.setFormFields(createFormFields(nodeList));
             formDefinitions.add(formDefinition);
+
         }
         return formDefinitions;
 
+    }
+
+    private List<FormField> createFormFields(NodeList nodeList) {
+        List<FormField> formFields = new ArrayList<>();
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
+            Node type = namedNodeMap.getNamedItem("type");
+            Node readOnly = namedNodeMap.getNamedItem("readonly");
+
+            if (readOnly == null && type != null) {
+                String typeString = type.getNodeValue();
+                String name = namedNodeMap.getNamedItem("nodeset").getNodeValue();
+                formFields.add( new FormField(name,typeString));
+            }
+        }
+        return formFields;
     }
 
     private void updateFormDefinitions(List<FormDefinition> formDefinitions, String configName) {

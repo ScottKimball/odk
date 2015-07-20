@@ -1221,8 +1221,8 @@
                 <hint>This will record the gps location. In enketo is is the same as the previous. (type=geopoint, appearance=maps)</hint>
             </input>
             <input appearance="maps hide-input" ref="/widgets/geopoint_widgets/my_geopoint_hide">
-                <label>Geopoint widget that hides input fields by default</label>
-                <hint>To show a larger map (on desktop screens), you can hide the input fields. (appearance = hide-input)</hint>
+                <label>Geopoint widget that hides input data by default</label>
+                <hint>To show a larger map (on desktop screens), you can hide the input data. (appearance = hide-input)</hint>
             </input>
             <input appearance="maps hide-input" ref="/widgets/geopoint_widgets/my_geotrace">
                 <label>Geotrace widget</label>
