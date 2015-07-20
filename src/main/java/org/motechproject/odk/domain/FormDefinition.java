@@ -1,11 +1,28 @@
 package org.motechproject.odk.domain;
 
+import org.motechproject.mds.annotations.Entity;
+import org.motechproject.mds.annotations.Field;
+
 import java.util.List;
 
+@Entity
 public class FormDefinition {
 
+    @Field
     private String title;
+
+    @Field
     private List<FormField> formFields;
+
+    @Field
+    private String configurationName;
+
+    public FormDefinition(String configurationName) {
+        this.configurationName = configurationName;
+    }
+
+    public FormDefinition() {
+    }
 
     public String getTitle() {
         return title;
@@ -23,32 +40,11 @@ public class FormDefinition {
         this.formFields = formFields;
     }
 
-    public static class FormField {
-        private String name;
-        private String type;
+    public String getConfigurationName() {
+        return configurationName;
+    }
 
-        public FormField(String name, String type) {
-            this.name = name;
-            this.type = type;
-        }
-
-        public FormField() {
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
+    public void setConfigurationName(String configurationName) {
+        this.configurationName = configurationName;
     }
 }

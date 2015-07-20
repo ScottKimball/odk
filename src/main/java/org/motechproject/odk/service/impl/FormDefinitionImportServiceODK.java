@@ -1,44 +1,32 @@
 package org.motechproject.odk.service.impl;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.client.HttpClient;
-import org.springframework.util.xml.SimpleNamespaceContext;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.motechproject.odk.tasks.ODKConstants;
 
 
@@ -46,7 +34,7 @@ import org.motechproject.odk.tasks.ODKConstants;
 public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
     private HttpClient client;
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(FormDefinitionImportServiceODK.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormDefinitionImportServiceODK.class);
 
 
     @Autowired
@@ -97,18 +85,18 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
         for (FormDefinition formDefinition: formDefinitions) {
-            for (FormDefinition.FormField formField : formDefinition.getFormFields()) {
+            for (FormField formField : formDefinition.getFormFields()) {
                 String[] array = formField.getName().split("/");
                 formField.setName(array[array.length - 1]);
             }
 
-            List<FormDefinition.FormField> formFields = formDefinition.getFormFields();
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
-            formFields.add(new FormDefinition.FormField(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
+            List<FormField> formFields = formDefinition.getFormFields();
+            formFields.add(new FormField(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formFields.add(new FormField(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
+            formFields.add(new FormField(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
+            formFields.add(new FormField(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
+            formFields.add(new FormField(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
+            formFields.add(new FormField(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
     }
 }

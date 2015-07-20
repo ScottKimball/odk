@@ -25,9 +25,8 @@ public class SyncController {
     @RequestMapping(value = "/sync/{config}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void syncForms (@PathVariable("config") String config) {
+    public boolean syncForms (@PathVariable("config") String config) {
         Configuration configuration = configurationService.getConfigByName(config);
-        boolean success = formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
-
+        return formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
     }
 }

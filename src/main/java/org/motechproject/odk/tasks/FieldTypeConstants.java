@@ -1,7 +1,6 @@
 package org.motechproject.odk.tasks;
 
 public class FieldTypeConstants {
-
     public static final String STRING = "string";
     public static final String DATE_TIME = "dateTime";
     public static final String BOOLEAN = "boolean";
@@ -15,6 +14,4 @@ public class FieldTypeConstants {
     public static final String GEOTRACE = "geotrace";
     public static final String GEOSHAPE = "geoshape";
     public static final String BINARY = "binary";
-
-
 }

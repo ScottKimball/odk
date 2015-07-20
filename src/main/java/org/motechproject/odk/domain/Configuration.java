@@ -1,12 +1,25 @@
 package org.motechproject.odk.domain;
 
+import org.motechproject.mds.annotations.Entity;
+import org.motechproject.mds.annotations.Field;
+
+import javax.jdo.annotations.Persistent;
+import java.util.List;
+
+@Entity
 public class Configuration {
 
+    @Field
     private String url;
+    @Field
     private String username;
+    @Field
     private String password;
+    @Field
     private String name;
+    @Field
     private ConfigurationType type;
+
 
 
     public Configuration(String url, String username, String password, String name, ConfigurationType type) {
@@ -15,6 +28,9 @@ public class Configuration {
         this.password = password;
         this.name = name;
         this.type = type;
+    }
+
+    public Configuration() {
     }
 
     public String getUrl() {
@@ -56,4 +72,6 @@ public class Configuration {
     public void setType(ConfigurationType type) {
         this.type = type;
     }
+
+
 }

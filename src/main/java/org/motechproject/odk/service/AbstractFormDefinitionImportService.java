@@ -3,6 +3,7 @@ package org.motechproject.odk.service;
 
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.domain.FormField;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,9 +27,21 @@ import java.util.List;
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
+    private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
+        put("xForms", "http://www.w3.org/2002/xforms");
+        put("ev", "http://www.w3.org/2001/xml-events");
+        put("h", "http://www.w3.org/1999/xhtml");
+        put("jr", "http://openrosa.org/javarosa");
+        put("orx", "http://openrosa.org/xforms");
+        put("xsd", "http://www.w3.org/2001/XMLSchema");
+    }};
+
 
     @Autowired
     private TasksService tasksService;
+
+    @Autowired
+    FormDefinitionService formDefinitionService;
 
     @Override
     public boolean importForms (Configuration config) {
@@ -36,39 +49,31 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         try {
             List<String> formUrls = getFormUrls(config);
             List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls);
-            List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions);
+            List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config.getName());
             modifyFormDefinitionForImplementation(formDefinitions);
+            updateFormDefinitions(formDefinitions, config.getName());
             tasksService.updateTasksChannel(formDefinitions,config);
-
             return true;
+
         } catch (Exception e) {
             LOGGER.error(e.toString());
             return false;
         }
     }
 
-    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions) throws XPathExpressionException {
+    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws XPathExpressionException {
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        HashMap<String, String> prefMap = new HashMap<String, String>() {{
-            put("xForms", "http://www.w3.org/2002/xforms");
-            put("ev", "http://www.w3.org/2001/xml-events");
-            put("h", "http://www.w3.org/1999/xhtml");
-            put("jr", "http://openrosa.org/javarosa");
-            put("orx", "http://openrosa.org/xforms");
-            put("xsd", "http://www.w3.org/2001/XMLSchema");
-        }};
-
         XPath xPath = xPathFactory.newXPath();
         SimpleNamespaceContext namespaces = new SimpleNamespaceContext();
-        namespaces.setBindings(prefMap);
+        namespaces.setBindings(NAMESPACE_MAP);
         xPath.setNamespaceContext(namespaces);
 
         List<FormDefinition> formDefinitions = new ArrayList<>();
 
         for (String xmlFormDefinition: xmlFormDefinitions) {
-            FormDefinition formDefinition = new FormDefinition();
-            formDefinition.setFormFields(new ArrayList<FormDefinition.FormField>());
+            FormDefinition formDefinition = new FormDefinition(configName);
+            formDefinition.setFormFields(new ArrayList<FormField>());
 
             InputSource inputSource = new InputSource(new ByteArrayInputStream(xmlFormDefinition.getBytes()));
 
@@ -85,7 +90,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
                 if (readOnly == null && type != null) {
 
-                    FormDefinition.FormField formField = new FormDefinition.FormField();
+                    FormField formField = new FormField();
                     formField.setName(namedNodeMap.getNamedItem("nodeset").getNodeValue());
                     formField.setType(type.getNodeValue());
                     formDefinition.getFormFields().add(formField);
@@ -96,6 +101,14 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         return formDefinitions;
 
     }
+
+    private void updateFormDefinitions(List<FormDefinition> formDefinitions, String configName) {
+        formDefinitionService.deleteFormDefinitionsByConfigurationName(configName);
+        for (FormDefinition formDefinition : formDefinitions) {
+            formDefinitionService.create(formDefinition);
+        }
+    }
+
 
     protected abstract List<String> getFormUrls (Configuration configuration) throws Exception;
     protected abstract List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception;

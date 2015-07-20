@@ -70,6 +70,8 @@
                         <Export-Package>
                             org.motechproject.odk.service;version=${project.version},
                             org.motechproject.odk.web;version=${project.version},
+                            org.motechproject.odk.repository;version=${project.version},
+                            org.motechproject.odk.domain;version=${project.version},
                         </Export-Package>
                     </instructions>
                 </configuration>
