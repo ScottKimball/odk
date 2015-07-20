@@ -36,6 +36,10 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     private HttpClient client;
     private static final Logger LOGGER = LoggerFactory.getLogger(FormDefinitionImportServiceODK.class);
 
+    private static final String LATITUDE = ":Latitude";
+    private static final String LONGITUDE = ":Longitude";
+    private static final String ALTITUDE = ":Altitude";
+    private static final String ACCURACY = ":Accuracy";
 
     @Autowired
     public FormDefinitionImportServiceODK(HttpClientBuilderFactory httpClientBuilderFactory) {
@@ -84,13 +88,25 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
+        List<FormField> additionalFields = new ArrayList<>();
         for (FormDefinition formDefinition: formDefinitions) {
-            for (FormField formField : formDefinition.getFormFields()) {
+            List<FormField> formFields = formDefinition.getFormFields();
+
+            for (FormField formField : formFields) {
                 String[] array = formField.getName().split("/");
                 formField.setName(array[array.length - 1]);
+
+                switch (formField.getType()) {
+                    case FieldTypeConstants.GEOPOINT :
+                        additionalFields.addAll(addGeopointFields(formField));
+                        break;
+
+                    default:
+                        break;
+                }
             }
 
-            List<FormField> formFields = formDefinition.getFormFields();
+            formFields.addAll(additionalFields);
             formFields.add(new FormField(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
             formFields.add(new FormField(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
             formFields.add(new FormField(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
@@ -98,5 +114,18 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
             formFields.add(new FormField(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
             formFields.add(new FormField(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
+    }
+
+    private List<FormField> addGeopointFields (FormField formField) {
+        List<FormField> formFields = new ArrayList<>();
+        String name = formField.getName();
+        String type = formField.getType();
+
+        formField.setName(name + LATITUDE);
+        formFields.add(formField);
+        formFields.add(new FormField(name + LONGITUDE, type ));
+        formFields.add(new FormField(name + ALTITUDE, type ));
+        formFields.add(new FormField(name + ACCURACY, type ));
+        return formFields;
     }
 }
