@@ -5,5 +5,5 @@ import org.motechproject.odk.domain.FormDefinition;
 
 public interface JsonParser {
 
-    MotechEvent createEventFromJson(String json, FormDefinition formDefinition) throws Exception;
+    MotechEvent createEventFromJson(String json, FormDefinition formDefinition, String configurationName) throws Exception;
 }

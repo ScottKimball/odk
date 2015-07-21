@@ -1,5 +1,7 @@
 package org.motechproject.odk.domain;
 
+import java.util.Map;
+
 public class OdkJsonFormPublication {
 
     private String token;
@@ -7,7 +9,7 @@ public class OdkJsonFormPublication {
     private String formId;
     private String formVersion;
 
-    private Object[] data;
+    private Map<String, Object>[] data;
 
     public String getToken() {
         return token;
@@ -33,11 +35,11 @@ public class OdkJsonFormPublication {
         this.formId = formId;
     }
 
-    public Object getData() {
+    public Map<String, Object>[] getData() {
         return data;
     }
 
-    public void setData(Object[] data) {
+    public void setData(Map<String, Object>[] data) {
         this.data = data;
     }
 

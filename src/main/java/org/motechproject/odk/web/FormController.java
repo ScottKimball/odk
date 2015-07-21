@@ -56,7 +56,7 @@ public class FormController {
     private void publishEvent (String body, Configuration configuration, FormDefinition formDefinition) {
         JsonParser parser = new JsonParserFactory().getParser(configuration.getType());
         try {
-            MotechEvent event = parser.createEventFromJson(body, formDefinition);
+            MotechEvent event = parser.createEventFromJson(body, formDefinition, configuration.getName());
 
         } catch (Exception e) {
             //TODO publish form fail event
