@@ -3,6 +3,7 @@ package org.motechproject.odk.tasks;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.event.EventParameters;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.tasks.contract.ActionEventRequest;
 import org.motechproject.tasks.contract.ChannelRequest;
@@ -20,8 +21,7 @@ public class ChannelRequestBuilder {
     private List<FormDefinition> formDefinitions;
     private Configuration configuration;
 
-    private static final String CHANNEL_DISPLAY_NAME = "ODK Module";
-    private static final String TRIGGER_DISPLAY_NAME = "Recieved Form";
+
 
     private static final String UNICODE = "UNICODE";
     private static final String DATE = "DATE";
@@ -54,8 +54,9 @@ public class ChannelRequestBuilder {
 
     public ChannelRequest build () {
         List<TriggerEventRequest> triggers = buildTriggers();
+        triggers.add(buildFailureEventTrigger());
 
-        return new ChannelRequest(CHANNEL_DISPLAY_NAME, bundleContext.getBundle().getSymbolicName(),
+        return new ChannelRequest(DisplayNames.CHANNEL_DISPLAY_NAME, bundleContext.getBundle().getSymbolicName(),
                 bundleContext.getBundle().getVersion().toString(), null, triggers, new ArrayList<ActionEventRequest>());
     }
 
@@ -64,7 +65,7 @@ public class ChannelRequestBuilder {
 
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
-            TriggerEventRequest eventRequest = new TriggerEventRequest(TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
+            TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
                     EventSubjects.RECEIVED_FORM + "." +  configuration.getName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }
@@ -82,6 +83,17 @@ public class ChannelRequestBuilder {
             }
         }
         return eventParameterRequests;
+    }
+
+    private TriggerEventRequest buildFailureEventTrigger() {
+        List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.CONFIGURATION_NAME,EventParameters.CONFIGURATION_NAME,UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.EXCEPTION,EventParameters.EXCEPTION,UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE,EventParameters.FORM_TITLE,UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.MESSAGE,EventParameters.MESSAGE,UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT,EventParameters.JSON_CONTENT));
+
+        return new TriggerEventRequest(DisplayNames.FORM_FAIL,EventSubjects.FORM_FAIL,null,eventParameterRequests);
     }
 
 }
