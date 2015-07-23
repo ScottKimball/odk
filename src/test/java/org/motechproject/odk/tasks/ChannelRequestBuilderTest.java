@@ -1,4 +1,4 @@
-package org.motechprojext.odk.test;
+package org.motechproject.odk.tasks;
 
 import org.junit.Before;
 import org.junit.Test;

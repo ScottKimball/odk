@@ -91,7 +91,7 @@ public class ChannelRequestBuilder {
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.EXCEPTION,EventParameters.EXCEPTION,UNICODE));
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE,EventParameters.FORM_TITLE,UNICODE));
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.MESSAGE,EventParameters.MESSAGE,UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT,EventParameters.JSON_CONTENT));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT,EventParameters.JSON_CONTENT, UNICODE));
 
         return new TriggerEventRequest(DisplayNames.FORM_FAIL,EventSubjects.FORM_FAIL,null,eventParameterRequests);
     }

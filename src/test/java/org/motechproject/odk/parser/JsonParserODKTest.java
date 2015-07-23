@@ -1,4 +1,4 @@
-package org.motechprojext.odk.test;
+package org.motechproject.odk.parser;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;

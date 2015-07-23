@@ -1,4 +1,4 @@
-package org.motechprojext.odk.test;
+package org.motechproject.odk;
 
 import org.apache.commons.io.FileUtils;
 
