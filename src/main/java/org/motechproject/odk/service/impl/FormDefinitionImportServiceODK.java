@@ -9,6 +9,8 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
+import org.motechproject.odk.service.FormDefinitionService;
+import org.motechproject.odk.service.TasksService;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +35,7 @@ import org.motechproject.odk.tasks.ODKConstants;
 @Service
 public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
-    private HttpClient client;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FormDefinitionImportServiceODK.class);
 
     private static final String LATITUDE = ":Latitude";
@@ -42,33 +44,11 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     private static final String ACCURACY = ":Accuracy";
 
     @Autowired
-    public FormDefinitionImportServiceODK(HttpClientBuilderFactory httpClientBuilderFactory) {
-        this.client = httpClientBuilderFactory.newBuilder().build();
+    public FormDefinitionImportServiceODK(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
+        super(httpClientBuilderFactory, tasksService, formDefinitionService);
     }
 
-    protected List<String> getFormUrls(Configuration configuration) throws Exception{
-        HttpGet request = new HttpGet(configuration.getUrl());
-        request.addHeader("accept", MediaType.APPLICATION_XML_VALUE);
-        HttpResponse response = client.execute(request);
-        String responseBody = EntityUtils.toString(response.getEntity());
-        return parseToUrlList(responseBody);
-    }
-
-    protected List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception{
-        List<String> formDefinitions = new ArrayList<>();
-
-        for (String url : formUrls) {
-            HttpGet request = new HttpGet(url);
-            request.addHeader("accept", MediaType.APPLICATION_XML_VALUE);
-            HttpResponse response = client.execute(request);
-            String responseBody = EntityUtils.toString(response.getEntity());
-            formDefinitions.add(responseBody);
-        }
-
-        return formDefinitions;
-    }
-
-    private List<String> parseToUrlList(String responseBody) throws XPathException {
+    protected List<String> parseToUrlList(String responseBody) throws XPathException {
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();

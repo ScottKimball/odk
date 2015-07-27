@@ -61,8 +61,7 @@ public class ChannelRequestBuilderTest {
 
         definition.setFormFields(formFields);
         formDefinitionList.add(definition);
-        Configuration configuration = new Configuration(null,null,null,"configuration",null);
-        ChannelRequestBuilder builder = new ChannelRequestBuilder(bundleContext,formDefinitionList,configuration);
+        ChannelRequestBuilder builder = new ChannelRequestBuilder(bundleContext,formDefinitionList);
         ChannelRequest request = builder.build();
         assertNotNull(request);
         List<EventParameterRequest> eventParameters = request.getTriggerTaskEvents().get(0).getEventParameters();

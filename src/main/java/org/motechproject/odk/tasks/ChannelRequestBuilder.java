@@ -19,7 +19,6 @@ import java.util.Map;
 public class ChannelRequestBuilder {
     private BundleContext bundleContext;
     private List<FormDefinition> formDefinitions;
-    private Configuration configuration;
 
 
 
@@ -46,10 +45,9 @@ public class ChannelRequestBuilder {
         put(FieldTypeConstants.GEOSHAPE, UNICODE);
     }};
 
-    public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions, Configuration configuration) {
+    public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {
         this.bundleContext = bundleContext;
         this.formDefinitions = formDefinitions;
-        this.configuration = configuration;
     }
 
     public ChannelRequest build () {
@@ -66,7 +64,7 @@ public class ChannelRequestBuilder {
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
             TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
-                    EventSubjects.RECEIVED_FORM + "." +  configuration.getName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
+                    EventSubjects.RECEIVED_FORM + "." +  formDefinition.getConfigurationName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }
         return triggerEventRequests;

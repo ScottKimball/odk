@@ -36,4 +36,9 @@ public class FormDefinitionServiceImpl implements FormDefinitionService {
             formDefinitionDataService.delete(formDefinition);
         }
     }
+
+    @Override
+    public List<FormDefinition> findAll() {
+        return formDefinitionDataService.retrieveAll();
+    }
 }

@@ -1,11 +1,17 @@
 package org.motechproject.odk.service;
 
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.osgi.services.HttpClientBuilderFactory;
+import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.xml.SimpleNamespaceContext;
@@ -16,6 +22,7 @@ import org.xml.sax.InputSource;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
@@ -27,7 +34,9 @@ import java.util.List;
 @Component
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
+
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
     private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
         put("xForms", "http://www.w3.org/2002/xforms");
         put("ev", "http://www.w3.org/2001/xml-events");
@@ -36,14 +45,18 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         put("orx", "http://openrosa.org/xforms");
         put("xsd", "http://www.w3.org/2001/XMLSchema");
     }};
+    protected static final String FORM_LIST_PATH = "/formList";
 
-
-
-    @Autowired
+    private HttpClient client;
     private TasksService tasksService;
+    FormDefinitionService formDefinitionService;
 
     @Autowired
-    FormDefinitionService formDefinitionService;
+    public AbstractFormDefinitionImportService(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
+        this.client = httpClientBuilderFactory.newBuilder().build();
+        this.tasksService = tasksService;
+        this.formDefinitionService = formDefinitionService;
+    }
 
     @Override
     public boolean importForms (Configuration config) {
@@ -54,7 +67,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config.getName());
             modifyFormDefinitionForImplementation(formDefinitions);
             updateFormDefinitions(formDefinitions, config.getName());
-            tasksService.updateTasksChannel(formDefinitions,config);
+            tasksService.updateTasksChannel();
             return true;
 
         } catch (Exception e) {
@@ -88,6 +101,25 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
     }
 
+    protected List<String> getFormUrls(Configuration configuration) throws Exception {
+        HttpGet request = new HttpGet(configuration.getUrl() + FORM_LIST_PATH);
+        HttpResponse response = client.execute(request);
+        String responseBody = EntityUtils.toString(response.getEntity());
+        return parseToUrlList(responseBody);
+    }
+
+    protected List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception {
+        List<String> formDefinitions = new ArrayList<>();
+
+        for (String url : formUrls) {
+            HttpGet request = new HttpGet(url);
+            HttpResponse response = client.execute(request);
+            String responseBody = EntityUtils.toString(response.getEntity());
+            formDefinitions.add(responseBody);
+        }
+        return formDefinitions;
+    }
+
     private List<FormField> createFormFields(NodeList nodeList) {
         List<FormField> formFields = new ArrayList<>();
 
@@ -113,7 +145,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
 
-    protected abstract List<String> getFormUrls (Configuration configuration) throws Exception;
-    protected abstract List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception;
+
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
+    protected abstract List<String> parseToUrlList(String responseBody) throws XPathException;
 }

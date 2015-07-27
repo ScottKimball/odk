@@ -38,10 +38,6 @@ public class JsonParserODK implements JsonParser {
     private Object formatValue(String type, Object value) {
 
         switch (type) {
-
-            case FieldTypeConstants.GEOSHAPE:
-                return formatList(value);
-
             case FieldTypeConstants.SELECT:
                 return formatArray((List<String>)value);
 

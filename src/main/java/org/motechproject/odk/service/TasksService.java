@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TasksService {
 
-    void updateTasksChannel(List<FormDefinition> formDefinitions, Configuration configuration);
+    void updateTasksChannel();
 }

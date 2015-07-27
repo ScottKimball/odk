@@ -35,14 +35,14 @@ public class JsonParserODKTest {
         assertEquals(params.get("my_long_text"), "long\ntext");
         assertEquals(params.get("my_int"),6);
         assertEquals(params.get("select_horizontal"), "3\n5\n8");
-        assertEquals(params.get("my_geoshape"), "7.9377 -11.5845 0.0 0.0\n" +
-                " 7.9324 -11.5902 0.0 0.0\n" +
-                " 7.927 -11.5857 0.0 0.0\n" +
-                " 7.925 -11.578 0.0 0.0\n" +
-                " 7.9267 -11.5722 0.0 0.0\n" +
-                " 7.9325 -11.5708 0.0 0.0\n" +
-                " 7.9372 -11.5737 0.0 0.0\n" +
-                " 7.9393 -11.579 0.0 0.0\n" +
+        assertEquals(params.get("my_geoshape"), "7.9377 -11.5845 0.0 0.0" +
+                " 7.9324 -11.5902 0.0 0.0" +
+                " 7.927 -11.5857 0.0 0.0" +
+                " 7.925 -11.578 0.0 0.0" +
+                " 7.9267 -11.5722 0.0 0.0" +
+                " 7.9325 -11.5708 0.0 0.0" +
+                " 7.9372 -11.5737 0.0 0.0" +
+                " 7.9393 -11.579 0.0 0.0" +
                 " 7.9377 -11.5845 0.0 0.0");
         assertEquals(params.get("my_image"), "http://motech-test01.rcg.usm.maine.edu:8080/ODKAggregate/view/binaryData" +
                 "?blobKey=widgets%5B%40version%3Dnull+and+%40uiVersion%3Dnull%5D%2Fwidgets%5B%40key%3Duuid%3Affb7423d-" +
