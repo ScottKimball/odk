@@ -19,15 +19,18 @@ public class Configuration {
     private String name;
     @Field
     private ConfigurationType type;
+    @Field
+    private String namespace;
 
 
 
-    public Configuration(String url, String username, String password, String name, ConfigurationType type) {
+    public Configuration(String url, String username, String password, String name, ConfigurationType type, String namespace) {
         this.url = url;
         this.username = username;
         this.password = password;
         this.name = name;
         this.type = type;
+        this.namespace = namespace;
     }
 
     public Configuration() {
@@ -74,4 +77,11 @@ public class Configuration {
     }
 
 
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
+    }
 }

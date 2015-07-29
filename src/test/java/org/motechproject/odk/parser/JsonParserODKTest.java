@@ -3,11 +3,11 @@ package org.motechproject.odk.parser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.motechproject.event.MotechEvent;
+import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.event.EventSubjects;
-import org.motechproject.odk.parser.JsonParser;
-import org.motechproject.odk.parser.JsonParserODK;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,10 +24,12 @@ public class JsonParserODKTest {
         File f = new File("odk/src/test/resources/test-widgets.json");
         String json = FileUtils.readFileToString(f);
 
-        JsonParser parser = new JsonParserODK();
         FormDefinition formDefinition = createFormDefinition();
+        Configuration configuration = new Configuration("http://domainname.com", "username", "password", "configname", ConfigurationType.ONA, "namespace");
 
-        MotechEvent motechEvent = parser.createEventFromJson(json, formDefinition, "configName");
+        JsonParser parser = new JsonParserODK(json, formDefinition,configuration);
+
+        MotechEvent motechEvent = parser.createEventFromJson();
         assertNotNull(motechEvent);
         assertEquals(motechEvent.getSubject(), EventSubjects.RECEIVED_FORM + ".configName." + formDefinition.getTitle());
         Map<String,Object> params = motechEvent.getParameters();

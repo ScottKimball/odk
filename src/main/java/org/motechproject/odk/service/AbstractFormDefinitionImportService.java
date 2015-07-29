@@ -34,8 +34,6 @@ import java.util.List;
 @Component
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
-
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
     private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
         put("xForms", "http://www.w3.org/2002/xforms");
@@ -102,7 +100,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
-        HttpGet request = new HttpGet(configuration.getUrl() + FORM_LIST_PATH);
+        HttpGet request = new HttpGet(configuration.getUrl() + configuration.getNamespace() + FORM_LIST_PATH);
         HttpResponse response = client.execute(request);
         String responseBody = EntityUtils.toString(response.getEntity());
         return parseToUrlList(responseBody);

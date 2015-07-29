@@ -44,10 +44,10 @@ public class FormController {
     @RequestMapping(value = "/{config}/{form}" ,method = RequestMethod.POST )
     @ResponseStatus(HttpStatus.OK)
     public void receiveForm(@PathVariable("config") String config, @PathVariable("form") String form, @RequestBody String body) {
-        LOGGER.debug("Recieved form: " + form + " Configuration: " + config );
+        LOGGER.debug("Received form: " + form + " Configuration: " + config );
 
         Configuration configuration = configurationService.getConfigByName(config);
-        FormDefinition formDefinition = formDefinitionService.findByTitle(form);
+        FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(config,form);
 
         if (configuration == null) {
             LOGGER.error("Configuration " + config + " does not exist");
@@ -63,14 +63,14 @@ public class FormController {
     }
 
     private void publishEvent (String body, Configuration configuration, FormDefinition formDefinition) {
-        JsonParser parser = new JsonParserFactory().getParser(configuration.getType());
+        JsonParser parser = new JsonParserFactory().getParser(body,formDefinition,configuration);
 
         try {
-            MotechEvent event = parser.createEventFromJson(body, formDefinition, configuration.getName());
+            MotechEvent event = parser.createEventFromJson();
             eventRelay.sendEventMessage(event);
 
         } catch (Exception e) {
-            LOGGER.error(e.toString());
+            LOGGER.error("Publishing form reciept failure event:\n" + e.toString());
             publishFailureEvent("Error parsing JSON form data", e.toString(), configuration.getName(), formDefinition.getTitle(), body);
         }
     }

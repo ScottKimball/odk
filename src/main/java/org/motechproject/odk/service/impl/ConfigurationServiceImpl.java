@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigurationServiceImpl implements ConfigurationService {
 
-    private static final String ODK_URL = "http://motech-test01.rcg.usm.maine.edu:8080/ODKAggregate";
-    private static final String ONA_URL = "http://ona.io/scott";
+    private static final String ODK_URL = "http://motech-test01.rcg.usm.maine.edu:8080";
+    private static final String ONA_URL = "http://ona.io";
 
     /*Hard wired for now*/
     private static final String CONFIG_NAME_ODK = "odk";
     private static final String CONFIG_NAME_ONA = "ona";
-    private static final Configuration ODK_CONFIG =  new Configuration(ODK_URL, "username","password", CONFIG_NAME_ODK, ConfigurationType.ODK);
-    private static final Configuration ONA_CONFIG = new Configuration(ONA_URL,"username","password", CONFIG_NAME_ONA, ConfigurationType.ONA);
+    private static final Configuration ODK_CONFIG =  new Configuration(ODK_URL, "username","password", CONFIG_NAME_ODK, ConfigurationType.ODK, "/ODKAggregate");
+    private static final Configuration ONA_CONFIG = new Configuration(ONA_URL,"username","password", CONFIG_NAME_ONA, ConfigurationType.ONA,"/scott" );
 
 
     @Override

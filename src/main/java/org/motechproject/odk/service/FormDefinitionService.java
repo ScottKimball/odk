@@ -11,4 +11,5 @@ public interface FormDefinitionService {
     void deleteAll();
     void deleteFormDefinitionsByConfigurationName(String configName);
     List<FormDefinition> findAll();
+    FormDefinition findByConfigurationNameAndTitle(String configurationName, String title);
 }

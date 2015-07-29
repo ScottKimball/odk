@@ -1,11 +1,6 @@
 package org.motechproject.odk.service.impl;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
-import org.apache.http.util.EntityUtils;
-import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
@@ -13,15 +8,10 @@ import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
 import org.motechproject.odk.tasks.FieldTypeConstants;
-import org.motechproject.odk.tasks.ODKConstants;
 import org.motechproject.odk.tasks.OnaConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.xml.SimpleNamespaceContext;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -50,7 +40,14 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
 
         for (FormDefinition formDefinition: formDefinitions) {
             List<FormField> formFields = formDefinition.getFormFields();
-            formFields.add(new FormField(OnaConstants.NOTES, FieldTypeConstants.SELECT));
+
+            for (FormField formField : formFields) {
+                String name = formField.getName().replace("/" + formDefinition.getTitle().toLowerCase() + "/","");
+                formField.setName(name);
+
+            }
+
+            formFields.add(new FormField(OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
             formFields.add(new FormField(OnaConstants.TAGS, FieldTypeConstants.SELECT));
             formFields.add(new FormField(OnaConstants.XFORM_ID_STRING, FieldTypeConstants.STRING));
             formFields.add(new FormField(OnaConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
@@ -60,7 +57,7 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             formFields.add(new FormField(OnaConstants.ID, FieldTypeConstants.STRING));
             formFields.add(new FormField(OnaConstants.SUBMISSION_TIME, FieldTypeConstants.DATE_TIME));
             formFields.add(new FormField(OnaConstants.VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.GEOLOCATION, FieldTypeConstants.SELECT));
+            formFields.add(new FormField(OnaConstants.GEOLOCATION, FieldTypeConstants.DOUBLE_ARRAY));
             formFields.add(new FormField(OnaConstants.SUBMITTED_BY, FieldTypeConstants.STRING));
         }
     }

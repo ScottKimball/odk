@@ -1,6 +1,5 @@
 package org.motechproject.odk.tasks;
 
-import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
 import org.motechproject.odk.event.EventParameters;
@@ -43,6 +42,8 @@ public class ChannelRequestBuilder {
         put(FieldTypeConstants.GEOPOINT, UNICODE);
         put(FieldTypeConstants.GEOTRACE, UNICODE);
         put(FieldTypeConstants.GEOSHAPE, UNICODE);
+        put(FieldTypeConstants.DOUBLE_ARRAY, UNICODE);
+        put(FieldTypeConstants.STRING_ARRAY, UNICODE);
     }};
 
     public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {

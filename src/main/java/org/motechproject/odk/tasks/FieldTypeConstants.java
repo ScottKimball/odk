@@ -14,4 +14,6 @@ public class FieldTypeConstants {
     public static final String GEOTRACE = "geotrace";
     public static final String GEOSHAPE = "geoshape";
     public static final String BINARY = "binary";
+    public static final String DOUBLE_ARRAY = "doubleArray";
+    public static final String STRING_ARRAY = "stringArray";
 }

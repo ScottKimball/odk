@@ -41,4 +41,9 @@ public class FormDefinitionServiceImpl implements FormDefinitionService {
     public List<FormDefinition> findAll() {
         return formDefinitionDataService.retrieveAll();
     }
+
+    @Override
+    public FormDefinition findByConfigurationNameAndTitle(String configurationName, String title) {
+        return formDefinitionDataService.byConfigurationNameAndTitle(configurationName,title);
+    }
 }
