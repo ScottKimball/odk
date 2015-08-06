@@ -111,22 +111,6 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         return formDefinitions;
     }
 
-    private List<FormField> createFormFields(NodeList nodeList) {
-        List<FormField> formFields = new ArrayList<>();
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
-            Node type = namedNodeMap.getNamedItem(TYPE);
-            Node readOnly = namedNodeMap.getNamedItem(READ_ONLY);
-
-            if (readOnly == null && type != null) {
-                String typeString = type.getNodeValue();
-                String name = namedNodeMap.getNamedItem(NODE_SET).getNodeValue();
-                formFields.add( new FormField(name,typeString));
-            }
-        }
-        return formFields;
-    }
 
     private void updateFormDefinitions(List<FormDefinition> formDefinitions, String configName) {
         formDefinitionService.deleteFormDefinitionsByConfigurationName(configName);
@@ -134,8 +118,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             formDefinitionService.create(formDefinition);
         }
     }
-
-
+    
 
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
     protected abstract List<String> parseToUrlList(String responseBody) throws XPathException;
