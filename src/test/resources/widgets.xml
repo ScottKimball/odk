@@ -546,8 +546,7 @@
             </instance>
             <bind nodeset="/widgets/intro" readonly="true()" type="string"/>
             <bind nodeset="/widgets/text_widgets/my_string" type="string"/>
-            <bind nodeset="/widgets/text_widgets/my_long_t    private String name;
-    private String type;ext" type="string"/>
+            <bind nodeset="/widgets/text_widgets/my_long_text" type="string"/>
             <bind constraint=". &lt; 10" jr:constraintMsg="number must be less than 10" nodeset="/widgets/number_widgets/my_int" type="int"/>
             <bind constraint=". &gt; 10.51 and . &lt; 18.39" jr:constraintMsg="number must be between 10.51 and 18.39" nodeset="/widgets/number_widgets/my_decimal" type="decimal"/>
             <bind constraint=". &gt;= 0 and . &lt;= 10" nodeset="/widgets/number_widgets/my_distress" type="int"/>

@@ -9,6 +9,7 @@ import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,12 @@ import org.xml.sax.InputSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +48,11 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         put("xsd", "http://www.w3.org/2001/XMLSchema");
     }};
     protected static final String FORM_LIST_PATH = "/formList";
+    private static final String READ_ONLY = "readonly";
+    private static final String TYPE = "type";
+    private static final String NODE_SET = "nodeset";
+    private static final String TITLE = "/h:html/h:head/h:title";
+    private static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
 
     private HttpClient client;
     private TasksService tasksService;
@@ -74,26 +83,10 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         }
     }
 
-    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws XPathExpressionException {
-
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
-        SimpleNamespaceContext namespaces = new SimpleNamespaceContext();
-        namespaces.setBindings(NAMESPACE_MAP);
-        xPath.setNamespaceContext(namespaces);
-
+    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws XPathException {
         List<FormDefinition> formDefinitions = new ArrayList<>();
-
-        for (String xmlFormDefinition: xmlFormDefinitions) {
-            FormDefinition formDefinition = new FormDefinition(configName);
-            InputSource inputSource = new InputSource(new ByteArrayInputStream(xmlFormDefinition.getBytes()));
-            String title = xPath.compile("/h:html/h:head/h:title").evaluate(inputSource);
-            formDefinition.setTitle(title);
-            inputSource = new InputSource(new ByteArrayInputStream(xmlFormDefinition.getBytes()));
-            NodeList nodeList = (NodeList) xPath.compile("/h:html/h:head/xForms:model/xForms:bind").evaluate(inputSource, XPathConstants.NODESET);
-            formDefinition.setFormFields(createFormFields(nodeList));
-            formDefinitions.add(formDefinition);
-
+        for (String def : xmlFormDefinitions) {
+            formDefinitions.add(XformParser.parse(def, configName));
         }
         return formDefinitions;
 
@@ -123,12 +116,12 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
-            Node type = namedNodeMap.getNamedItem("type");
-            Node readOnly = namedNodeMap.getNamedItem("readonly");
+            Node type = namedNodeMap.getNamedItem(TYPE);
+            Node readOnly = namedNodeMap.getNamedItem(READ_ONLY);
 
             if (readOnly == null && type != null) {
                 String typeString = type.getNodeValue();
-                String name = namedNodeMap.getNamedItem("nodeset").getNodeValue();
+                String name = namedNodeMap.getNamedItem(NODE_SET).getNodeValue();
                 formFields.add( new FormField(name,typeString));
             }
         }

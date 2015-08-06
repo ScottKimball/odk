@@ -16,4 +16,5 @@ public class FieldTypeConstants {
     public static final String BINARY = "binary";
     public static final String DOUBLE_ARRAY = "doubleArray";
     public static final String STRING_ARRAY = "stringArray";
+    public static final String REPEAT_GROUP = "repeatGroup";
 }

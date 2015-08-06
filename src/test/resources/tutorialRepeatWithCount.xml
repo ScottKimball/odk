@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <h:head>
+        <h:title>tutorialRepeatWithCount</h:title>
+        <model>
+            <instance>
+                <tutorialRepeatWithCount id="tutorialRepeatWithCount" version="201507291955">
+                    <formhub>
+                        <uuid/>
+                    </formhub>
+                    <child_repeat_count/>
+                    <child_repeat jr:template="">
+                        <name/>
+                        <age/>
+                        <gender/>
+                    </child_repeat>
+                    <photo/>
+                    <date/>
+                    <location/>
+                    <pizza_fan/>
+                    <pizza_hater/>
+                    <pizza_type/>
+                    <favorite_toppings/>
+                    <thanks/>
+                    <start_time/>
+                    <end_time/>
+                    <today/>
+                    <imei/>
+                    <phonenumber/>
+                    <meta>
+                        <instanceID/>
+                    </meta>
+                </tutorialRepeatWithCount>
+            </instance>
+            <bind calculate="3" nodeset="/tutorialRepeatWithCount/child_repeat_count" readonly="true()" type="string"/>
+            <bind nodeset="/tutorialRepeatWithCount/child_repeat/name" required="true()" type="string"/>
+            <bind constraint=" /tutorialRepeatWithCount/child_repeat/age  &gt; 0 and  /tutorialRepeatWithCount/child_repeat/age  &lt; 120" jr:constraintMsg="That's not a valid age!" nodeset="/tutorialRepeatWithCount/child_repeat/age" required="true()" type="int"/>
+            <bind nodeset="/tutorialRepeatWithCount/child_repeat/gender" type="select1"/>
+            <bind nodeset="/tutorialRepeatWithCount/photo" type="binary"/>
+            <bind nodeset="/tutorialRepeatWithCount/date" type="date"/>
+            <bind nodeset="/tutorialRepeatWithCount/location" type="geopoint"/>
+            <bind nodeset="/tutorialRepeatWithCount/pizza_fan" type="select1"/>
+            <bind nodeset="/tutorialRepeatWithCount/pizza_hater" readonly="true()" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'no'" type="string"/>
+            <bind nodeset="/tutorialRepeatWithCount/pizza_type" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'" type="select1"/>
+            <bind nodeset="/tutorialRepeatWithCount/favorite_toppings" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'" type="select"/>
+            <bind nodeset="/tutorialRepeatWithCount/thanks" readonly="true()" type="string"/>
+            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/tutorialRepeatWithCount/start_time" type="dateTime"/>
+            <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/tutorialRepeatWithCount/end_time" type="dateTime"/>
+            <bind jr:preload="date" jr:preloadParams="today" nodeset="/tutorialRepeatWithCount/today" type="date"/>
+            <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/tutorialRepeatWithCount/imei" type="string"/>
+            <bind jr:preload="property" jr:preloadParams="phonenumber" nodeset="/tutorialRepeatWithCount/phonenumber" type="string"/>
+            <bind calculate="concat('uuid:', uuid())" nodeset="/tutorialRepeatWithCount/meta/instanceID" readonly="true()" type="string"/>
+            <bind calculate="'01edbad75c52455fa7e67135b355f1ad'" nodeset="/tutorialRepeatWithCount/formhub/uuid" type="string"/>
+        </model>
+    </h:head>
+    <h:body>
+        <group ref="/tutorialRepeatWithCount/child_repeat">
+            <label/>
+            <repeat jr:count=" /tutorialRepeatWithCount/child_repeat_count " nodeset="/tutorialRepeatWithCount/child_repeat">
+                <input ref="/tutorialRepeatWithCount/child_repeat/name">
+                    <label>What's your name?</label>
+                </input>
+                <input ref="/tutorialRepeatWithCount/child_repeat/age">
+                    <label>How old are you?</label>
+                </input>
+                <select1 ref="/tutorialRepeatWithCount/child_repeat/gender">
+                    <label>Gender</label>
+                    <item>
+                        <label>Male</label>
+                        <value>male</value>
+                    </item>
+                    <item>
+                        <label>Female</label>
+                        <value>female</value>
+                    </item>
+                </select1>
+            </repeat>
+        </group>
+        <upload mediatype="image/*" ref="/tutorialRepeatWithCount/photo">
+            <label>Take a picture</label>
+        </upload>
+        <input ref="/tutorialRepeatWithCount/date">
+            <label>Date</label>
+        </input>
+        <input ref="/tutorialRepeatWithCount/location">
+            <label>Where are you?</label>
+            <hint>You need to be outside for your GPS to work.</hint>
+        </input>
+        <select1 ref="/tutorialRepeatWithCount/pizza_fan">
+            <label>Do you like pizza?</label>
+            <item>
+                <label>Yes</label>
+                <value>yes</value>
+            </item>
+            <item>
+                <label>No</label>
+                <value>no</value>
+            </item>
+        </select1>
+        <input ref="/tutorialRepeatWithCount/pizza_hater">
+            <label>That's weird!</label>
+        </input>
+        <select1 ref="/tutorialRepeatWithCount/pizza_type">
+            <label>Best pie?</label>
+            <item>
+                <label>New York think crust!</label>
+                <value>nyc</value>
+            </item>
+            <item>
+                <label>Chicago deep dish!</label>
+                <value>chitown</value>
+            </item>
+        </select1>
+        <select ref="/tutorialRepeatWithCount/favorite_toppings">
+            <label>Favorite toppings</label>
+            <item>
+                <label>Cheese</label>
+                <value>cheese</value>
+            </item>
+            <item>
+                <label>Pepperoni</label>
+                <value>pepperoni</value>
+            </item>
+            <item>
+                <label>Sausauge</label>
+                <value>sausauge</value>
+            </item>
+            <item>
+                <label>Green Peppers</label>
+                <value>green_peppers</value>
+            </item>
+            <item>
+                <label>Mushrooms</label>
+                <value>mushrooms</value>
+            </item>
+            <item>
+                <label>Anchovies :)</label>
+                <value>anchovies</value>
+            </item>
+        </select>
+        <input ref="/tutorialRepeatWithCount/thanks">
+            <label>Thanks for your time <output value=" /tutorialRepeatWithCount/child_repeat/name "/>!</label>
+        </input>
+    </h:body>
+</h:html>
