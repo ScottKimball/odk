@@ -75,11 +75,11 @@ public class XformParser {
             }
         }
 
-        Map<String,FormElement> formFieldMap = new HashMap<>();
-        recursivelyAddFormFields(formFieldMap, formElementsList, "/" + uri);
+        Map<String,FormElement> formElementMap = new HashMap<>();
+        recursivelyAddFormElements(formElementMap, formElementsList, "/" + uri);
         NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
-        addBindInformationToFormFields(formFieldMap, binds);
-        formDefinition.setFormElements(new ArrayList<>(formFieldMap.values()));
+        addBindInformationToFormFields(formElementMap, binds);
+        formDefinition.setFormElements(createFormElementListFromMap(formElementMap));
         return formDefinition;
     }
 
@@ -92,10 +92,6 @@ public class XformParser {
             Node typeNode = attributes.getNamedItem(TYPE);
 
             if (formElement != null) {
-
-                if (formElement.hasParent() && formElement.getParent().getType().equals(FieldTypeConstants.REPEAT_GROUP)) {
-                    formElementMap.remove(formElement.getName());
-                }
                 String type;
                 if (typeNode == null) {
                     type = STRING;
@@ -107,7 +103,7 @@ public class XformParser {
         }
     }
 
-    private static void recursivelyAddFormFields(Map<String, FormElement> formElementMap, NodeList nodeList, String uri) {
+    private static void recursivelyAddFormElements(Map<String, FormElement> formElementMap, NodeList nodeList, String uri) {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node element = nodeList.item(i);
             if (hasChildElements(element)) {
@@ -119,7 +115,7 @@ public class XformParser {
                     formElement.setChildren(new ArrayList<FormElement>());
                     recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
                 } else {
-                    recursivelyAddFormFields(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
+                    recursivelyAddFormElements(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
 
                 }
             } else if (element.getNodeType() == Node.ELEMENT_NODE) {
@@ -145,7 +141,7 @@ public class XformParser {
                     recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
 
                 } else {
-                    recursivelyAddFormFields(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
+                    recursivelyAddFormElements(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
                 }
 
             } else if (element.getNodeType() == Node.ELEMENT_NODE){
@@ -167,5 +163,15 @@ public class XformParser {
                 return true;
         }
         return false;
+    }
+
+    private static List<FormElement> createFormElementListFromMap(Map<String, FormElement> formElementMap) {
+        List<FormElement> formElements = new ArrayList<>();
+        for (FormElement formElement : formElementMap.values()) {
+            if (!(formElement.hasParent() && formElement.getParent().getType().equals(FieldTypeConstants.REPEAT_GROUP))) {
+                formElements.add(formElement);
+            }
+        }
+        return formElements;
     }
 }
