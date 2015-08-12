@@ -54,6 +54,9 @@ public class JsonParserODK implements JsonParser {
             case FieldTypeConstants.BINARY:
                 return formatUrl((Map<String, String>) value);
 
+            case FieldTypeConstants.REPEAT_GROUP:
+                return JsonParserUtils.formatAsJson(value);
+
             default:
                 return value;
         }

@@ -37,4 +37,30 @@ public class XformParserTest {
         }
 
     }
+
+    @Test
+    public void testTestDoc () throws Exception {
+        Configuration configuration = new Configuration();
+        configuration.setName("configName");
+
+        File f = new File("odk/src/test/resources/test.xml");
+        String xml = FileUtils.readFileToString(f);
+        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        for (FormField formField : formDefinition.getFormFields()) {
+            System.out.println(formField.getName() + "\t" + formField.getType());
+        }
+    }
+
+    @Test
+    public void testDemoForm () throws Exception {
+        Configuration configuration = new Configuration();
+        configuration.setName("configName");
+
+        File f = new File("odk/src/test/resources/demoForm.xml");
+        String xml = FileUtils.readFileToString(f);
+        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        for (FormField formField : formDefinition.getFormFields()) {
+            System.out.println(formField.getName() + "\t" + formField.getType());
+        }
+    }
 }

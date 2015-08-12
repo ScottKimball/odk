@@ -1,8 +1,11 @@
 package org.motechproject.odk.parser;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import java.util.List;
 
 public class JsonParserUtils {
+
 
     public static String formatStringList(Object value) {
         String s = (String) value;
@@ -35,6 +38,14 @@ public class JsonParserUtils {
             builder.append(value.get(i));
         }
         return builder.toString();
+    }
+
+    public static String formatAsJson(Object value) {
+        try {
+            return new ObjectMapper().writeValueAsString(value);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

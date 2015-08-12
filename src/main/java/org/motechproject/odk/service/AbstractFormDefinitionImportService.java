@@ -39,20 +39,7 @@ import java.util.List;
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFormDefinitionImportService.class);
-    private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
-        put("xForms", "http://www.w3.org/2002/xforms");
-        put("ev", "http://www.w3.org/2001/xml-events");
-        put("h", "http://www.w3.org/1999/xhtml");
-        put("jr", "http://openrosa.org/javarosa");
-        put("orx", "http://openrosa.org/xforms");
-        put("xsd", "http://www.w3.org/2001/XMLSchema");
-    }};
     protected static final String FORM_LIST_PATH = "/formList";
-    private static final String READ_ONLY = "readonly";
-    private static final String TYPE = "type";
-    private static final String NODE_SET = "nodeset";
-    private static final String TITLE = "/h:html/h:head/h:title";
-    private static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
 
     private HttpClient client;
     private TasksService tasksService;
@@ -83,13 +70,12 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         }
     }
 
-    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws XPathException {
+    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws Exception {
         List<FormDefinition> formDefinitions = new ArrayList<>();
         for (String def : xmlFormDefinitions) {
             formDefinitions.add(XformParser.parse(def, configName));
         }
         return formDefinitions;
-
     }
 
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
@@ -118,7 +104,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             formDefinitionService.create(formDefinition);
         }
     }
-    
+
 
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
     protected abstract List<String> parseToUrlList(String responseBody) throws XPathException;

@@ -40,9 +40,10 @@ public class JsonParserOna implements JsonParser {
         Map<String, Object> params = new HashMap<>();
         for (FormField formField : formDefinition.getFormFields()) {
 
-            Object value = data.get(formField.getName());
+            String name = formField.getName().replace("/" + formDefinition.getTitle() + "/", "");
+            Object value = data.get(name);
             if (value != null) {
-                value = formatValue(formField.getType(), value, formField);
+                value = formatValue(formField.getType(), value);
                 params.put(formField.getName(),value );
             }
         }
@@ -52,7 +53,7 @@ public class JsonParserOna implements JsonParser {
 
     }
 
-    private Object formatValue(String type, Object value, FormField formField) {
+    private Object formatValue(String type, Object value) {
 
         switch (type) {
             case FieldTypeConstants.SELECT:
@@ -66,6 +67,9 @@ public class JsonParserOna implements JsonParser {
 
             case FieldTypeConstants.BINARY:
                 return formatUrl((String) value);
+
+            case FieldTypeConstants.REPEAT_GROUP:
+                return JsonParserUtils.formatAsJson(value);
 
             default:
                 return value;

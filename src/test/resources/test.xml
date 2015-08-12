@@ -1,0 +1,45 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>test</h:title>
+    <model>
+      <instance>
+        <data id="build_test_1438879110">
+          <meta>
+            <instanceID/>
+          </meta>
+          <testGroup>
+            <firstname/>
+          </testGroup>
+          <LastName/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="eng">
+          <text id="/data/testGroup:label">
+            <value></value>
+          </text>
+          <text id="/data/testGroup/firstname:label">
+            <value>First Name</value>
+          </text>
+          <text id="/data/LastName:label">
+            <value>Last Name</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/testGroup/firstname" type="string" required="true()"/>
+      <bind nodeset="/data/LastName" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group>
+      <label ref="jr:itext('/data/testGroup:label')"/>
+      <input ref="/data/testGroup/firstname">
+        <label ref="jr:itext('/data/testGroup/firstname:label')"/>
+      </input>
+    </group>
+    <input ref="/data/LastName">
+      <label ref="jr:itext('/data/LastName:label')"/>
+    </input>
+  </h:body>
+</h:html>
