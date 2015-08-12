@@ -6,22 +6,13 @@ import org.motechproject.mds.annotations.Field;
 import javax.jdo.annotations.Persistent;
 import java.util.List;
 
-@Entity
 public class Configuration {
-
-    @Field
     private String url;
-    @Field
     private String username;
-    @Field
     private String password;
-    @Field
     private String name;
-    @Field
     private ConfigurationType type;
-    @Field
     private String namespace;
-
 
 
     public Configuration(String url, String username, String password, String name, ConfigurationType type, String namespace) {

@@ -9,7 +9,7 @@ import org.motechproject.odk.event.EventParameters;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.odk.parser.JsonParser;
 import org.motechproject.odk.parser.JsonParserFactory;
-import org.motechproject.odk.service.ConfigurationService;
+import org.motechproject.odk.service.SettingsService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class FormController {
     private static final Logger LOGGER = LoggerFactory.getLogger(FormController.class);
 
     @Autowired
-    private ConfigurationService configurationService;
+    private SettingsService settingsService;
 
     @Autowired
     private FormDefinitionService formDefinitionService;
@@ -46,7 +46,7 @@ public class FormController {
     public void receiveForm(@PathVariable("config") String config, @PathVariable("form") String form, @RequestBody String body) {
         LOGGER.debug("Received form: " + form + " Configuration: " + config );
 
-        Configuration configuration = configurationService.getConfigByName(config);
+        Configuration configuration = settingsService.getConfigByName(config);
         FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(config,form);
 
         if (configuration == null) {

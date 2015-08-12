@@ -3,7 +3,7 @@ package org.motechproject.odk.web;
 
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.service.factory.FormDefinitionImportServiceFactory;
-import org.motechproject.odk.service.ConfigurationService;
+import org.motechproject.odk.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,13 +20,13 @@ public class SyncController {
     FormDefinitionImportServiceFactory formDefinitionImportServiceFactory;
 
     @Autowired
-    ConfigurationService configurationService;
+    SettingsService settingsService;
 
     @RequestMapping(value = "/sync/{config}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public boolean syncForms (@PathVariable("config") String config) {
-        Configuration configuration = configurationService.getConfigByName(config);
+        Configuration configuration = settingsService.getConfigByName(config);
         return formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
     }
 }
