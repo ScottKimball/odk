@@ -6,7 +6,7 @@ import org.motechproject.event.MotechEvent;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.event.EventSubjects;
 
 import java.io.File;
@@ -56,15 +56,15 @@ public class JsonParserODKTest {
         FormDefinition formDefinition = new FormDefinition("Widgets");
         formDefinition.setTitle("formTitle");
         formDefinition.setConfigurationName("odk");
-        List<FormField> formFields = new ArrayList<>();
-        formFields.add(new FormField("my_string", "string"));
-        formFields.add(new FormField("my_long_text", "string"));
-        formFields.add(new FormField("my_int", "int"));
-        formFields.add(new FormField("country", "select1"));
-        formFields.add(new FormField("select_horizontal", "select"));
-        formFields.add(new FormField("my_geoshape", "geoshape"));
-        formFields.add(new FormField("my_image", "binary"));
-        formDefinition.setFormFields(formFields);
+        List<FormElement> formElements = new ArrayList<>();
+        formElements.add(new FormElement("my_string", "string"));
+        formElements.add(new FormElement("my_long_text", "string"));
+        formElements.add(new FormElement("my_int", "int"));
+        formElements.add(new FormElement("country", "select1"));
+        formElements.add(new FormElement("select_horizontal", "select"));
+        formElements.add(new FormElement("my_geoshape", "geoshape"));
+        formElements.add(new FormElement("my_image", "binary"));
+        formDefinition.setFormElements(formElements);
         return formDefinition;
 
 

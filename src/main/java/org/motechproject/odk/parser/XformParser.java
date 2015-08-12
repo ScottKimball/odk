@@ -1,7 +1,7 @@
 package org.motechproject.odk.parser;
 
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.springframework.util.xml.SimpleNamespaceContext;
 import org.w3c.dom.NamedNodeMap;
@@ -75,80 +75,88 @@ public class XformParser {
             }
         }
 
-        Map<String,FormField> formFieldMap = new HashMap<>();
+        Map<String,FormElement> formFieldMap = new HashMap<>();
         recursivelyAddFormFields(formFieldMap, formElementsList, "/" + uri);
         NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formFieldMap, binds);
-        formDefinition.setFormFields(new ArrayList<>(formFieldMap.values()));
+        formDefinition.setFormElements(new ArrayList<>(formFieldMap.values()));
         return formDefinition;
     }
 
-    private static void addBindInformationToFormFields(Map<String, FormField> formFieldMap, NodeList binds ) {
+    private static void addBindInformationToFormFields(Map<String, FormElement> formElementMap, NodeList binds ) {
         for (int i = 0; i < binds.getLength(); i++) {
             Node bind = binds.item(i);
             NamedNodeMap attributes = bind.getAttributes();
             String fieldUri = attributes.getNamedItem(NODE_SET).getNodeValue();
-            FormField formField = formFieldMap.get(fieldUri);
+            FormElement formElement = formElementMap.get(fieldUri);
             Node typeNode = attributes.getNamedItem(TYPE);
 
-            if (formField != null) {
+            if (formElement != null) {
+
+                if (formElement.hasParent() && formElement.getParent().getType().equals(FieldTypeConstants.REPEAT_GROUP)) {
+                    formElementMap.remove(formElement.getName());
+                }
                 String type;
                 if (typeNode == null) {
                     type = STRING;
                 } else {
                     type = typeNode.getNodeValue();
                 }
-                formField.setType(type);
+                formElement.setType(type);
             }
         }
     }
 
-    private static void recursivelyAddFormFields(Map<String, FormField> formFieldMap, NodeList nodeList, String uri) {
+    private static void recursivelyAddFormFields(Map<String, FormElement> formElementMap, NodeList nodeList, String uri) {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node element = nodeList.item(i);
             if (hasChildElements(element)) {
 
                 if (element.hasAttributes()) { // repeat group
-                    FormField formField = new FormField( uri + "/" + element.getNodeName());
-                    formFieldMap.put(formField.getName(), formField);
-                    formField.setType(FieldTypeConstants.REPEAT_GROUP);
-                    formField.setChildren(new ArrayList<FormField>());
-                    recursivelyAddGroup(formFieldMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formField.getChildren());
+                    FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                    formElementMap.put(formElement.getName(), formElement);
+                    formElement.setType(FieldTypeConstants.REPEAT_GROUP);
+                    formElement.setChildren(new ArrayList<FormElement>());
+                    recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
                 } else {
-                    recursivelyAddFormFields(formFieldMap, element.getChildNodes(), uri + "/" + element.getNodeName());
+                    recursivelyAddFormFields(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
 
                 }
             } else if (element.getNodeType() == Node.ELEMENT_NODE) {
-                FormField formField = new FormField( uri + "/" + element.getNodeName());
-                formFieldMap.put(formField.getName(),formField);
+                FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                formElementMap.put(formElement.getName(), formElement);
             }
         }
     }
 
 
-    private static void recursivelyAddGroup (Map<String, FormField> formFieldMap, NodeList nodeList, String uri, List<FormField> group) {
+    private static void recursivelyAddGroup (Map<String, FormElement> formElementMap, NodeList nodeList, String uri, List<FormElement> group, FormElement parent) {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node element = nodeList.item(i);
 
             if (element.hasChildNodes()) {
 
                 if (element.hasAttributes()) {
-                    FormField formField = new FormField( uri + "/" + element.getNodeName());
-                    formFieldMap.put(formField.getName(), formField);
-                    formField.setType(FieldTypeConstants.REPEAT_GROUP);
-                    formField.setChildren(new ArrayList<FormField>());
-                    group.add(formField);
-                    recursivelyAddGroup(formFieldMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formField.getChildren());
+                    FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                    formElementMap.put(formElement.getName(), formElement);
+                    formElement.setType(FieldTypeConstants.REPEAT_GROUP);
+                    formElement.setChildren(new ArrayList<FormElement>());
+                    group.add(formElement);
+                    recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
 
                 } else {
-                    recursivelyAddFormFields(formFieldMap, element.getChildNodes(), uri + "/" + element.getNodeName());
+                    recursivelyAddFormFields(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
                 }
 
-            } else {
-                FormField formField = new FormField( uri + "/" + element.getNodeName());
-                group.add(formField);
-                formFieldMap.put(formField.getName(), formField);
+            } else if (element.getNodeType() == Node.ELEMENT_NODE){
+                FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                group.add(formElement);
+                formElementMap.put(formElement.getName(), formElement);
             }
+        }
+
+        for (FormElement child : group) {
+            child.setParent(parent);
         }
     }
 

@@ -6,7 +6,7 @@ import org.motechproject.mds.annotations.Field;
 import java.util.List;
 
 @Entity
-public class FormField {
+public class FormElement {
 
     @Field
     private String name;
@@ -15,10 +15,13 @@ public class FormField {
     private String type;
 
     @Field
-    private List<FormField> children;
+    private List<FormElement> children;
+
+    @Field
+    private FormElement parent;
 
 
-    public FormField(String name, String type) {
+    public FormElement(String name, String type) {
         this.name = name;
         this.type = type;
     }
@@ -27,11 +30,11 @@ public class FormField {
         return children != null;
     }
 
-    public FormField(String name) {
+    public FormElement(String name) {
         this.name = name;
     }
 
-    public FormField() {
+    public FormElement() {
     }
 
     public String getName() {
@@ -51,12 +54,23 @@ public class FormField {
     }
 
 
-    public List<FormField> getChildren() {
+    public List<FormElement> getChildren() {
         return children;
     }
 
-    public void setChildren(List<FormField> children) {
+    public void setChildren(List<FormElement> children) {
         this.children = children;
     }
 
+    public FormElement getParent() {
+        return parent;
+    }
+
+    public void setParent(FormElement parent) {
+        this.parent = parent;
+    }
+
+    public boolean hasParent() {
+        return getParent() != null;
+    }
 }

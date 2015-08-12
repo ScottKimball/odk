@@ -1,7 +1,7 @@
 package org.motechproject.odk.tasks;
 
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.event.EventParameters;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.tasks.contract.ActionEventRequest;
@@ -76,11 +76,11 @@ public class ChannelRequestBuilder {
 
     private List<EventParameterRequest> buildEventParameterRequests(FormDefinition formDefinition) {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
-        for (FormField formField : formDefinition.getFormFields()) {
-            String type = TYPE_MAP.get(formField.getType());
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            String type = TYPE_MAP.get(formElement.getType());
 
             if (type != null) {
-                EventParameterRequest request = new EventParameterRequest(formField.getName(),formField.getName(),type);
+                EventParameterRequest request = new EventParameterRequest(formElement.getName(), formElement.getName(),type);
                 eventParameterRequests.add(request);
             }
         }

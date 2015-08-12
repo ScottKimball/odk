@@ -2,7 +2,7 @@ package org.motechproject.odk.service.impl;
 
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
@@ -39,26 +39,27 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
         for (FormDefinition formDefinition: formDefinitions) {
-            List<FormField> formFields = formDefinition.getFormFields();
+            List<FormElement> formElements = formDefinition.getFormElements();
 
-            for (FormField formField : formFields) {
-                String name = formField.getName().replace("/" + formDefinition.getTitle().toLowerCase() + "/","");
-                formField.setName(name);
+            for (FormElement formElement : formElements) {
+                String formFieldName = formElement.getName();
+                String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
+                formElement.setName(name);
 
             }
 
-            formFields.add(new FormField(OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
-            formFields.add(new FormField(OnaConstants.TAGS, FieldTypeConstants.SELECT));
-            formFields.add(new FormField(OnaConstants.XFORM_ID_STRING, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.UUID, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.STATUS, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.FORMHUB_UUID, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.ID, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.SUBMISSION_TIME, FieldTypeConstants.DATE_TIME));
-            formFields.add(new FormField(OnaConstants.VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormField(OnaConstants.GEOLOCATION, FieldTypeConstants.DOUBLE_ARRAY));
-            formFields.add(new FormField(OnaConstants.SUBMITTED_BY, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
+            formElements.add(new FormElement(OnaConstants.TAGS, FieldTypeConstants.SELECT));
+            formElements.add(new FormElement(OnaConstants.XFORM_ID_STRING, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.UUID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.STATUS, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.FORMHUB_UUID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.ID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.SUBMISSION_TIME, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(OnaConstants.VERSION, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.GEOLOCATION, FieldTypeConstants.DOUBLE_ARRAY));
+            formElements.add(new FormElement(OnaConstants.SUBMITTED_BY, FieldTypeConstants.STRING));
         }
     }
 

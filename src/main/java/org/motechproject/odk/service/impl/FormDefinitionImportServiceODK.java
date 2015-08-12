@@ -1,12 +1,7 @@
 package org.motechproject.odk.service.impl;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
-import org.motechproject.odk.domain.Configuration;
-
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
@@ -15,10 +10,8 @@ import org.motechproject.odk.tasks.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
-import org.apache.http.client.HttpClient;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -68,17 +61,17 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
-        List<FormField> additionalFields = new ArrayList<>();
+        List<FormElement> additionalFields = new ArrayList<>();
         for (FormDefinition formDefinition: formDefinitions) {
-            List<FormField> formFields = formDefinition.getFormFields();
+            List<FormElement> formElements = formDefinition.getFormElements();
 
-            for (FormField formField : formFields) {
-                String[] array = formField.getName().split("/");
-                formField.setName(array[array.length - 1]);
+            for (FormElement formElement : formElements) {
+                String[] array = formElement.getName().split("/");
+                formElement.setName(array[array.length - 1]);
 
-                switch (formField.getType()) {
+                switch (formElement.getType()) {
                     case FieldTypeConstants.GEOPOINT :
-                        additionalFields.addAll(addGeopointFields(formField));
+                        additionalFields.addAll(addGeopointFields(formElement));
                         break;
 
                     default:
@@ -86,26 +79,26 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
                 }
             }
 
-            formFields.addAll(additionalFields);
-            formFields.add(new FormField(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formFields.add(new FormField(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormField(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
-            formFields.add(new FormField(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
-            formFields.add(new FormField(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
-            formFields.add(new FormField(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
+            formElements.addAll(additionalFields);
+            formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
+            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
     }
 
-    private List<FormField> addGeopointFields (FormField formField) {
-        List<FormField> formFields = new ArrayList<>();
-        String name = formField.getName();
-        String type = formField.getType();
+    private List<FormElement> addGeopointFields (FormElement formElement) {
+        List<FormElement> formElements = new ArrayList<>();
+        String name = formElement.getName();
+        String type = formElement.getType();
 
-        formField.setName(name + LATITUDE);
-        formFields.add(formField);
-        formFields.add(new FormField(name + LONGITUDE, type ));
-        formFields.add(new FormField(name + ALTITUDE, type ));
-        formFields.add(new FormField(name + ACCURACY, type ));
-        return formFields;
+        formElement.setName(name + LATITUDE);
+        formElements.add(formElement);
+        formElements.add(new FormElement(name + LONGITUDE, type ));
+        formElements.add(new FormElement(name + ALTITUDE, type ));
+        formElements.add(new FormElement(name + ACCURACY, type ));
+        return formElements;
     }
 }

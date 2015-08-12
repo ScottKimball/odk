@@ -4,11 +4,9 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class XformParserTest {
 
@@ -32,8 +30,8 @@ public class XformParserTest {
         File f = new File("odk/src/test/resources/widgets.xml");
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
-        for (FormField formField : formDefinition.getFormFields()) {
-            System.out.println(formField.getName() + "\t" + formField.getType());
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
 
     }
@@ -46,8 +44,8 @@ public class XformParserTest {
         File f = new File("odk/src/test/resources/test.xml");
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
-        for (FormField formField : formDefinition.getFormFields()) {
-            System.out.println(formField.getName() + "\t" + formField.getType());
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
     }
 
@@ -59,8 +57,8 @@ public class XformParserTest {
         File f = new File("odk/src/test/resources/demoForm.xml");
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
-        for (FormField formField : formDefinition.getFormFields()) {
-            System.out.println(formField.getName() + "\t" + formField.getType());
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
     }
 }

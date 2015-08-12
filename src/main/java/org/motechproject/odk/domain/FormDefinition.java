@@ -12,7 +12,7 @@ public class FormDefinition {
     private String title;
 
     @Field
-    private List<FormField> formFields;
+    private List<FormElement> formElements;
 
     @Field
     private String configurationName;
@@ -32,12 +32,12 @@ public class FormDefinition {
         this.title = title;
     }
 
-    public List<FormField> getFormFields() {
-        return formFields;
+    public List<FormElement> getFormElements() {
+        return formElements;
     }
 
-    public void setFormFields(List<FormField> formFields) {
-        this.formFields = formFields;
+    public void setFormElements(List<FormElement> formElements) {
+        this.formElements = formElements;
     }
 
     public String getConfigurationName() {

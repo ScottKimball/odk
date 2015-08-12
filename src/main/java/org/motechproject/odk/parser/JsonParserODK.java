@@ -4,7 +4,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.motechproject.event.MotechEvent;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormField;
+import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.odk.tasks.FieldTypeConstants;
@@ -31,12 +31,12 @@ public class JsonParserODK implements JsonParser {
         Map<String, Object> params = new HashMap<>();
         OdkJsonFormPublication publication = mapper.readValue(json,OdkJsonFormPublication.class );
         Map<String, Object> data = publication.getData()[0];
-        for (FormField formField : formDefinition.getFormFields()) {
+        for (FormElement formElement : formDefinition.getFormElements()) {
 
-            Object value = data.get(formField.getName());
+            Object value = data.get(formElement.getName());
             if (value != null) {
-                value = formatValue(formField.getType(), value);
-                params.put(formField.getName(),value );
+                value = formatValue(formElement.getType(), value);
+                params.put(formElement.getName(),value );
             }
         }
 
