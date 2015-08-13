@@ -8,6 +8,7 @@ import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.parser.XformParserFactory;
 import org.motechproject.odk.parser.XformParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         try {
             List<String> formUrls = getFormUrls(config);
             List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls);
-            List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config.getName());
+            List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config);
             modifyFormDefinitionForImplementation(formDefinitions);
             updateFormDefinitions(formDefinitions, config.getName());
             tasksService.updateTasksChannel();
@@ -54,10 +55,11 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         }
     }
 
-    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, String configName) throws Exception {
+    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, Configuration configuration) throws Exception {
         List<FormDefinition> formDefinitions = new ArrayList<>();
+        XformParser parser = new XformParserFactory().getParser(configuration.getType());
         for (String def : xmlFormDefinitions) {
-            formDefinitions.add(XformParser.parse(def, configName));
+            formDefinitions.add(parser.parse(def, configuration.getName()));
         }
         return formDefinitions;
     }

@@ -5,10 +5,11 @@ import org.junit.Test;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
+import org.motechproject.odk.parser.impl.XformParserImpl;
 
 import java.io.File;
 
-public class XformParserTest {
+public class XformParserImplTest {
 
     @Test
     public void testRepeatWithCount () throws Exception {
@@ -18,7 +19,7 @@ public class XformParserTest {
 
         File f = new File("odk/src/test/resources/tutorialRepeatWithCount.xml");
         String xml = FileUtils.readFileToString(f);
-        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        FormDefinition formDefinition = new XformParserImpl().parse(xml, configuration.getName());
 
     }
 
@@ -29,7 +30,7 @@ public class XformParserTest {
 
         File f = new File("odk/src/test/resources/widgets.xml");
         String xml = FileUtils.readFileToString(f);
-        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        FormDefinition formDefinition = new XformParserImpl().parse(xml, configuration.getName());
         for (FormElement formElement : formDefinition.getFormElements()) {
             System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
@@ -43,7 +44,7 @@ public class XformParserTest {
 
         File f = new File("odk/src/test/resources/test.xml");
         String xml = FileUtils.readFileToString(f);
-        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        FormDefinition formDefinition = new XformParserImpl().parse(xml, configuration.getName());
         for (FormElement formElement : formDefinition.getFormElements()) {
             System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
@@ -56,7 +57,7 @@ public class XformParserTest {
 
         File f = new File("odk/src/test/resources/demoForm.xml");
         String xml = FileUtils.readFileToString(f);
-        FormDefinition formDefinition = XformParser.parse(xml, configuration.getName());
+        FormDefinition formDefinition = new XformParserImpl().parse(xml, configuration.getName());
         for (FormElement formElement : formDefinition.getFormElements()) {
             System.out.println(formElement.getName() + "\t" + formElement.getType());
         }

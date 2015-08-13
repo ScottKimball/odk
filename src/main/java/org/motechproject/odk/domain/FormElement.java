@@ -12,6 +12,9 @@ public class FormElement {
     private String name;
 
     @Field
+    private String label;
+
+    @Field
     private String type;
 
     @Field
@@ -19,7 +22,6 @@ public class FormElement {
 
     @Field
     private FormElement parent;
-
 
     public FormElement(String name, String type) {
         this.name = name;
@@ -72,5 +74,13 @@ public class FormElement {
 
     public boolean hasParent() {
         return getParent() != null;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

@@ -7,6 +7,7 @@ import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
+import org.motechproject.odk.parser.impl.JsonParserOna;
 
 import java.io.File;
 import java.util.ArrayList;
