@@ -45,9 +45,7 @@ public class XformParserImpl implements XformParser {
     protected static final String NODE_SET = "nodeset";
     protected static final String TYPE = "type";
     protected static final String STRING = "string";
-    protected static final String DATA = "data";
-    protected static final String DATA_PATH = "//xForms:" + DATA + "/*";
-    protected static final String FORM_ELEMENTS_PATH = "/h:html/h:head/xForms:model/xForms:instance/*[@id]";
+    protected static final String FORM_ELEMENTS_PARENT_PATH = "/h:html/h:head/xForms:model/xForms:instance/*[@id]";
 
 
 
@@ -63,24 +61,23 @@ public class XformParserImpl implements XformParser {
     }
 
     protected FormDefinition parseXForm( String configurationName, Node root) throws XPathExpressionException{
+        Map<String,FormElement> formElementMap = new HashMap<>();
         String title = XPATH.compile(TITLE_PATH).evaluate(root);
         FormDefinition formDefinition = new FormDefinition(configurationName);
         formDefinition.setTitle(title);
 
-        NodeList formElementsList = (NodeList) XPATH.compile(FORM_ELEMENTS_PATH).evaluate(root, XPathConstants.NODESET);
-        if (formElementsList.getLength() == 0) {
-            formElementsList = (NodeList) XPATH.compile(DATA_PATH).evaluate(root, XPathConstants.NODESET);
-        }
+        Node node =(Node) XPATH.compile(FORM_ELEMENTS_PARENT_PATH).evaluate(root, XPathConstants.NODE);
+        String uri = node.getNodeName();
+        NodeList formElementsList = node.getChildNodes();
 
-        Map<String,FormElement> formElementMap = new HashMap<>();
-        recursivelyAddFormElements(formElementMap, formElementsList, "");
+        recursivelyAddFormElements(formElementMap, formElementsList, uri);
         NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
         formDefinition.setFormElements(createFormElementListFromMap(formElementMap));
         return formDefinition;
     }
 
-    protected Node getRoot(InputSource inputSource) throws XPathExpressionException{
+    protected Node getRoot(InputSource inputSource) throws XPathExpressionException {
         return (Node) XPATH.evaluate("/", inputSource, XPathConstants.NODE);
     }
 
