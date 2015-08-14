@@ -8,6 +8,7 @@ import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.odk.parser.JsonParser;
+import org.motechproject.odk.parser.JsonParserUtils;
 import org.motechproject.odk.tasks.FieldTypeConstants;
 
 import java.util.HashMap;

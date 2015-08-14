@@ -58,13 +58,13 @@ public class JsonParserODKTest {
         formDefinition.setTitle("formTitle");
         formDefinition.setConfigurationName("odk");
         List<FormElement> formElements = new ArrayList<>();
-        formElements.add(new FormElement("my_string", "string"));
-        formElements.add(new FormElement("my_long_text", "string"));
-        formElements.add(new FormElement("my_int", "int"));
-        formElements.add(new FormElement("country", "select1"));
-        formElements.add(new FormElement("select_horizontal", "select"));
-        formElements.add(new FormElement("my_geoshape", "geoshape"));
-        formElements.add(new FormElement("my_image", "binary"));
+        formElements.add(new FormElement("my_string","my_string", "string"));
+        formElements.add(new FormElement("my_long_text", "my_long_text","string"));
+        formElements.add(new FormElement("my_int","my_int", "int"));
+        formElements.add(new FormElement("country","country", "select1"));
+        formElements.add(new FormElement("select_horizontal","select_horizontal", "select"));
+        formElements.add(new FormElement("my_geoshape","my_geoshape", "geoshape"));
+        formElements.add(new FormElement("my_image","my_image", "binary"));
         formDefinition.setFormElements(formElements);
         return formDefinition;
 

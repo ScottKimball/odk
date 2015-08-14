@@ -12,11 +12,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,13 +40,14 @@ public class XformParserImpl implements XformParser {
         XPATH.setNamespaceContext(namespaces);
     }
 
-    protected static final String TITLE = "/h:html/h:head/h:title";
+    protected static final String TITLE_PATH = "/h:html/h:head/h:title";
     protected static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
     protected static final String NODE_SET = "nodeset";
     protected static final String TYPE = "type";
     protected static final String STRING = "string";
     protected static final String DATA = "data";
     protected static final String DATA_PATH = "//xForms:" + DATA + "/*";
+    protected static final String FORM_ELEMENTS_PATH = "/h:html/h:head/xForms:model/xForms:instance/*[@id]";
 
 
 
@@ -64,27 +63,17 @@ public class XformParserImpl implements XformParser {
     }
 
     protected FormDefinition parseXForm( String configurationName, Node root) throws XPathExpressionException{
-        String title = XPATH.compile(TITLE).evaluate(root);
+        String title = XPATH.compile(TITLE_PATH).evaluate(root);
         FormDefinition formDefinition = new FormDefinition(configurationName);
         formDefinition.setTitle(title);
 
-        String uri;
-        if (title.contains(" ")) {
-            uri = DATA;
-        }
-
-        NodeList formElementsList = getFormElements(root,title);
+        NodeList formElementsList = (NodeList) XPATH.compile(FORM_ELEMENTS_PATH).evaluate(root, XPathConstants.NODESET);
         if (formElementsList.getLength() == 0) {
-            uri = DATA;
             formElementsList = (NodeList) XPATH.compile(DATA_PATH).evaluate(root, XPathConstants.NODESET);
-
-        } else {
-            uri = title;
         }
-
 
         Map<String,FormElement> formElementMap = new HashMap<>();
-        recursivelyAddFormElements(formElementMap, formElementsList, "/" + uri);
+        recursivelyAddFormElements(formElementMap, formElementsList, "");
         NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
         formDefinition.setFormElements(createFormElementListFromMap(formElementMap));
@@ -95,12 +84,6 @@ public class XformParserImpl implements XformParser {
         return (Node) XPATH.evaluate("/", inputSource, XPathConstants.NODE);
     }
 
-    protected NodeList getFormElements(Node root, String title) throws XPathExpressionException{
-        title = (Character.toLowerCase(title.charAt(0)) + title.substring(1));
-        String formElementsPath = "//xForms:" + title + "/*";
-        return (NodeList) XPATH.compile(formElementsPath).evaluate(root, XPathConstants.NODESET);
-
-    }
 
     private void addBindInformationToFormFields(Map<String, FormElement> formElementMap, NodeList binds ) {
         for (int i = 0; i < binds.getLength(); i++) {

@@ -1,6 +1,7 @@
-package org.motechproject.odk.parser;
+package org.motechproject.odk.parser.factory;
 
 import org.motechproject.odk.domain.ConfigurationType;
+import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.impl.XformParserImpl;
 import org.motechproject.odk.parser.impl.XformParserKobo;
 

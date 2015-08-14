@@ -1,4 +1,4 @@
-package org.motechproject.odk.parser.impl;
+package org.motechproject.odk.parser;
 
 import org.codehaus.jackson.map.ObjectMapper;
 

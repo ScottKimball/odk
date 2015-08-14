@@ -80,12 +80,12 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
             }
 
             formElements.addAll(additionalFields);
-            formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
-            formElements.add(new FormElement(ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
-            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION,ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_UI_VERSION,ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE,ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(ODKConstants.META_IS_COMPLETE,ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
+            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE,ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
     }
 
@@ -95,10 +95,11 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
         String type = formElement.getType();
 
         formElement.setName(name + LATITUDE);
+        formElement.setLabel(formElement.getName());
         formElements.add(formElement);
-        formElements.add(new FormElement(name + LONGITUDE, type ));
-        formElements.add(new FormElement(name + ALTITUDE, type ));
-        formElements.add(new FormElement(name + ACCURACY, type ));
+        formElements.add(new FormElement(name + LONGITUDE, name + LONGITUDE, type ));
+        formElements.add(new FormElement(name + ALTITUDE,name + ALTITUDE, type ));
+        formElements.add(new FormElement(name + ACCURACY,name + ACCURACY, type ));
         return formElements;
     }
 }

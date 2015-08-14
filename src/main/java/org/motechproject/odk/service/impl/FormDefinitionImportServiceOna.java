@@ -48,18 +48,17 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
 
             }
 
-            formElements.add(new FormElement(OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
-            formElements.add(new FormElement(OnaConstants.TAGS, FieldTypeConstants.SELECT));
-            formElements.add(new FormElement(OnaConstants.XFORM_ID_STRING, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.UUID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.STATUS, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.FORMHUB_UUID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.ID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.SUBMISSION_TIME, FieldTypeConstants.DATE_TIME));
-            formElements.add(new FormElement(OnaConstants.VERSION, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(OnaConstants.GEOLOCATION, FieldTypeConstants.DOUBLE_ARRAY));
-            formElements.add(new FormElement(OnaConstants.SUBMITTED_BY, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.NOTES,OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
+            formElements.add(new FormElement(OnaConstants.TAGS,OnaConstants.TAGS, FieldTypeConstants.SELECT));
+            formElements.add(new FormElement(OnaConstants.XFORM_ID_STRING,OnaConstants.XFORM_ID_STRING, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.META_INSTANCE_ID,OnaConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.UUID,OnaConstants.UUID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.STATUS,OnaConstants.STATUS, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.FORMHUB_UUID,OnaConstants.FORMHUB_UUID, FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.SUBMISSION_TIME,OnaConstants.SUBMISSION_TIME, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(OnaConstants.VERSION, OnaConstants.VERSION,FieldTypeConstants.STRING));
+            formElements.add(new FormElement(OnaConstants.GEOLOCATION, OnaConstants.GEOLOCATION, FieldTypeConstants.DOUBLE_ARRAY));
+            formElements.add(new FormElement(OnaConstants.SUBMITTED_BY,OnaConstants.SUBMITTED_BY, FieldTypeConstants.STRING));
         }
     }
 

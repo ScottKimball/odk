@@ -1,4 +1,4 @@
-package org.motechproject.odk.parser;
+package org.motechproject.odk.parser.factory;
 
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;

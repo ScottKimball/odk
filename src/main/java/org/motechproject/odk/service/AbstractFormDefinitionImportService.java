@@ -8,7 +8,7 @@ import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.parser.XformParserFactory;
+import org.motechproject.odk.parser.factory.XformParserFactory;
 import org.motechproject.odk.parser.XformParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

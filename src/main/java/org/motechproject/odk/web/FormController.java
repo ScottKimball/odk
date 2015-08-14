@@ -8,7 +8,7 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.event.EventParameters;
 import org.motechproject.odk.event.EventSubjects;
 import org.motechproject.odk.parser.JsonParser;
-import org.motechproject.odk.parser.JsonParserFactory;
+import org.motechproject.odk.parser.factory.JsonParserFactory;
 import org.motechproject.odk.service.SettingsService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.slf4j.Logger;

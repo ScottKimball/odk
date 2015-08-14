@@ -23,8 +23,10 @@ public class FormElement {
     @Field
     private FormElement parent;
 
-    public FormElement(String name, String type) {
+
+    public FormElement(String name, String label, String type) {
         this.name = name;
+        this.label = label;
         this.type = type;
     }
 

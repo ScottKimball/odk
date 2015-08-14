@@ -80,7 +80,7 @@ public class ChannelRequestBuilder {
             String type = TYPE_MAP.get(formElement.getType());
 
             if (type != null) {
-                EventParameterRequest request = new EventParameterRequest(formElement.getName(), formElement.getName(),type);
+                EventParameterRequest request = new EventParameterRequest(formElement.getLabel(), formElement.getName(),type);
                 eventParameterRequests.add(request);
             }
         }

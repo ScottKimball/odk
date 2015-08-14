@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
-import org.motechproject.odk.parser.impl.XformParserImpl;
 import org.motechproject.odk.parser.impl.XformParserKobo;
 
 import java.io.File;

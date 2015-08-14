@@ -47,15 +47,15 @@ public class ChannelRequestBuilderTest {
         FormDefinition definition = new FormDefinition();
         definition.setTitle("formTitle");
         List<FormElement> formElements = new ArrayList<>();
-        formElements.add(new FormElement("stringfield", "string"));
-        formElements.add(new FormElement("intfield", "int"));
-        formElements.add(new FormElement("selectfield", "select"));
-        formElements.add(new FormElement("select1field", "select1"));
-        formElements.add(new FormElement("datefield", "date"));
-        formElements.add(new FormElement("datetimefield", "dateTime"));
-        formElements.add(new FormElement("decimalfield", "decimal"));
-        formElements.add(new FormElement("timefield", "time"));
-        formElements.add(new FormElement("binaryField", "binary"));
+        formElements.add(new FormElement("stringfield","stringfield", "string"));
+        formElements.add(new FormElement("intfield","intfield", "int"));
+        formElements.add(new FormElement("selectfield", "selectfield","select"));
+        formElements.add(new FormElement("select1field","select1field", "select1"));
+        formElements.add(new FormElement("datefield","datefield", "date"));
+        formElements.add(new FormElement("datetimefield","datetimefield", "dateTime"));
+        formElements.add(new FormElement("decimalfield","decimalfield", "decimal"));
+        formElements.add(new FormElement("timefield","timefield", "time"));
+        formElements.add(new FormElement("binaryField","binaryField", "binary"));
 
         definition.setFormElements(formElements);
         formDefinitionList.add(definition);

@@ -4,6 +4,7 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.XformParserException;
+import org.motechproject.odk.parser.impl.XformParserImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -36,11 +37,6 @@ public class XformParserKobo extends XformParserImpl implements XformParser {
         }
     }
 
-    @Override
-    protected NodeList getFormElements(Node root, String title) throws XPathExpressionException {
-        String formElementsPath = "//xForms:" + title + "/*";
-        return (NodeList) XPATH.compile(formElementsPath).evaluate(root, XPathConstants.NODESET);
-    }
 
     private FormDefinition findGroupLabels(FormDefinition formDefinition, Node root) throws XPathExpressionException {
         Map<String, FormElement> formElementMap = listToMap(formDefinition.getFormElements());
