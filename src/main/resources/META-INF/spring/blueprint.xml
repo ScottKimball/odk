@@ -10,4 +10,7 @@
     <osgi:reference id="formDefinitionDataService" interface="org.motechproject.odk.repository.FormDefinitionDataService"/>
     <osgi:reference id="eventRelay" interface="org.motechproject.event.listener.EventRelay"/>
 
+    <osgi:service ref="odkSettingsService" interface="org.motechproject.odk.service.SettingsService" />
+
+
 </beans>

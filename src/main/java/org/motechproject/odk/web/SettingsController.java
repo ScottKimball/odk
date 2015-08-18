@@ -35,8 +35,10 @@ public class SettingsController {
     }
 
     @RequestMapping(value = "/configs/all", method = RequestMethod.GET)
-    public void addConfigs () {
+    @ResponseBody
+    public boolean addConfigs () {
         settingsService.addConfigs();
+        return true;
     }
 
 

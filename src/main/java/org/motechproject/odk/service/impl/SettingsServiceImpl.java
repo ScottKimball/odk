@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Service
+@Service("odkSettingsService")
 public class SettingsServiceImpl implements SettingsService {
 
     private static final String ODK_URL = "http://motech-test01.rcg.usm.maine.edu:8080";
@@ -85,8 +85,8 @@ public class SettingsServiceImpl implements SettingsService {
             Gson gson = new Gson();
 
             settings = gson.fromJson(jsonText, Settings.class);
-            if (settings.getConfigurations() == null) {
-                settings.setConfigurations(new ArrayList<Configuration>());
+            if (settings == null) {
+                settings = new Settings();
             }
         }
         catch (Exception e) {

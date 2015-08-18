@@ -1,10 +1,21 @@
 package org.motechproject.odk.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Settings {
 
     private List<Configuration>  configurations;
+
+    public Settings() {
+        if (this.configurations == null) {
+            this.configurations = new ArrayList<>();
+        }
+    }
+
+    public Settings(List<Configuration> configurations) {
+        this.configurations = configurations;
+    }
 
     public List<Configuration> getConfigurations() {
         return configurations;
@@ -13,4 +24,8 @@ public class Settings {
     public void setConfigurations(List<Configuration> configurations) {
         this.configurations = configurations;
     }
+
+
+
+
 }

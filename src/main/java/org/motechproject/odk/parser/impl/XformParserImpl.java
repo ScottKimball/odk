@@ -70,7 +70,7 @@ public class XformParserImpl implements XformParser {
         String uri = node.getNodeName();
         NodeList formElementsList = node.getChildNodes();
 
-        recursivelyAddFormElements(formElementMap, formElementsList, uri);
+        recursivelyAddFormElements(formElementMap, formElementsList,"/" + uri);
         NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
         formDefinition.setFormElements(createFormElementListFromMap(formElementMap));

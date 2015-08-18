@@ -31,18 +31,18 @@ public class XformParserKobo extends XformParserImpl implements XformParser {
             InputSource inputSource = new InputSource(new ByteArrayInputStream(xForm.getBytes()));
             Node root = getRoot(inputSource);
             FormDefinition formDefinition = parseXForm(configurationName, root);
-            return findGroupLabels(formDefinition, root);
+            findGroupLabels(formDefinition, root);
+            return formDefinition;
         } catch (XPathExpressionException e) {
             throw new XformParserException("Error parsing xForm", e);
         }
     }
 
 
-    private FormDefinition findGroupLabels(FormDefinition formDefinition, Node root) throws XPathExpressionException {
+    private void findGroupLabels(FormDefinition formDefinition, Node root) throws XPathExpressionException {
         Map<String, FormElement> formElementMap = listToMap(formDefinition.getFormElements());
         NodeList groups = (NodeList) XPATH.compile(GROUPS_PATH).evaluate(root, XPathConstants.NODESET);
         recursivelyFindGroupRefs(groups, formElementMap, "/" + formDefinition.getTitle() + "/");
-        return formDefinition;
     }
 
     private void recursivelyFindGroupRefs(NodeList groups, Map<String, FormElement> formElementMap, String uri) {
@@ -72,6 +72,8 @@ public class XformParserKobo extends XformParserImpl implements XformParser {
             }
         }
     }
+
+
 
 
 
