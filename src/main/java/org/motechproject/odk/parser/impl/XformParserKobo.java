@@ -4,7 +4,6 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.XformParserException;
-import org.motechproject.odk.parser.impl.XformParserImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class XformParserKobo extends XformParserImpl implements XformParser {
+public class XformParserKobo extends XformParserODK implements XformParser {
 
     private static final String GROUPS_PATH = "/h:html/h:body/xForms:group";
     private static final String REF = "ref";
@@ -111,5 +110,6 @@ public class XformParserKobo extends XformParserImpl implements XformParser {
             }
         }
     }
+
 
 }

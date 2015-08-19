@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class XformParserImpl implements XformParser {
+public class XformParserODK implements XformParser {
 
     protected static XPath XPATH;
     private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
@@ -42,6 +42,7 @@ public class XformParserImpl implements XformParser {
 
     protected static final String TITLE_PATH = "/h:html/h:head/h:title";
     protected static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
+    protected static final String ROOT_PATH = "/";
     protected static final String NODE_SET = "nodeset";
     protected static final String TYPE = "type";
     protected static final String STRING = "string";
@@ -78,7 +79,7 @@ public class XformParserImpl implements XformParser {
     }
 
     protected Node getRoot(InputSource inputSource) throws XPathExpressionException {
-        return (Node) XPATH.evaluate("/", inputSource, XPathConstants.NODE);
+        return (Node) XPATH.evaluate(ROOT_PATH, inputSource, XPathConstants.NODE);
     }
 
 

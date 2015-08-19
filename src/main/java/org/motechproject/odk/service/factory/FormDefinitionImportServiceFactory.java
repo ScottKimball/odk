@@ -2,6 +2,7 @@ package org.motechproject.odk.service.factory;
 
 import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.service.FormDefinitionImportService;
+import org.motechproject.odk.service.impl.FormDefinitionImportServiceKobo;
 import org.motechproject.odk.service.impl.FormDefinitionImportServiceODK;
 import org.motechproject.odk.service.impl.FormDefinitionImportServiceOna;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class FormDefinitionImportServiceFactory {
     @Autowired
     FormDefinitionImportServiceOna formDefinitionImportServiceOna;
 
+    @Autowired
+    FormDefinitionImportServiceKobo formDefinitionImportServiceKobo;
+
 
     public FormDefinitionImportService getService (ConfigurationType type) {
 
@@ -26,6 +30,9 @@ public class FormDefinitionImportServiceFactory {
 
             case ONA:
                 return formDefinitionImportServiceOna;
+
+            case KOBO:
+                return formDefinitionImportServiceKobo;
 
             default:
                 return null;

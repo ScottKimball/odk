@@ -2,7 +2,7 @@ package org.motechproject.odk.tasks;
 
 public class OnaConstants {
     public static final String NOTES = "_notes";
-    public static final String TAGS = "_tages";
+    public static final String TAGS = "_tags";
     public static final String XFORM_ID_STRING = "_xform_id_string";
     public static final String META_INSTANCE_ID = "meta/instanceID";
     public static final String UUID = "_uuid";

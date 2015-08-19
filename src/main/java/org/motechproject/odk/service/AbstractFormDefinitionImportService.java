@@ -1,9 +1,14 @@
 package org.motechproject.odk.service;
 
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
@@ -28,10 +33,12 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
     private HttpClient client;
     private TasksService tasksService;
+    private HttpClientBuilderFactory clientBuilderFactory;
     FormDefinitionService formDefinitionService;
 
     @Autowired
     public AbstractFormDefinitionImportService(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
+        this.clientBuilderFactory = httpClientBuilderFactory;
         this.client = httpClientBuilderFactory.newBuilder().build();
         this.tasksService = tasksService;
         this.formDefinitionService = formDefinitionService;
@@ -42,7 +49,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
         try {
             List<String> formUrls = getFormUrls(config);
-            List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls);
+            List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls,config);
             List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config);
             modifyFormDefinitionForImplementation(formDefinitions);
             updateFormDefinitions(formDefinitions, config.getName());
@@ -71,7 +78,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         return parseToUrlList(responseBody);
     }
 
-    protected List<String> getXmlFormDefinitions(List<String> formUrls) throws Exception {
+    protected List<String> getXmlFormDefinitions(List<String> formUrls, Configuration configuration) throws Exception {
         List<String> formDefinitions = new ArrayList<>();
 
         for (String url : formUrls) {
@@ -81,6 +88,20 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             formDefinitions.add(responseBody);
         }
         return formDefinitions;
+    }
+
+    protected Header generateBasicAuthHeader(HttpUriRequest request, Configuration configuration) {
+        Header basicAuthHeader;
+        BasicScheme basicScheme = new BasicScheme();
+        try {
+            basicAuthHeader = basicScheme.authenticate(
+                    new UsernamePasswordCredentials(configuration.getUsername(), configuration.getPassword()),
+                    request,
+                    HttpClientContext.create());
+        } catch (Exception e) {
+            return null;
+        }
+        return basicAuthHeader;
     }
 
 
@@ -93,5 +114,10 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
 
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
-    protected abstract List<String> parseToUrlList(String responseBody) throws XPathException;
+    protected abstract List<String> parseToUrlList(String responseBody) throws Exception;
+
+    public HttpClient getClient() {
+        return client;
+    }
+
 }

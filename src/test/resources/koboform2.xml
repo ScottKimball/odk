@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root><?xml version="1.0" encoding="utf-8"?>
+    <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <h:head>
+            <h:title>KoboForm2</h:title>
+            <model>
+                <instance>
+                    <uploaded_form_x08lao id="KoboForm2">
+                        <formhub>
+                            <uuid/>
+                        </formhub>
+                        <group_qy8km68 jr:template="">
+                            <Select/>
+                            <Select_1/>
+                        </group_qy8km68>
+                        <group_ok5jl66 jr:template="">
+                            <group_ko91h06 jr:template="">
+                                <Text/>
+                            </group_ko91h06>
+                            <Text_001/>
+                            <Date/>
+                        </group_ok5jl66>
+                        <Number/>
+                        <start/>
+                        <end/>
+                        <meta>
+                            <instanceID/>
+                        </meta>
+                    </uploaded_form_x08lao>
+                </instance>
+                <bind nodeset="/uploaded_form_x08lao/group_qy8km68/Select" required="true()" type="select"/>
+                <bind nodeset="/uploaded_form_x08lao/group_qy8km68/Select_1" required="true()" type="select1"/>
+                <bind nodeset="/uploaded_form_x08lao/group_ok5jl66/group_ko91h06/Text" required="true()" type="string"/>
+                <bind nodeset="/uploaded_form_x08lao/group_ok5jl66/Text_001" required="true()" type="string"/>
+                <bind nodeset="/uploaded_form_x08lao/group_ok5jl66/Date" required="true()" type="date"/>
+                <bind nodeset="/uploaded_form_x08lao/Number" required="true()" type="int"/>
+                <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/uploaded_form_x08lao/start" type="dateTime"/>
+                <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/uploaded_form_x08lao/end" type="dateTime"/>
+                <bind calculate="concat('uuid:', uuid())" nodeset="/uploaded_form_x08lao/meta/instanceID" readonly="true()" type="string"/>
+                <bind calculate="'83db7cc30e1349b3a3e316e0f3eb8f1d'" nodeset="/uploaded_form_x08lao/formhub/uuid" type="string"/>
+            </model>
+        </h:head>
+        <h:body>
+            <group ref="/uploaded_form_x08lao/group_qy8km68">
+                <label>Group1</label>
+                <repeat nodeset="/uploaded_form_x08lao/group_qy8km68">
+                    <select ref="/uploaded_form_x08lao/group_qy8km68/Select">
+                        <label>Select</label>
+                        <item>
+                            <label>Option 1</label>
+                            <value>option_1</value>
+                        </item>
+                        <item>
+                            <label>Option 2</label>
+                            <value>option_2</value>
+                        </item>
+                    </select>
+                    <select1 ref="/uploaded_form_x08lao/group_qy8km68/Select_1">
+                        <label>Select 1</label>
+                        <item>
+                            <label>Option 1</label>
+                            <value>AUTOMATIC</value>
+                        </item>
+                        <item>
+                            <label>Option 2</label>
+                            <value>option_2</value>
+                        </item>
+                    </select1>
+                </repeat>
+            </group>
+            <group ref="/uploaded_form_x08lao/group_ok5jl66">
+                <label>OuterGroup</label>
+                <repeat nodeset="/uploaded_form_x08lao/group_ok5jl66">
+                    <group ref="/uploaded_form_x08lao/group_ok5jl66/group_ko91h06">
+                        <label>InnerGroup</label>
+                        <repeat nodeset="/uploaded_form_x08lao/group_ok5jl66/group_ko91h06">
+                            <input ref="/uploaded_form_x08lao/group_ok5jl66/group_ko91h06/Text">
+                                <label>Text</label>
+                            </input>
+                        </repeat>
+                    </group>
+                    <input ref="/uploaded_form_x08lao/group_ok5jl66/Text_001">
+                        <label>Text</label>
+                    </input>
+                    <input ref="/uploaded_form_x08lao/group_ok5jl66/Date">
+                        <label>Date</label>
+                    </input>
+                </repeat>
+            </group>
+            <input ref="/uploaded_form_x08lao/Number">
+                <label>Number</label>
+            </input>
+        </h:body>
+    </h:html>
+</root>
