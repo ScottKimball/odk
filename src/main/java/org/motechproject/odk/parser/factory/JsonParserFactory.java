@@ -14,6 +14,8 @@ public class JsonParserFactory {
                 return new JsonParserODK(json,formDefinition,configuration);
             case ONA:
                 return new JsonParserOna(json,formDefinition,configuration);
+            case KOBO:
+                return new JsonParserOna(json,formDefinition,configuration);
             default:
                 return null;
         }

@@ -13,7 +13,7 @@ public class JsonParserUtils {
     }
 
     public static String formatStringArray(List<String> value) {
-        if (value.size() == 0) {
+        if (value.size() == 0 || value.get(0) == null) {
             return "";
         }
 
@@ -27,7 +27,7 @@ public class JsonParserUtils {
     }
 
     public static String formatDoubleArray(List<Double> value) {
-        if (value.size() == 0) {
+        if (value.size() == 0 || value.get(0) == null) {
             return "";
         }
 

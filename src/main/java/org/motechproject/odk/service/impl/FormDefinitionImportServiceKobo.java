@@ -82,6 +82,13 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
         for (FormDefinition formDefinition : formDefinitions) {
             List<FormElement> formElements = formDefinition.getFormElements();
+
+            for (FormElement formElement : formElements) {
+                String formFieldName = formElement.getName();
+                String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
+                formElement.setName(name);
+
+            }
             formElements.add(new FormElement(OnaConstants.NOTES,OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
             formElements.add(new FormElement(OnaConstants.UUID,OnaConstants.UUID, FieldTypeConstants.STRING));
             formElements.add(new FormElement(KoboConstants.BAMBOO_DATASET_ID,KoboConstants.BAMBOO_DATASET_ID, FieldTypeConstants.STRING));
