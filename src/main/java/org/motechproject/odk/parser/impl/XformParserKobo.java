@@ -23,6 +23,9 @@ public class XformParserKobo extends XformParserODK implements XformParser {
     private static final String LABEL = "label";
     private static final String INPUT = "input";
 
+    public XformParserKobo() {
+        super();
+    }
 
     @Override
     public FormDefinition parse(String xForm, String configurationName) throws XformParserException {
@@ -40,7 +43,7 @@ public class XformParserKobo extends XformParserODK implements XformParser {
 
     private void findGroupLabels(FormDefinition formDefinition, Node root) throws XPathExpressionException {
         Map<String, FormElement> formElementMap = listToMap(formDefinition.getFormElements());
-        NodeList groups = (NodeList) XPATH.compile(GROUPS_PATH).evaluate(root, XPathConstants.NODESET);
+        NodeList groups = (NodeList) getxPath().compile(GROUPS_PATH).evaluate(root, XPathConstants.NODESET);
         recursivelyFindGroupRefs(groups, formElementMap, "/" + formDefinition.getTitle() + "/");
     }
 

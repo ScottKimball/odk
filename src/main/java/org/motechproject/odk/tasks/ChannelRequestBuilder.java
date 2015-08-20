@@ -16,11 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ChannelRequestBuilder {
-    private BundleContext bundleContext;
-    private List<FormDefinition> formDefinitions;
-
-
-
     private static final String UNICODE = "UNICODE";
     private static final String DATE = "DATE";
     private static final String BOOLEAN = "BOOLEAN";
@@ -29,6 +24,8 @@ public class ChannelRequestBuilder {
     private static final String TIME = "TIME";
     private static final String LIST = "LIST";
 
+    private BundleContext bundleContext;
+    private List<FormDefinition> formDefinitions;
     private static final Map<String, String> TYPE_MAP = new HashMap<String,String>(){{
         put(FieldTypeConstants.STRING, UNICODE);
         put(FieldTypeConstants.DATE_TIME,DATE);
@@ -45,8 +42,6 @@ public class ChannelRequestBuilder {
         put(FieldTypeConstants.DOUBLE_ARRAY, UNICODE);
         put(FieldTypeConstants.STRING_ARRAY, UNICODE);
         put(FieldTypeConstants.REPEAT_GROUP, UNICODE);
-
-
     }};
 
     public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {
@@ -67,7 +62,7 @@ public class ChannelRequestBuilder {
 
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
-            TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
+            TriggerEventRequest eventRequest = new TriggerEventRequest("[" + formDefinition.getConfigurationName() + "] " + DisplayNames.TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
                     EventSubjects.RECEIVED_FORM + "." +  formDefinition.getConfigurationName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }

@@ -22,7 +22,15 @@ import java.util.Map;
 
 public class XformParserODK implements XformParser {
 
-    protected static XPath XPATH;
+    protected static final String TITLE_PATH = "/h:html/h:head/h:title";
+    protected static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
+    protected static final String FORM_ELEMENTS_PARENT_PATH = "/h:html/h:head/xForms:model/xForms:instance/*[@id]";
+    protected static final String ROOT_PATH = "/";
+    protected static final String NODE_SET = "nodeset";
+    protected static final String TYPE = "type";
+    protected static final String STRING = "string";
+
+    private   XPath xPath;
     private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
         put("xForms", "http://www.w3.org/2002/xforms");
         put("ev", "http://www.w3.org/2001/xml-events");
@@ -32,23 +40,13 @@ public class XformParserODK implements XformParser {
         put("xsd", "http://www.w3.org/2001/XMLSchema");
     }};
 
-    static {
+    public XformParserODK() {
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPATH = xPathFactory.newXPath();
+        this.xPath = xPathFactory.newXPath();
         SimpleNamespaceContext namespaces = new SimpleNamespaceContext();
         namespaces.setBindings(NAMESPACE_MAP);
-        XPATH.setNamespaceContext(namespaces);
+        this.xPath.setNamespaceContext(namespaces);
     }
-
-    protected static final String TITLE_PATH = "/h:html/h:head/h:title";
-    protected static final String BIND_ELEMENTS = "/h:html/h:head/xForms:model/xForms:bind";
-    protected static final String ROOT_PATH = "/";
-    protected static final String NODE_SET = "nodeset";
-    protected static final String TYPE = "type";
-    protected static final String STRING = "string";
-    protected static final String FORM_ELEMENTS_PARENT_PATH = "/h:html/h:head/xForms:model/xForms:instance/*[@id]";
-
-
 
     public  FormDefinition parse (String xForm, String configurationName) throws XformParserException {
         try {
@@ -63,23 +61,23 @@ public class XformParserODK implements XformParser {
 
     protected FormDefinition parseXForm( String configurationName, Node root) throws XPathExpressionException{
         Map<String,FormElement> formElementMap = new HashMap<>();
-        String title = XPATH.compile(TITLE_PATH).evaluate(root);
+        String title = xPath.compile(TITLE_PATH).evaluate(root);
         FormDefinition formDefinition = new FormDefinition(configurationName);
         formDefinition.setTitle(title);
 
-        Node node =(Node) XPATH.compile(FORM_ELEMENTS_PARENT_PATH).evaluate(root, XPathConstants.NODE);
+        Node node =(Node) xPath.compile(FORM_ELEMENTS_PARENT_PATH).evaluate(root, XPathConstants.NODE);
         String uri = node.getNodeName();
         NodeList formElementsList = node.getChildNodes();
 
         recursivelyAddFormElements(formElementMap, formElementsList,"/" + uri);
-        NodeList binds = (NodeList) XPATH.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
+        NodeList binds = (NodeList) xPath.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
         formDefinition.setFormElements(createFormElementListFromMap(formElementMap));
         return formDefinition;
     }
 
     protected Node getRoot(InputSource inputSource) throws XPathExpressionException {
-        return (Node) XPATH.evaluate(ROOT_PATH, inputSource, XPathConstants.NODE);
+        return (Node) xPath.evaluate(ROOT_PATH, inputSource, XPathConstants.NODE);
     }
 
 
@@ -175,5 +173,9 @@ public class XformParserODK implements XformParser {
             }
         }
         return formElements;
+    }
+
+    public XPath getxPath() {
+        return xPath;
     }
 }
