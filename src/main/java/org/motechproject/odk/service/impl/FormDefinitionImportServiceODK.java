@@ -6,7 +6,7 @@ import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
-import org.motechproject.odk.tasks.FieldTypeConstants;
+import org.motechproject.odk.constant.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import org.motechproject.odk.tasks.ODKConstants;
+import org.motechproject.odk.constant.ODKConstants;
 
 
 @Service

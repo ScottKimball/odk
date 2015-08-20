@@ -4,7 +4,7 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.XformParserException;
-import org.motechproject.odk.tasks.FieldTypeConstants;
+import org.motechproject.odk.constant.FieldTypeConstants;
 import org.springframework.util.xml.SimpleNamespaceContext;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

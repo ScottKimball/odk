@@ -1,4 +1,4 @@
-package org.motechproject.odk.tasks;
+package org.motechproject.odk.constant;
 
 public class ODKConstants {
     public static final String META_INSTANCE_ID = "meta-instance-id";

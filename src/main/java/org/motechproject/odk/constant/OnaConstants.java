@@ -1,4 +1,4 @@
-package org.motechproject.odk.tasks;
+package org.motechproject.odk.constant;
 
 public class OnaConstants {
     public static final String NOTES = "_notes";

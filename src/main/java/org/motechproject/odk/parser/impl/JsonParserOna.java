@@ -6,10 +6,10 @@ import org.motechproject.event.MotechEvent;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
-import org.motechproject.odk.event.EventSubjects;
+import org.motechproject.odk.constant.EventSubjects;
 import org.motechproject.odk.parser.JsonParser;
 import org.motechproject.odk.parser.JsonParserUtils;
-import org.motechproject.odk.tasks.FieldTypeConstants;
+import org.motechproject.odk.constant.FieldTypeConstants;
 
 import java.util.HashMap;
 import java.util.List;

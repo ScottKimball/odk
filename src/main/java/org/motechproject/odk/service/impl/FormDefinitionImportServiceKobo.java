@@ -1,17 +1,7 @@
 package org.motechproject.odk.service.impl;
 
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -24,15 +14,12 @@ import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
-import org.motechproject.odk.tasks.FieldTypeConstants;
-import org.motechproject.odk.tasks.KoboConstants;
-import org.motechproject.odk.tasks.ODKConstants;
-import org.motechproject.odk.tasks.OnaConstants;
+import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.constant.KoboConstants;
+import org.motechproject.odk.constant.OnaConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.xpath.XPathException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 

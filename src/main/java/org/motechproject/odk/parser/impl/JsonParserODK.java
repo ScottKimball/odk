@@ -6,10 +6,11 @@ import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.OdkJsonFormPublication;
-import org.motechproject.odk.event.EventSubjects;
+import org.motechproject.odk.constant.EventParameters;
+import org.motechproject.odk.constant.EventSubjects;
 import org.motechproject.odk.parser.JsonParser;
 import org.motechproject.odk.parser.JsonParserUtils;
-import org.motechproject.odk.tasks.FieldTypeConstants;
+import org.motechproject.odk.constant.FieldTypeConstants;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,9 @@ public class JsonParserODK implements JsonParser {
                 params.put(formElement.getName(),value );
             }
         }
+
+        params.put(EventParameters.FORM_TITLE,formDefinition.getTitle());
+        params.put(EventParameters.CONFIGURATION_NAME, configuration.getName());
 
         String subject = EventSubjects.RECEIVED_FORM + "." +  configuration.getName() + "." + formDefinition.getTitle();
         return new MotechEvent(subject, params);

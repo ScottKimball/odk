@@ -1,4 +1,4 @@
-package org.motechproject.odk.tasks;
+package org.motechproject.odk.constant;
 
 public class DisplayNames {
 
@@ -10,5 +10,6 @@ public class DisplayNames {
     public static final String MESSAGE = "Message";
     public static final String FORM_FAIL = "Form Receipt Failure";
     public static final String JSON_CONTENT = "JSON Content";
+    public static final String CONFIG_NAME = "Configuration Name";
 
 }

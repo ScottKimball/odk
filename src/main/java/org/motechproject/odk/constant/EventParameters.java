@@ -1,4 +1,4 @@
-package org.motechproject.odk.event;
+package org.motechproject.odk.constant;
 
 public class EventParameters {
 
