@@ -10,12 +10,19 @@ public class TypeMapper {
 
     private static final Map<String, String> TYPE_MAP = new HashMap<String,String>(){{
         put(FieldTypeConstants.STRING, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.DATE_TIME,TasksDataTypes.DATE);
-        put(FieldTypeConstants.BOOLEAN, TasksDataTypes.BOOLEAN);
+       // put(FieldTypeConstants.DATE_TIME,TasksDataTypes.DATE);
+        put(FieldTypeConstants.DATE_TIME,TasksDataTypes.UNICODE);
+
+     //   put(FieldTypeConstants.BOOLEAN, TasksDataTypes.BOOLEAN);
+        put(FieldTypeConstants.BOOLEAN, TasksDataTypes.UNICODE);
         put(FieldTypeConstants.INT, TasksDataTypes.INTEGER);
         put(FieldTypeConstants.DECIMAL, TasksDataTypes.DOUBLE);
-        put(FieldTypeConstants.DATE, TasksDataTypes.DATE);
-        put(FieldTypeConstants.TIME,TasksDataTypes.TIME);
+       // put(FieldTypeConstants.DATE, TasksDataTypes.DATE);
+        put(FieldTypeConstants.DATE, TasksDataTypes.UNICODE);
+
+        //put(FieldTypeConstants.TIME,TasksDataTypes.TIME);
+        put(FieldTypeConstants.TIME,TasksDataTypes.UNICODE);
+
         put(FieldTypeConstants.SELECT, TasksDataTypes.UNICODE);
         put(FieldTypeConstants.SELECT_1, TasksDataTypes.LIST);
         put(FieldTypeConstants.GEOPOINT, TasksDataTypes.UNICODE);

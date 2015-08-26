@@ -19,8 +19,10 @@ import java.util.TreeSet;
 public class ActionBuilder {
 
     private List<FormDefinition> formDefinitions;
+    private int count;
 
     public ActionBuilder(List<FormDefinition> formDefinitions) {
+        this.count = 0;
         this.formDefinitions = formDefinitions;
     }
 
@@ -43,8 +45,8 @@ public class ActionBuilder {
     }
 
     private SortedSet<ActionParameterRequest> createParameterRequestsForFormDef(FormDefinition formDefinition) {
-        int count = 0;
-        SortedSet<ActionParameterRequest> actionParameterRequests = createRequiredFields(count, new TreeSet<ActionParameterRequest>());
+        ;
+        SortedSet<ActionParameterRequest> actionParameterRequests = createRequiredFields();
         List<FormElement> formElements = formDefinition.getFormElements();
         ActionParameterRequestBuilder builder;
         for(FormElement formElement : formElements) {
@@ -60,13 +62,15 @@ public class ActionBuilder {
         return actionParameterRequests;
     }
 
-    private SortedSet<ActionParameterRequest> createRequiredFields(int count, SortedSet<ActionParameterRequest> actionParameterRequests) {
+    private SortedSet<ActionParameterRequest> createRequiredFields() {
+        SortedSet<ActionParameterRequest> actionParameterRequests = new TreeSet<ActionParameterRequest>();
         ActionParameterRequestBuilder builder = new ActionParameterRequestBuilder();
         builder
                 .setDisplayName(DisplayNames.FORM_TITLE)
                 .setType(TasksDataTypes.UNICODE)
                 .setKey(EventParameters.FORM_TITLE)
-                .setOrder(count++);
+                .setOrder(count++)
+                .setRequired(true);
 
         actionParameterRequests.add(builder.createActionParameterRequest());
 
@@ -75,7 +79,8 @@ public class ActionBuilder {
                 .setDisplayName(DisplayNames.CONFIG_NAME)
                 .setOrder(count++)
                 .setType(TasksDataTypes.UNICODE)
-                .setKey(EventParameters.CONFIGURATION_NAME);
+                .setKey(EventParameters.CONFIGURATION_NAME)
+                .setRequired(true);
 
         actionParameterRequests.add(builder.createActionParameterRequest());
 

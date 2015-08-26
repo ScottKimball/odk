@@ -39,7 +39,7 @@ public class JsonParserODK implements JsonParser {
             Object value = data.get(formElement.getName());
             if (value != null) {
                 value = formatValue(formElement.getType(), value);
-                params.put(formElement.getName(),value );
+                params.put(formElement.getName(), value);
             }
         }
 

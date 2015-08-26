@@ -61,21 +61,16 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
-        List<FormElement> additionalFields = new ArrayList<>();
         for (FormDefinition formDefinition: formDefinitions) {
+            List<FormElement> additionalFields = new ArrayList<>();
             List<FormElement> formElements = formDefinition.getFormElements();
 
             for (FormElement formElement : formElements) {
                 String[] array = formElement.getName().split("/");
                 formElement.setName(array[array.length - 1]);
 
-                switch (formElement.getType()) {
-                    case FieldTypeConstants.GEOPOINT :
-                        additionalFields.addAll(addGeopointFields(formElement));
-                        break;
-
-                    default:
-                        break;
+                if (formElement.getType().equalsIgnoreCase(FieldTypeConstants.GEOPOINT)) {
+                    additionalFields.addAll(addGeopointFields(formElement));
                 }
             }
 
