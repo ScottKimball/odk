@@ -17,22 +17,22 @@
             <itext>
                 <translation lang="eng">
                     <text id="/data/name:label">
-                        <children>Name</children>
+                        <value>Name</value>
                     </text>
                     <text id="/data/name:hint">
-                        <children>Please enter your name.</children>
+                        <value>Please enter your name.</value>
                     </text>
                     <text id="/data/dob:label">
-                        <children>Date of Birth</children>
+                        <value>Date of Birth</value>
                     </text>
                     <text id="/data/dob:hint">
-                        <children>Please enter your date of birth.</children>
+                        <value>Please enter your date of birth.</value>
                     </text>
                     <text id="/data/address:label">
-                        <children>Address</children>
+                        <value>Address</value>
                     </text>
                     <text id="/data/address:hint">
-                        <children>Please enter your address.</children>
+                        <value>Please enter your address.</value>
                     </text>
                 </translation>
             </itext>

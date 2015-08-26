@@ -6,206 +6,206 @@
             <itext>
                 <translation default="true()" lang="default">
                     <text id="/widgets/select_widgets/happy_sad_table/reserved_name_for_field_list_labels_52/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="/widgets/display_widgets/select_media/king:label">
-                        <children form="image">jr://images/kingfisher.png</children>
-                        <children>kingfisher</children>
+                        <value form="image">jr://images/kingfisher.png</value>
+                        <value>kingfisher</value>
                     </text>
                     <text id="static_instance-list-0">
-                        <children>option a</children>
+                        <value>option a</value>
                     </text>
                     <text id="static_instance-list-1">
-                        <children>option b</children>
+                        <value>option b</value>
                     </text>
                     <text id="static_instance-list-2">
-                        <children>option c</children>
+                        <value>option c</value>
                     </text>
                     <text id="static_instance-list-3">
-                        <children>option d</children>
+                        <value>option d</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table/reserved_name_for_field_list_labels_52/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_brian2/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_brian2/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="static_instance-list2-1">
-                        <children>option 2</children>
+                        <value>option 2</value>
                     </text>
                     <text id="static_instance-list2-0">
-                        <children>option 1</children>
+                        <value>option 1</value>
                     </text>
                     <text id="static_instance-list2-3">
-                        <children>option 4</children>
+                        <value>option 4</value>
                     </text>
                     <text id="static_instance-list2-2">
-                        <children>option 3</children>
+                        <value>option 3</value>
                     </text>
                     <text id="static_instance-list2-5">
-                        <children>option 6</children>
+                        <value>option 6</value>
                     </text>
                     <text id="static_instance-list2-4">
-                        <children>option 5</children>
+                        <value>option 5</value>
                     </text>
                     <text id="static_instance-list2-7">
-                        <children>option 8</children>
+                        <value>option 8</value>
                     </text>
                     <text id="static_instance-list2-6">
-                        <children>option 7</children>
+                        <value>option 7</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table/happy_sad_michael/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="static_instance-happy_sad-0">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="static_instance-happy_sad-1">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table/happy_sad_brian/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="static_instance-countries-1">
-                        <children>United States</children>
+                        <value>United States</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table/happy_sad_michael/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_second_method/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="static_instance-countries-0">
-                        <children>The Netherlands</children>
+                        <value>The Netherlands</value>
                     </text>
                     <text id="static_instance-cities-3">
-                        <children>Los Angeles</children>
+                        <value>Los Angeles</value>
                     </text>
                     <text id="static_instance-cities-2">
-                        <children>New York City</children>
+                        <value>New York City</value>
                     </text>
                     <text id="static_instance-cities-1">
-                        <children>Denver</children>
+                        <value>Denver</value>
                     </text>
                     <text id="static_instance-cities-0">
-                        <children>Amsterdam</children>
+                        <value>Amsterdam</value>
                     </text>
                     <text id="static_instance-cities-5">
-                        <children>Dronten</children>
+                        <value>Dronten</value>
                     </text>
                     <text id="static_instance-cities-4">
-                        <children>Rotterdam</children>
+                        <value>Rotterdam</value>
                     </text>
                     <text id="static_instance-agree5-3">
-                        <children>agree</children>
+                        <value>agree</value>
                     </text>
                     <text id="static_instance-agree5-2">
-                        <children>neither agree nor disagree</children>
+                        <value>neither agree nor disagree</value>
                     </text>
                     <text id="static_instance-agree5-1">
-                        <children>disagree</children>
+                        <value>disagree</value>
                     </text>
                     <text id="static_instance-agree5-0">
-                        <children>strongly disagree</children>
+                        <value>strongly disagree</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_michael2/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/grid_test_audio/a:label">
-                        <children form="image">jr://images/a.jpg</children>
+                        <value form="image">jr://images/a.jpg</value>
                     </text>
                     <text id="static_instance-agree5-4">
-                        <children>strongly agree</children>
+                        <value>strongly agree</value>
                     </text>
                     <text id="/widgets/select_widgets/grid_test_audio/b:label">
-                        <children form="image">jr://images/b.jpg</children>
+                        <value form="image">jr://images/b.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_michael2/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="static_instance-a_b-1">
-                        <children form="image">jr://images/b.jpg</children>
+                        <value form="image">jr://images/b.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table_2/happy_sad_second_method/sad:label">
-                        <children form="image">jr://images/sad.jpg</children>
+                        <value form="image">jr://images/sad.jpg</value>
                     </text>
                     <text id="/widgets/select_widgets/grid_test/a:label">
-                        <children form="image">jr://images/a.jpg</children>
+                        <value form="image">jr://images/a.jpg</value>
                     </text>
                     <text id="static_instance-a_b-0">
-                        <children form="image">jr://images/a.jpg</children>
+                        <value form="image">jr://images/a.jpg</value>
                     </text>
                     <text id="/widgets/display_widgets/select_media/nut:label">
-                        <children form="image">jr://images/nuthatch.png</children>
-                        <children>nuthatch</children>
+                        <value form="image">jr://images/nuthatch.png</value>
+                        <value>nuthatch</value>
                     </text>
                     <text id="static_instance-yes_no-3">
-                        <children>Not Applicable</children>
+                        <value>Not Applicable</value>
                     </text>
                     <text id="static_instance-yes_no-2">
-                        <children>Don't Know</children>
+                        <value>Don't Know</value>
                     </text>
                     <text id="static_instance-yes_no-1">
-                        <children>No</children>
+                        <value>No</value>
                     </text>
                     <text id="static_instance-yes_no-0">
-                        <children>Yes</children>
+                        <value>Yes</value>
                     </text>
                     <text id="/widgets/display_widgets/text_media:label">
-                        <children form="audio">jr://audio/goldeneagle.mp3</children>
-                        <children>You can add a sound recording, an image and a video to any input label or to a note.</children>
+                        <value form="audio">jr://audio/goldeneagle.mp3</value>
+                        <value>You can add a sound recording, an image and a video to any input label or to a note.</value>
                     </text>
                     <text id="static_instance-neighborhoods-4">
-                        <children>Park Hill</children>
+                        <value>Park Hill</value>
                     </text>
                     <text id="static_instance-neighborhoods-5">
-                        <children>Harbor</children>
+                        <value>Harbor</value>
                     </text>
                     <text id="static_instance-neighborhoods-6">
-                        <children>Dam</children>
+                        <value>Dam</value>
                     </text>
                     <text id="static_instance-neighborhoods-7">
-                        <children>Downtown</children>
+                        <value>Downtown</value>
                     </text>
                     <text id="static_instance-neighborhoods-0">
-                        <children>Bronx</children>
+                        <value>Bronx</value>
                     </text>
                     <text id="static_instance-neighborhoods-1">
-                        <children>Harlem</children>
+                        <value>Harlem</value>
                     </text>
                     <text id="static_instance-neighborhoods-2">
-                        <children>Bel Air</children>
+                        <value>Bel Air</value>
                     </text>
                     <text id="static_instance-neighborhoods-3">
-                        <children>Westerpark</children>
+                        <value>Westerpark</value>
                     </text>
                     <text id="static_instance-list1-2">
-                        <children form="image">jr://images/nuthatch.png</children>
-                        <children>nuthatch</children>
+                        <value form="image">jr://images/nuthatch.png</value>
+                        <value>nuthatch</value>
                     </text>
                     <text id="/widgets/select_widgets/grid_test/b:label">
-                        <children form="image">jr://images/b.jpg</children>
+                        <value form="image">jr://images/b.jpg</value>
                     </text>
                     <text id="static_instance-list1-0">
-                        <children form="image">jr://images/kingfisher.png</children>
-                        <children>kingfisher</children>
+                        <value form="image">jr://images/kingfisher.png</value>
+                        <value>kingfisher</value>
                     </text>
                     <text id="static_instance-list1-1">
-                        <children form="image">jr://images/pigeon.png</children>
-                        <children>pigeon</children>
+                        <value form="image">jr://images/pigeon.png</value>
+                        <value>pigeon</value>
                     </text>
                     <text id="static_instance-neighborhoods-8">
-                        <children>Harbor</children>
+                        <value>Harbor</value>
                     </text>
                     <text id="/widgets/display_widgets/select_media/pig:label">
-                        <children form="image">jr://images/pigeon.png</children>
-                        <children>pigeon</children>
+                        <value form="image">jr://images/pigeon.png</value>
+                        <value>pigeon</value>
                     </text>
                     <text id="/widgets/select_widgets/happy_sad_table/happy_sad_brian/happy:label">
-                        <children form="image">jr://images/happy.jpg</children>
+                        <value form="image">jr://images/happy.jpg</value>
                     </text>
                 </translation>
             </itext>
@@ -640,7 +640,7 @@
         <group ref="/widgets/date_time_widgets">
             <label>Date and time widgets</label>
             <input ref="/widgets/date_time_widgets/my_date">
-                <label>Date widget (this one allows only future dates and has a default children)</label>
+                <label>Date widget (this one allows only future dates and has a default value)</label>
                 <hint>This field has a constraint (type=date, constraint=.&gt;= today())</hint>
             </input>
             <input appearance="month-year" ref="/widgets/date_time_widgets/my_date_month_year">
@@ -667,19 +667,19 @@
                 <hint>Using a list specified in the choices worksheet (type=select_multiple list)</hint>
                 <item>
                     <label>option a</label>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label>option b</label>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
                 <item>
                     <label>option c</label>
-                    <children>c</children>
+                    <value>c</value>
                 </item>
                 <item>
                     <label>option d</label>
-                    <children>d</children>
+                    <value>d</value>
                 </item>
             </select>
             <select appearance="horizontal-compact" ref="/widgets/select_widgets/select_horizontal_compact">
@@ -687,19 +687,19 @@
                 <hint>(type = select_multiple, appearance=horizontal-compact)</hint>
                 <item>
                     <label>option a</label>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label>option b</label>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
                 <item>
                     <label>option c</label>
-                    <children>c</children>
+                    <value>c</value>
                 </item>
                 <item>
                     <label>option d</label>
-                    <children>d</children>
+                    <value>d</value>
                 </item>
             </select>
             <select appearance="horizontal" ref="/widgets/select_widgets/select_horizontal">
@@ -707,35 +707,35 @@
                 <hint>(type=select_multiple, appearance=horizontal)</hint>
                 <item>
                     <label>option 1</label>
-                    <children>1</children>
+                    <value>1</value>
                 </item>
                 <item>
                     <label>option 2</label>
-                    <children>2</children>
+                    <value>2</value>
                 </item>
                 <item>
                     <label>option 3</label>
-                    <children>3</children>
+                    <value>3</value>
                 </item>
                 <item>
                     <label>option 4</label>
-                    <children>4</children>
+                    <value>4</value>
                 </item>
                 <item>
                     <label>option 5</label>
-                    <children>5</children>
+                    <value>5</value>
                 </item>
                 <item>
                     <label>option 6</label>
-                    <children>6</children>
+                    <value>6</value>
                 </item>
                 <item>
                     <label>option 7</label>
-                    <children>7</children>
+                    <value>7</value>
                 </item>
                 <item>
                     <label>option 8</label>
-                    <children>8</children>
+                    <value>8</value>
                 </item>
             </select>
             <select1 ref="/widgets/select_widgets/my_select1">
@@ -743,35 +743,35 @@
                 <hint>Scroll down to see default selection (type=select_one list2, default=8)</hint>
                 <item>
                     <label>option 1</label>
-                    <children>1</children>
+                    <value>1</value>
                 </item>
                 <item>
                     <label>option 2</label>
-                    <children>2</children>
+                    <value>2</value>
                 </item>
                 <item>
                     <label>option 3</label>
-                    <children>3</children>
+                    <value>3</value>
                 </item>
                 <item>
                     <label>option 4</label>
-                    <children>4</children>
+                    <value>4</value>
                 </item>
                 <item>
                     <label>option 5</label>
-                    <children>5</children>
+                    <value>5</value>
                 </item>
                 <item>
                     <label>option 6</label>
-                    <children>6</children>
+                    <value>6</value>
                 </item>
                 <item>
                     <label>option 7</label>
-                    <children>7</children>
+                    <value>7</value>
                 </item>
                 <item>
                     <label>option 8</label>
-                    <children>8</children>
+                    <value>8</value>
                 </item>
             </select1>
             <select1 appearance="horizontal-compact" ref="/widgets/select_widgets/select1_horizontal_compact">
@@ -779,19 +779,19 @@
                 <hint>(type=select_one, appearance=horizontal-compact)</hint>
                 <item>
                     <label>Yes</label>
-                    <children>yes</children>
+                    <value>yes</value>
                 </item>
                 <item>
                     <label>No</label>
-                    <children>no</children>
+                    <value>no</value>
                 </item>
                 <item>
                     <label>Don't Know</label>
-                    <children>dk</children>
+                    <value>dk</value>
                 </item>
                 <item>
                     <label>Not Applicable</label>
-                    <children>na</children>
+                    <value>na</value>
                 </item>
             </select1>
             <select1 appearance="horizontal" ref="/widgets/select_widgets/select1_horizontal">
@@ -799,35 +799,35 @@
                 <hint>(type=select_one, appearance=horizontal)</hint>
                 <item>
                     <label>option 1</label>
-                    <children>1</children>
+                    <value>1</value>
                 </item>
                 <item>
                     <label>option 2</label>
-                    <children>2</children>
+                    <value>2</value>
                 </item>
                 <item>
                     <label>option 3</label>
-                    <children>3</children>
+                    <value>3</value>
                 </item>
                 <item>
                     <label>option 4</label>
-                    <children>4</children>
+                    <value>4</value>
                 </item>
                 <item>
                     <label>option 5</label>
-                    <children>5</children>
+                    <value>5</value>
                 </item>
                 <item>
                     <label>option 6</label>
-                    <children>6</children>
+                    <value>6</value>
                 </item>
                 <item>
                     <label>option 7</label>
-                    <children>7</children>
+                    <value>7</value>
                 </item>
                 <item>
                     <label>option 8</label>
-                    <children>8</children>
+                    <value>8</value>
                 </item>
             </select1>
             <select1 appearance="likert" ref="/widgets/select_widgets/select1_likert">
@@ -835,23 +835,23 @@
                 <hint>(type=select_one, appearance=likert)</hint>
                 <item>
                     <label>strongly disagree</label>
-                    <children>1</children>
+                    <value>1</value>
                 </item>
                 <item>
                     <label>disagree</label>
-                    <children>2</children>
+                    <value>2</value>
                 </item>
                 <item>
                     <label>neither agree nor disagree</label>
-                    <children>3</children>
+                    <value>3</value>
                 </item>
                 <item>
                     <label>agree</label>
-                    <children>4</children>
+                    <value>4</value>
                 </item>
                 <item>
                     <label>strongly agree</label>
-                    <children>5</children>
+                    <value>5</value>
                 </item>
             </select1>
             <select1 appearance="minimal" ref="/widgets/select_widgets/spinner">
@@ -859,19 +859,19 @@
                 <hint>Showing a pull-down list of options (type=select_one list, appearance=minimal)</hint>
                 <item>
                     <label>option a</label>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label>option b</label>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
                 <item>
                     <label>option c</label>
-                    <children>c</children>
+                    <value>c</value>
                 </item>
                 <item>
                     <label>option d</label>
-                    <children>d</children>
+                    <value>d</value>
                 </item>
             </select1>
             <select appearance="minimal" ref="/widgets/select_widgets/spinner_all">
@@ -879,19 +879,19 @@
                 <hint>Showing a pull-down list of options (type=select_multiple list, appearance=minimal)</hint>
                 <item>
                     <label>option a</label>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label>option b</label>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
                 <item>
                     <label>option c</label>
-                    <children>c</children>
+                    <value>c</value>
                 </item>
                 <item>
                     <label>option d</label>
-                    <children>d</children>
+                    <value>d</value>
                 </item>
             </select>
             <select1 appearance="quick" ref="/widgets/select_widgets/selectadvance">
@@ -899,19 +899,19 @@
                 <hint>Advance to the next question immediate after selection in ODK Collect. (type=select_one list, appearance=quick)</hint>
                 <item>
                     <label>option a</label>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label>option b</label>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
                 <item>
                     <label>option c</label>
-                    <children>c</children>
+                    <value>c</value>
                 </item>
                 <item>
                     <label>option d</label>
-                    <children>d</children>
+                    <value>d</value>
                 </item>
             </select1>
             <select1 appearance="compact" ref="/widgets/select_widgets/grid_test">
@@ -919,11 +919,11 @@
                 <hint>Make sure to put a.jpg and b.jpg in the form-media folder to see images here. (type=select_one a_b, appearance=compact)</hint>
                 <item>
                     <label ref="jr:itext('/widgets/select_widgets/grid_test/a:label')"/>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label ref="jr:itext('/widgets/select_widgets/grid_test/b:label')"/>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
             </select1>
             <select1 appearance="quickcompact" ref="/widgets/select_widgets/grid_test_audio">
@@ -931,11 +931,11 @@
                 <hint>Same as previous but this one advances to the next question automatically in ODK Collect. (type=select_one a_b, appearance=quickcompact)</hint>
                 <item>
                     <label ref="jr:itext('/widgets/select_widgets/grid_test_audio/a:label')"/>
-                    <children>a</children>
+                    <value>a</value>
                 </item>
                 <item>
                     <label ref="jr:itext('/widgets/select_widgets/grid_test_audio/b:label')"/>
-                    <children>b</children>
+                    <value>b</value>
                 </item>
             </select1>
             <group appearance="field-list" ref="/widgets/select_widgets/table_list_test">
@@ -945,19 +945,19 @@
                     <hint>Show only the labels of these options and not the inputs (type=select_one yes_no, appearance=label)</hint>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
                 <select1 appearance="list-nolabel" ref="/widgets/select_widgets/table_list_test/table_list_1">
@@ -965,19 +965,19 @@
                     <hint>Show only the inputs of these options and not the labels (type=select_one yes_no, appearance=list-nolabel)</hint>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
                 <select1 appearance="list-nolabel" ref="/widgets/select_widgets/table_list_test/table_list_2">
@@ -985,19 +985,19 @@
                     <hint>Show only the inputs of these options and not the labels (type=select_one yes_no, appearance=list-nolabel)</hint>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
             </group>
@@ -1010,19 +1010,19 @@
                     <label></label>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
                 <select1 appearance="list-nolabel" ref="/widgets/select_widgets/table_list_test2/table_list_3">
@@ -1030,19 +1030,19 @@
                     <hint>No need to do anything special here</hint>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
                 <select1 appearance="list-nolabel" ref="/widgets/select_widgets/table_list_test2/table_list_4">
@@ -1050,19 +1050,19 @@
                     <hint>No need to do anything special here</hint>
                     <item>
                         <label>Yes</label>
-                        <children>yes</children>
+                        <value>yes</value>
                     </item>
                     <item>
                         <label>No</label>
-                        <children>no</children>
+                        <value>no</value>
                     </item>
                     <item>
                         <label>Don't Know</label>
-                        <children>dk</children>
+                        <value>dk</value>
                     </item>
                     <item>
                         <label>Not Applicable</label>
-                        <children>na</children>
+                        <value>na</value>
                     </item>
                 </select1>
             </group>
@@ -1073,11 +1073,11 @@
                     <hint>Show only the labels of these options and not the inputs (type=select_one yes_no, appearance=label)</hint>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_second_method/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_second_method/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
                 <select appearance="list-nolabel" ref="/widgets/select_widgets/happy_sad_table_2/happy_sad_brian2">
@@ -1085,11 +1085,11 @@
                     <hint>Show only the inputs of these options and not the labels (type=select_one yes_no, appearance=list-nolabel)</hint>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_brian2/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_brian2/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
                 <select appearance="list-nolabel" ref="/widgets/select_widgets/happy_sad_table_2/happy_sad_michael2">
@@ -1097,11 +1097,11 @@
                     <hint>Show only the inputs of these options and not the labels (type=select_one yes_no, appearance=list-nolabel)</hint>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_michael2/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table_2/happy_sad_michael2/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
             </group>
@@ -1114,33 +1114,33 @@
                     <label></label>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/reserved_name_for_field_list_labels_52/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/reserved_name_for_field_list_labels_52/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
                 <select appearance="list-nolabel" ref="/widgets/select_widgets/happy_sad_table/happy_sad_brian">
                     <label>Brian</label>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/happy_sad_brian/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/happy_sad_brian/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
                 <select appearance="list-nolabel" ref="/widgets/select_widgets/happy_sad_table/happy_sad_michael">
                     <label>Michael</label>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/happy_sad_michael/happy:label')"/>
-                        <children>happy</children>
+                        <value>happy</value>
                     </item>
                     <item>
                         <label ref="jr:itext('/widgets/select_widgets/happy_sad_table/happy_sad_michael/sad:label')"/>
-                        <children>sad</children>
+                        <value>sad</value>
                     </item>
                 </select>
             </group>
@@ -1153,26 +1153,26 @@
                     <label>Country</label>
                     <item>
                         <label>The Netherlands</label>
-                        <children>nl</children>
+                        <value>nl</value>
                     </item>
                     <item>
                         <label>United States</label>
-                        <children>usa</children>
+                        <value>usa</value>
                     </item>
                 </select1>
                 <select1 ref="/widgets/cascading_widgets/group1/city">
                     <label>City</label>
-                    <hint>Using a choice filter to update options based on a previous answer (choice_filter: country = <output children=" /widgets/cascading_widgets/group1/country "/>)</hint>
+                    <hint>Using a choice filter to update options based on a previous answer (choice_filter: country = <output value=" /widgets/cascading_widgets/group1/country "/>)</hint>
                     <itemset nodeset="instance('cities')/root/item[country= /widgets/cascading_widgets/group1/country ]">
-                        <children ref="name"/>
+                        <value ref="name"/>
                         <label ref="jr:itext(itextId)"/>
                     </itemset>
                 </select1>
                 <select1 ref="/widgets/cascading_widgets/group1/neighborhood">
                     <label>Neighborhood</label>
-                    <hint>Using a choice filter to update options based on previous answers (choice_filter: country = <output children=" /widgets/cascading_widgets/group1/country "/> and city = <output children=" /widgets/cascading_widgets/group1/city "/>)</hint>
+                    <hint>Using a choice filter to update options based on previous answers (choice_filter: country = <output value=" /widgets/cascading_widgets/group1/country "/> and city = <output value=" /widgets/cascading_widgets/group1/city "/>)</hint>
                     <itemset nodeset="instance('neighborhoods')/root/item[country= /widgets/cascading_widgets/group1/country  and city= /widgets/cascading_widgets/group1/city ]">
-                        <children ref="name"/>
+                        <value ref="name"/>
                         <label ref="jr:itext(itextId)"/>
                     </itemset>
                 </select1>
@@ -1184,26 +1184,26 @@
                     <hint>(appearance: minimal)</hint>
                     <item>
                         <label>The Netherlands</label>
-                        <children>nl</children>
+                        <value>nl</value>
                     </item>
                     <item>
                         <label>United States</label>
-                        <children>usa</children>
+                        <value>usa</value>
                     </item>
                 </select1>
                 <select1 appearance="minimal" ref="/widgets/cascading_widgets/group2/city2">
                     <label>City</label>
-                    <hint>Using a choice filter to update options based on a previous answer (choice_filter: country = <output children=" /widgets/cascading_widgets/group2/country2 "/>, appearance: minimal)</hint>
+                    <hint>Using a choice filter to update options based on a previous answer (choice_filter: country = <output value=" /widgets/cascading_widgets/group2/country2 "/>, appearance: minimal)</hint>
                     <itemset nodeset="instance('cities')/root/item[country= /widgets/cascading_widgets/group2/country2 ]">
-                        <children ref="name"/>
+                        <value ref="name"/>
                         <label ref="jr:itext(itextId)"/>
                     </itemset>
                 </select1>
                 <select1 appearance="minimal" ref="/widgets/cascading_widgets/group2/neighborhood2">
                     <label>Neighborhood</label>
-                    <hint>Using a choice filter to update options based on previous answers (choice_filter: country = <output children=" /widgets/cascading_widgets/group2/country2 "/> and city = <output children=" /widgets/cascading_widgets/group2/city2 "/>, appearance = minimal)</hint>
+                    <hint>Using a choice filter to update options based on previous answers (choice_filter: country = <output value=" /widgets/cascading_widgets/group2/country2 "/> and city = <output value=" /widgets/cascading_widgets/group2/city2 "/>, appearance = minimal)</hint>
                     <itemset nodeset="instance('neighborhoods')/root/item[country= /widgets/cascading_widgets/group2/country2  and city= /widgets/cascading_widgets/group2/city2 ]">
-                        <children ref="name"/>
+                        <value ref="name"/>
                         <label ref="jr:itext(itextId)"/>
                     </itemset>
                 </select1>
@@ -1257,8 +1257,8 @@
                 <label>Note widget. In notes you can emphasize _words_ or _multiple words_ or __strongly emphasize something__.
                     You can also use a line break to start a new sentence.
 
-                    The decimal number you entered was <output children=" /widgets/number_widgets/my_decimal "/>.</label>
-                <hint>This is a note and it uses a children of another field in its label (type=note)</hint>
+                    The decimal number you entered was <output value=" /widgets/number_widgets/my_decimal "/>.</label>
+                <hint>This is a note and it uses a value of another field in its label (type=note)</hint>
             </input>
             <input ref="/widgets/display_widgets/text_media">
                 <label ref="jr:itext('/widgets/display_widgets/text_media:label')"/>
@@ -1269,15 +1269,15 @@
                 <hint>Add the file name in the image column on your choices sheet. Make sure you upload this file when you publish your form.</hint>
                 <item>
                     <label ref="jr:itext('/widgets/display_widgets/select_media/king:label')"/>
-                    <children>king</children>
+                    <value>king</value>
                 </item>
                 <item>
                     <label ref="jr:itext('/widgets/display_widgets/select_media/pig:label')"/>
-                    <children>pig</children>
+                    <value>pig</value>
                 </item>
                 <item>
                     <label ref="jr:itext('/widgets/display_widgets/select_media/nut:label')"/>
-                    <children>nut</children>
+                    <value>nut</value>
                 </item>
             </select1>
             <trigger ref="/widgets/display_widgets/my_trigger">

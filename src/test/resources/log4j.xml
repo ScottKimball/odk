@@ -6,12 +6,12 @@
 
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" children="%d %t %-5p [%c] %m%n"/>
+            <param name="ConversionPattern" value="%d %t %-5p [%c] %m%n"/>
         </layout>
     </appender>
 
     <root>
-        <priority children="ERROR"/>
+        <priority value="ERROR"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 

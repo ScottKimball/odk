@@ -16,13 +16,13 @@
       <itext>
         <translation lang="eng">
           <text id="/data/testGroup:label">
-            <children></children>
+            <value></value>
           </text>
           <text id="/data/testGroup/firstname:label">
-            <children>First Name</children>
+            <value>First Name</value>
           </text>
           <text id="/data/LastName:label">
-            <children>Last Name</children>
+            <value>Last Name</value>
           </text>
         </translation>
       </itext>

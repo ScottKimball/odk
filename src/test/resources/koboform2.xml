@@ -48,22 +48,22 @@
                         <label>Select</label>
                         <item>
                             <label>Option 1</label>
-                            <children>option_1</children>
+                            <value>option_1</value>
                         </item>
                         <item>
                             <label>Option 2</label>
-                            <children>option_2</children>
+                            <value>option_2</value>
                         </item>
                     </select>
                     <select1 ref="/uploaded_form_x08lao/group_qy8km68/Select_1">
                         <label>Select 1</label>
                         <item>
                             <label>Option 1</label>
-                            <children>AUTOMATIC</children>
+                            <value>AUTOMATIC</value>
                         </item>
                         <item>
                             <label>Option 2</label>
-                            <children>option_2</children>
+                            <value>option_2</value>
                         </item>
                     </select1>
                 </repeat>
