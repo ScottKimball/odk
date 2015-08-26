@@ -80,7 +80,7 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
             }
 
             formElements.addAll(additionalFields);
-            formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+          //  formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION,ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_UI_VERSION,ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE,ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));

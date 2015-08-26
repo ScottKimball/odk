@@ -67,11 +67,11 @@
                     <label>Gender</label>
                     <item>
                         <label>Male</label>
-                        <value>male</value>
+                        <children>male</children>
                     </item>
                     <item>
                         <label>Female</label>
-                        <value>female</value>
+                        <children>female</children>
                     </item>
                 </select1>
             </repeat>
@@ -90,11 +90,11 @@
             <label>Do you like pizza?</label>
             <item>
                 <label>Yes</label>
-                <value>yes</value>
+                <children>yes</children>
             </item>
             <item>
                 <label>No</label>
-                <value>no</value>
+                <children>no</children>
             </item>
         </select1>
         <input ref="/tutorialRepeatWithCount/pizza_hater">
@@ -104,42 +104,42 @@
             <label>Best pie?</label>
             <item>
                 <label>New York think crust!</label>
-                <value>nyc</value>
+                <children>nyc</children>
             </item>
             <item>
                 <label>Chicago deep dish!</label>
-                <value>chitown</value>
+                <children>chitown</children>
             </item>
         </select1>
         <select ref="/tutorialRepeatWithCount/favorite_toppings">
             <label>Favorite toppings</label>
             <item>
                 <label>Cheese</label>
-                <value>cheese</value>
+                <children>cheese</children>
             </item>
             <item>
                 <label>Pepperoni</label>
-                <value>pepperoni</value>
+                <children>pepperoni</children>
             </item>
             <item>
                 <label>Sausauge</label>
-                <value>sausauge</value>
+                <children>sausauge</children>
             </item>
             <item>
                 <label>Green Peppers</label>
-                <value>green_peppers</value>
+                <children>green_peppers</children>
             </item>
             <item>
                 <label>Mushrooms</label>
-                <value>mushrooms</value>
+                <children>mushrooms</children>
             </item>
             <item>
                 <label>Anchovies :)</label>
-                <value>anchovies</value>
+                <children>anchovies</children>
             </item>
         </select>
         <input ref="/tutorialRepeatWithCount/thanks">
-            <label>Thanks for your time <output value=" /tutorialRepeatWithCount/child_repeat/name "/>!</label>
+            <label>Thanks for your time <output children=" /tutorialRepeatWithCount/child_repeat/name "/>!</label>
         </input>
     </h:body>
 </h:html>

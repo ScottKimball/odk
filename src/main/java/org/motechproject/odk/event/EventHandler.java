@@ -6,15 +6,12 @@ import org.motechproject.event.listener.annotations.MotechListener;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormElementValue;
 import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.FormInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -32,21 +29,21 @@ public class EventHandler {
         Map<String,Object> params = event.getParameters();
         String title = (String) params.get(EventParameters.FORM_TITLE);
         String configName = (String) params.get(EventParameters.CONFIGURATION_NAME);
-        FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName,title);
-        if (formDefinition == null) {
-            publishPersistFailEvent(event);
+
+        if (title != null && configName != null) {
+            FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName,title);
+
+            if (formDefinition != null) {
+                FormInstanceBuilder builder = new FormInstanceBuilder(title,configName,formDefinition,params);
+                FormInstance instance = builder.build();
+                return;
+            }
         }
-
-        List<FormElementValue> formElementValues = new ArrayList<>();
-
-        /*iterate over form definition form elements; get value off params; construct formElementValue; add to list */
-
-
-        FormInstance formInstance = new FormInstance(title);
-        formInstance.setFormElementValues(formElementValues);
-
-
+        publishPersistFailEvent(event);
     }
+
+
+
 
     private void publishPersistFailEvent(MotechEvent event) {
 

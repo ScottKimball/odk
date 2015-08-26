@@ -5,7 +5,7 @@ import org.motechproject.mds.annotations.Field;
 
 
 @Entity
-public class FormElementValue {
+public class FormValue {
 
     @Field
     private String name;
@@ -16,9 +16,13 @@ public class FormElementValue {
     @Field
     private String type;
 
-    @Field
-    private Object value;
 
+    /*MDS doesn't seem to like collections of abstract classes so this is the workaround*/
+    protected FormValue(String name, String label, String type) {
+        this.name = name;
+        this.label = label;
+        this.type = type;
+    }
 
 
     public String getName() {
@@ -45,11 +49,7 @@ public class FormElementValue {
         this.type = type;
     }
 
-    public Object getValue() {
-        return value;
-    }
 
-    public void setValue(Object value) {
-        this.value = value;
-    }
+
+
 }

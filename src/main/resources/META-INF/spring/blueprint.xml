@@ -8,6 +8,8 @@
     <osgi:reference id="httpClientBuilderFactory" interface="org.apache.http.osgi.services.HttpClientBuilderFactory"/>
     <osgi:reference id="channelService" interface= "org.motechproject.tasks.service.ChannelService" />
     <osgi:reference id="formDefinitionDataService" interface="org.motechproject.odk.repository.FormDefinitionDataService"/>
+    <osgi:reference id="formInstanceDataService" interface="org.motechproject.odk.repository.FormInstanceDataService"/>
+
     <osgi:reference id="eventRelay" interface="org.motechproject.event.listener.EventRelay"/>
 
     <osgi:service ref="odkSettingsService" interface="org.motechproject.odk.service.SettingsService" />

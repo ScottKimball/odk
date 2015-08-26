@@ -3,7 +3,6 @@ package org.motechproject.odk.tasks;
 import org.motechproject.odk.constant.DisplayNames;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
-import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.constant.TasksDataTypes;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
@@ -11,30 +10,12 @@ import org.motechproject.tasks.contract.EventParameterRequest;
 import org.motechproject.tasks.contract.TriggerEventRequest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TriggerBuilder {
 
     private List<FormDefinition> formDefinitions;
-    private static final Map<String, String> TYPE_MAP = new HashMap<String,String>(){{
-        put(FieldTypeConstants.STRING, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.DATE_TIME,TasksDataTypes.DATE);
-        put(FieldTypeConstants.BOOLEAN, TasksDataTypes.BOOLEAN);
-        put(FieldTypeConstants.INT, TasksDataTypes.INTEGER);
-        put(FieldTypeConstants.DECIMAL, TasksDataTypes.DOUBLE);
-        put(FieldTypeConstants.DATE, TasksDataTypes.DATE);
-        put(FieldTypeConstants.TIME,TasksDataTypes.TIME);
-        put(FieldTypeConstants.SELECT, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.SELECT_1, TasksDataTypes.LIST);
-        put(FieldTypeConstants.GEOPOINT, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.GEOTRACE, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.GEOSHAPE, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.DOUBLE_ARRAY, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.STRING_ARRAY, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.REPEAT_GROUP, TasksDataTypes.UNICODE);
-    }};
+
 
     public TriggerBuilder( List<FormDefinition> formDefinitions) {
         this.formDefinitions = formDefinitions;
@@ -45,7 +26,8 @@ public class TriggerBuilder {
 
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
-            TriggerEventRequest eventRequest = new TriggerEventRequest("[" + formDefinition.getConfigurationName() + "] " + DisplayNames.TRIGGER_DISPLAY_NAME + " [" + formDefinition.getTitle() + "]",
+            TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.TRIGGER_DISPLAY_NAME + " [Configuration: " +
+                    formDefinition.getConfigurationName() + "] " + "[Title: " + formDefinition.getTitle() + "]",
                     EventSubjects.RECEIVED_FORM + "." +  formDefinition.getConfigurationName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }
@@ -58,7 +40,7 @@ public class TriggerBuilder {
     private List<EventParameterRequest> buildEventParameterRequests(FormDefinition formDefinition) {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
         for (FormElement formElement : formDefinition.getFormElements()) {
-            String type = TYPE_MAP.get(formElement.getType());
+            String type = TypeMapper.getType(formElement.getType());
 
             if (type != null) {
                 EventParameterRequest request = new EventParameterRequest(formElement.getLabel(), formElement.getName(),type);

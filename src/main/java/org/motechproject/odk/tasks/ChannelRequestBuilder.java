@@ -2,6 +2,7 @@ package org.motechproject.odk.tasks;
 
 import org.motechproject.odk.constant.DisplayNames;
 import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.constant.TasksDataTypes;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.constant.EventParameters;
@@ -22,6 +23,8 @@ public class ChannelRequestBuilder {
     private BundleContext bundleContext;
     private List<FormDefinition> formDefinitions;
 
+
+
     public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {
         this.bundleContext = bundleContext;
         this.formDefinitions = formDefinitions;
@@ -30,7 +33,9 @@ public class ChannelRequestBuilder {
     public ChannelRequest build () {
         TriggerBuilder triggerBuilder = new TriggerBuilder(formDefinitions);
         List<TriggerEventRequest> triggers = triggerBuilder.buildTriggers();
+        ActionBuilder actionBuilder = new ActionBuilder(formDefinitions);
+        List<ActionEventRequest> actions = actionBuilder.build();
         return new ChannelRequest(DisplayNames.CHANNEL_DISPLAY_NAME, bundleContext.getBundle().getSymbolicName(),
-                bundleContext.getBundle().getVersion().toString(), null, triggers, new ArrayList<ActionEventRequest>());
+                bundleContext.getBundle().getVersion().toString(), null, triggers,actions);
     }
 }
