@@ -7,6 +7,7 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.domain.FormValueDouble;
+import org.motechproject.odk.domain.FormValueGroup;
 import org.motechproject.odk.domain.FormValueInteger;
 import org.motechproject.odk.domain.FormValueString;
 import org.motechproject.odk.domain.FormInstance;
@@ -18,15 +19,12 @@ import java.util.Map;
 
 public class FormInstanceBuilder {
 
-    private String title;
-    private String configName;
     private FormDefinition formDefinition;
     private Map<String, Object> params;
 
 
-    public FormInstanceBuilder(String title, String configName, FormDefinition formDefinition, Map<String, Object> params) {
-        this.title = title;
-        this.configName = configName;
+    public FormInstanceBuilder( FormDefinition formDefinition, Map<String, Object> params) {
+
         this.formDefinition = formDefinition;
         this.params = params;
     }
@@ -43,7 +41,7 @@ public class FormInstanceBuilder {
             }
         }
 
-        FormInstance formInstance = new FormInstance(title, configName);
+        FormInstance formInstance = new FormInstance(formDefinition.getTitle(), formDefinition.getConfigurationName());
         formInstance.setFormValues(formValues);
         return formInstance;
     }
@@ -60,15 +58,16 @@ public class FormInstanceBuilder {
                 return null; //TODO
 
             case FieldTypeConstants.DATE:
-                return null;
+                return null;//TODO
 
             case FieldTypeConstants.TIME:
-                return null;
+                return null;//TODO
 
             */
 
             case FieldTypeConstants.REPEAT_GROUP :
                 return buildGroup(formElement, value);
+
             case FieldTypeConstants.INT:
                 return new FormValueInteger(formElement.getName(),formElement.getLabel(), formElement.getType(),(Integer) value);
 
@@ -82,15 +81,63 @@ public class FormInstanceBuilder {
 
     }
 
-    private FormValue buildGroup (FormElement formElement, Object value)  {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String,Object> data = mapper.readValue((String) value,new TypeReference<HashMap<String,Object>>() {} );
+    private FormValueGroup buildGroup (FormElement formElement, Object value)  {
+        Map<String, Object> data;
 
-        } catch (Exception e) {
+        if (value instanceof String) {
+            data = jsonToMap((String)value);
 
+        } else {
+            data = (Map<String,Object>) value;
         }
 
+        List<FormValue> children = new ArrayList<>();
+        for(Map.Entry pair:data.entrySet()) {
+            FormElement element = findFormElementByName(pair.getKey().toString());
+            Object pairValue = pair.getValue();
+            children.add(buildFormElementValueByType(element,pairValue));
+        }
+
+        return new FormValueGroup(formElement.getName(),formElement.getLabel(),formElement.getType(),children);
+    }
+
+    private Map<String, Object> jsonToMap(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue((String) json,new TypeReference<HashMap<String,Object>>() {} );
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private FormElement findFormElementByName(String name) {
+        for (FormElement formElement : formDefinition.getFormElements()) {
+           FormElement element =  recursivelyFindFormElementByName(formElement,name);
+
+            if (element != null) {
+                return element;
+            }
+        }
+
+        return null;
+    }
+
+    private FormElement recursivelyFindFormElementByName(FormElement formElement, String name) {
+
+        if (formElement.getName().equals(name)) {
+            return formElement;
+
+        } else if (formElement.hasChildren()) {
+
+            for (FormElement child : formElement.getChildren()) {
+                FormElement element = recursivelyFindFormElementByName(child, name);
+
+                if (element != null) {
+                    return element;
+                }
+            }
+        }
         return null;
     }
 

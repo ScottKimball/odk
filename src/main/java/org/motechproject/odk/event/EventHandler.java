@@ -34,18 +34,14 @@ public class EventHandler {
             FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName,title);
 
             if (formDefinition != null) {
-                FormInstanceBuilder builder = new FormInstanceBuilder(title,configName,formDefinition,params);
+                FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition,params);
                 FormInstance instance = builder.build();
-                return;
             }
         }
-        publishPersistFailEvent(event);
     }
 
 
 
 
-    private void publishPersistFailEvent(MotechEvent event) {
 
-    }
 }
