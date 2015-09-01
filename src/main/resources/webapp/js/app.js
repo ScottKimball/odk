@@ -3,10 +3,13 @@
 
     /* App Module */
 
-    angular.module('ODKHelloWorld', ['motech-dashboard', 'ODKHelloWorld.controllers', 'ODKHelloWorld.directives', 'ODKHelloWorld.services', 'ngCookies'])
+    angular.module('odk', ['motech-dashboard', 'odk.controllers', 'odk.directives', 'odk.services', 'ngCookies'])
         .config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.
-                when('/helloWorld', {templateUrl: '../ODK/resources/partials/say-hello.html', controller: 'HelloWorldController'});
+                when('/odk/settings', {
+                    templateUrl: '../odk/resources/partials/settings.html',
+                    controller: 'SettingsCtrl'
+                });
     }]);
 }());

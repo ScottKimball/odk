@@ -3,9 +3,9 @@
 
     /* Services */
 
-    var services = angular.module('ODKHelloWorld.services', ['ngResource']);
+    var services = angular.module('odk.services', ['ngResource']);
 
-    services.factory('HelloWorld', function($resource) {
-        return $resource('../ODK/sayHello');
+    services.factory('Settings', function($resource) {
+        return $resource('../odk/settings');
     });
 }());

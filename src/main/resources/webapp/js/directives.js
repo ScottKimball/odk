@@ -1,6 +1,6 @@
 (function () {
     'use strict';
 
-    var directives = angular.module('ODKHelloWorld.directives', []);
+    var directives = angular.module('odk.directives', []);
 
 }());

@@ -22,28 +22,6 @@
     </bean>
 
 
-    <bean id="moduleRegistrationData" class="org.motechproject.osgi.web.ModuleRegistrationData">
-        <constructor-arg name="url" value="../odk/resources/index.html"/>
-        <constructor-arg name="moduleName" value="odk"/>
-        <constructor-arg name="angularModules">
-            <list>
-                <value>odk</value>
-            </list>
-        </constructor-arg>
-        <constructor-arg name="i18n">
-            <map>
-                <entry key="messages" value="../dhis2/resources/messages/"/>
-            </map>
-        </constructor-arg>
-        <property name="roleForAccess">
-            <list>
-                <value>configureDhis</value>
-                <value>syncDhis</value>
-            </list>
-        </property>
-        <property name="settingsURL" value="/dhis2/settings"/>
-        <property name="defaultURL" value="/dhis2/settings"/>
-    </bean>
-
+    
 
 </beans>
