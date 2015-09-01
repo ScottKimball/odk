@@ -1,4 +1,4 @@
-package org.motechproject.odk.event;
+package org.motechproject.odk.domain.builder;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -21,12 +21,13 @@ public class FormInstanceBuilder {
 
     private FormDefinition formDefinition;
     private Map<String, Object> params;
+    private String instanceId;
 
 
-    public FormInstanceBuilder( FormDefinition formDefinition, Map<String, Object> params) {
-
+    public FormInstanceBuilder(FormDefinition formDefinition, Map<String, Object> params, String instanceId) {
         this.formDefinition = formDefinition;
         this.params = params;
+        this.instanceId = instanceId;
     }
 
     public FormInstance build() {
@@ -41,7 +42,7 @@ public class FormInstanceBuilder {
             }
         }
 
-        FormInstance formInstance = new FormInstance(formDefinition.getTitle(), formDefinition.getConfigurationName());
+        FormInstance formInstance = new FormInstance(formDefinition.getTitle(), formDefinition.getConfigurationName(), instanceId);
         formInstance.setFormValues(formValues);
         return formInstance;
     }
@@ -82,29 +83,33 @@ public class FormInstanceBuilder {
     }
 
     private FormValueGroup buildGroup (FormElement formElement, Object value)  {
-        Map<String, Object> data;
+        List<Map<String,Object>> data;
 
         if (value instanceof String) {
             data = jsonToMap((String)value);
 
         } else {
-            data = (Map<String,Object>) value;
+            data = (List<Map<String,Object>>) value;
         }
 
         List<FormValue> children = new ArrayList<>();
-        for(Map.Entry pair:data.entrySet()) {
-            FormElement element = findFormElementByName(pair.getKey().toString());
-            Object pairValue = pair.getValue();
-            children.add(buildFormElementValueByType(element,pairValue));
+        for(Map<String,Object> map : data) {
+
+            for (Map.Entry pair: map.entrySet()) {
+                FormElement element = findFormElementByName(pair.getKey().toString());
+                Object pairValue = pair.getValue();
+                children.add(buildFormElementValueByType(element,pairValue));
+            }
+
         }
 
         return new FormValueGroup(formElement.getName(),formElement.getLabel(),formElement.getType(),children);
     }
 
-    private Map<String, Object> jsonToMap(String json) {
+    private List<Map<String,Object>> jsonToMap(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue((String) json,new TypeReference<HashMap<String,Object>>() {} );
+            return mapper.readValue((String) json, new TypeReference<List<Map<String,Object>>>() {});
 
         } catch (Exception e) {
             return null;

@@ -3,6 +3,7 @@ package org.motechproject.odk.domain;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
+import javax.jdo.annotations.Unique;
 import java.util.List;
 
 @Entity
@@ -15,14 +16,16 @@ public class FormInstance {
     private String configName;
 
     @Field
+    @Unique
     private String instanceId;
 
     @Field
     private List<FormValue> formValues;
 
-    public FormInstance(String title, String configName) {
+    public FormInstance(String title, String configName, String instanceId) {
         this.title = title;
         this.configName = configName;
+        this.instanceId = instanceId;
     }
 
     public FormInstance() {

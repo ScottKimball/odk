@@ -62,26 +62,36 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
         for (FormDefinition formDefinition: formDefinitions) {
-            List<FormElement> additionalFields = new ArrayList<>();
             List<FormElement> formElements = formDefinition.getFormElements();
+            modifyFormElements(formElements);
 
-            for (FormElement formElement : formElements) {
-                String[] array = formElement.getName().split("/");
-                formElement.setName(array[array.length - 1]);
-
-                if (formElement.getType().equalsIgnoreCase(FieldTypeConstants.GEOPOINT)) {
-                    additionalFields.addAll(addGeopointFields(formElement));
-                }
-            }
-
-            formElements.addAll(additionalFields);
-          //  formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
+            //  formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION,ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_UI_VERSION,ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
             formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE,ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
             formElements.add(new FormElement(ODKConstants.META_IS_COMPLETE,ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
-            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE,ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE, ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
         }
+    }
+
+    private void modifyFormElements(List<FormElement> formElements) {
+        List<FormElement> additionalFields = new ArrayList<>();
+        for (FormElement formElement : formElements) {
+            String[] array = formElement.getName().split("/");
+            formElement.setName(array[array.length - 1]);
+
+            if (formElement.getType().equalsIgnoreCase(FieldTypeConstants.GEOPOINT)) {
+                additionalFields.addAll(addGeopointFields(formElement));
+            }
+
+            if (formElement.hasChildren()) {
+                modifyFormElements(formElement.getChildren());
+            }
+        }
+
+        formElements.addAll(additionalFields);
+
+
     }
 
     private List<FormElement> addGeopointFields (FormElement formElement) {

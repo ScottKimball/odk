@@ -11,6 +11,7 @@ public class DisplayNames {
     public static final String FORM_FAIL = "Form Receipt Failure";
     public static final String JSON_CONTENT = "JSON Content";
     public static final String CONFIG_NAME = "Configuration Name";
+    public static final String INSTANCE_ID = "Instance ID";
 
     public static final String SAVE_FORM_INSTANCE = "Save Form Instance";
 

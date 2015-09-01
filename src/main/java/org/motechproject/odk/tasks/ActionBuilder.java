@@ -84,6 +84,16 @@ public class ActionBuilder {
 
         actionParameterRequests.add(builder.createActionParameterRequest());
 
+        builder = new ActionParameterRequestBuilder();
+        builder
+                .setDisplayName(DisplayNames.INSTANCE_ID)
+                .setOrder(count++)
+                .setType(TasksDataTypes.UNICODE)
+                .setKey(EventParameters.INSTANCE_ID)
+                .setRequired(true);
+
+        actionParameterRequests.add(builder.createActionParameterRequest());
+
         return actionParameterRequests;
     }
 }
