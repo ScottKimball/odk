@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-public class SyncController {
+public class ImportController {
 
     @Autowired
     FormDefinitionImportServiceFactory formDefinitionImportServiceFactory;
@@ -22,7 +22,7 @@ public class SyncController {
     @Autowired
     SettingsService settingsService;
 
-    @RequestMapping(value = "/sync/{config}", method = RequestMethod.GET)
+    @RequestMapping(value = "/import/{config}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public boolean syncForms (@PathVariable("config") String config) {

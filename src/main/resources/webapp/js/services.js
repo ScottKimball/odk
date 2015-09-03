@@ -5,7 +5,7 @@
 
     var services = angular.module('odk.services', ['ngResource']);
 
-    services.factory('Settings', function($resource) {
-        return $resource('../odk/settings');
+    services.factory('Configs', function($resource) {
+        return $resource('../odk/configs');
     });
 }());

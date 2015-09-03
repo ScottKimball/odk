@@ -15,26 +15,27 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/settings")
+@RequestMapping(value = "/configs")
 public class SettingsController {
 
     @Autowired
     SettingsService settingsService;
 
 
-    @RequestMapping(value = "/configs", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Configuration> getConfigs() {
         return settingsService.getAllConfigs();
     }
 
-    @RequestMapping(value = "/configs", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void addOrUpdateConfig(@RequestBody Configuration configuration) {
         settingsService.addOrUpdateConfiguration(configuration);
     }
 
-    @RequestMapping(value = "/configs/all", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public boolean addConfigs () {
         settingsService.addConfigs();
