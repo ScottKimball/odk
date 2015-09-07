@@ -72,9 +72,12 @@ public class SettingsServiceImpl implements SettingsService {
     }
 
     @Override
-    public void removeConfiguration(Configuration configuration) {
-        settings.getConfigurations().remove(configuration);
-        updateSettings();
+    public void removeConfiguration(String configName) {
+        Configuration configuration = getConfigByName(configName);
+        if (configuration != null) {
+            settings.getConfigurations().remove(configuration);
+            updateSettings();
+        }
     }
 
     @Override

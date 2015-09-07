@@ -6,6 +6,7 @@ import org.motechproject.odk.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,13 +26,21 @@ public class SettingsController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Configuration> getConfigs() {
-        return settingsService.getAllConfigs();
+
+        List<Configuration> configurations = settingsService.getAllConfigs();
+        return configurations;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void addOrUpdateConfig(@RequestBody Configuration configuration) {
         settingsService.addOrUpdateConfiguration(configuration);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{configName}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteConfig(@PathVariable("configName") String configName) {
+        settingsService.removeConfiguration(configName);
     }
 
 
