@@ -23,21 +23,7 @@ import java.util.List;
 @Service("odkSettingsService")
 public class SettingsServiceImpl implements SettingsService {
 
-    private static final String ODK_URL = "http://motech-test01.rcg.usm.maine.edu:8080";
-    private static final String ONA_URL = "http://ona.io";
-    private static final String KOBO_URL = "https://kc.kobotoolbox.org";
-
     private static final String CONFIG_FILE_NAME = "settings.json";
-
-    /*Hard wired for now*/
-    private static final String CONFIG_NAME_ODK = "odk";
-    private static final String CONFIG_NAME_ONA = "ona";
-    private static final String CONFIG_NAME_KOBO = "kobo";
-    private static final Configuration ODK_CONFIG =  new Configuration(ODK_URL, "username","password", CONFIG_NAME_ODK, ConfigurationType.ODK, "/ODKAggregate");
-    private static final Configuration ONA_CONFIG = new Configuration(ONA_URL,"username","password", CONFIG_NAME_ONA, ConfigurationType.ONA,"/scott" );
-    private static final Configuration KOBO_CONFIG = new Configuration(KOBO_URL,"scott","motech", CONFIG_NAME_KOBO, ConfigurationType.KOBO,"");
-
-
     private SettingsFacade settingsFacade;
     private Settings settings;
 
@@ -109,10 +95,4 @@ public class SettingsServiceImpl implements SettingsService {
         loadSettings();
     }
 
-    @Override
-    public void addConfigs() {
-        addOrUpdateConfiguration(ODK_CONFIG);
-        addOrUpdateConfiguration(ONA_CONFIG);
-        addOrUpdateConfiguration(KOBO_CONFIG);
-    }
 }

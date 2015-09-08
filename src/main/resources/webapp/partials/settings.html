@@ -2,9 +2,9 @@
 
     <div class="form-inline toolbox">
 
-        <div class="form-inline form-group">
-            <label>{{msg('odk.selectConfig')}}: </label>
-            <select class="largeCombobox form-control" ng-model="selectedConfig" ng-options="config.name for config in configs">
+        <div class="form-inline form-group" >
+            <label for="configs">{{msg('odk.selectConfig')}}: </label>
+            <select class="largeCombobox form-control" id="configs" ng-model="selectedConfig" ng-options="config.name for config in configs">
             </select>
         </div>
         <div class="btn-group form-group">
@@ -17,7 +17,7 @@
             <a ng-if="selectedConfig" ng-click="deleteConfig()" type="button" class="btn btn-danger input-small">
                 <i class="fa fa-fw fa-trash-o"></i> {{msg('odk.delete')}}
             </a>
-            <a ng-if="selectedConfig"  ng-click="verify()" type="button" class="btn btn-info">
+            <a ng-if="selectedConfig" ng-disabled="true"  ng-click="verify()" type="button" class="btn btn-info">
                 <i class="fa fw fa-check-circle-o"></i> {{msg('odk.verify')}}
             </a>
         </div>
@@ -31,9 +31,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-4 control-label" for="type">{{msg('odk.settings.label.configType')}}</label>
                 <div class="col-md-9 col-sm-8 form-inline">
-                    <select class="form-control input-small"  ng-model="selectedConfig.type" ng-options="configType.type as configType.name for configType in configTypes" id="type">
-                     <!--   <option ng-selected="selectedConfig.type == configType.type" ng-repeat="configType in configTypes" value="{{configType.type}}">{{configType.name}}</option> -->
-                    </select>
+                    <select class="form-control input-small"  ng-model="selectedConfig.type" ng-options="configType.type as configType.name for configType in configTypes" id="type"></select>
                     <div class="form-hints">
                     </div>
                 </div>
@@ -87,4 +85,11 @@
             </div>
         </div>
     </form>
+
+    <div ng-if="saveSuccess" class="alert alert-success" role="alert" id="saveSuccess">{{msg('odk.settings.save.success')}}</div>
+    <div ng-if="deleteSuccess" class="alert alert-success" role="alert" id="deleteSuccess">{{msg('odk.settings.delete.success')}}</div>
+    <div ng-if="getConfigError" class="alert alert-danger" role="alert" id="getError">{{msg('odk.settings.get.error')}}</div>
+    <div ng-if="saveError" class="alert alert-danger" role="alert" id="saveError">{{msg('odk.settings.save.error')}}</div>
+    <div ng-if="deleteError" class="alert alert-danger" role="alert" id="deleteError">{{msg('odk.settings.delete.error')}}</div>
+
 </div>

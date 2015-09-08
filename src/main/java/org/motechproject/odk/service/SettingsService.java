@@ -11,5 +11,4 @@ public interface SettingsService {
     void addOrUpdateConfiguration(Configuration configuration);
     void removeConfiguration (String configName);
     List<Configuration> getAllConfigs();
-    void addConfigs();
 }
