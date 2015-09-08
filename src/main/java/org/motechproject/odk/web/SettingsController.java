@@ -26,9 +26,7 @@ public class SettingsController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Configuration> getConfigs() {
-
-        List<Configuration> configurations = settingsService.getAllConfigs();
-        return configurations;
+        return  settingsService.getAllConfigs();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -42,14 +40,4 @@ public class SettingsController {
     public void deleteConfig(@PathVariable("configName") String configName) {
         settingsService.removeConfiguration(configName);
     }
-
-
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ResponseBody
-    public boolean addConfigs () {
-        settingsService.addConfigs();
-        return true;
-    }
-
-
 }
