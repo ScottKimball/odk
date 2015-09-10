@@ -4,4 +4,8 @@
     <label  for="configs">{{msg('odk.settings.label.configName')}}</label>
         <select class="largeCombobox form-control" ng-model="selectedConfig" ng-options="config.name for config in configs" id="configs"></select>
 </div>
-<button ng-if="selectedConfig" type="button" class="btn btn-success" ng-click="import()">{{msg('odk.import')}}</button>
+<button ng-if="selectedConfig" ng-disabled="importing" type="button" class="btn btn-success" ng-click="import()">{{msg('odk.import')}}</button>
+
+<div ng-if="importSuccess" class="alert alert-success" role="alert" id="importSuccess">Success</div>
+<div ng-if="importFail" class="alert alert-success" role="alert" id="importFail">Fail</div>
+<div ng-if="importing" class="alert alert-info" role="alert" id="importing">Fail</div>

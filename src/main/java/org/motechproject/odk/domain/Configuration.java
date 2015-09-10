@@ -12,16 +12,14 @@ public class Configuration {
     private String password;
     private String name;
     private ConfigurationType type;
-    private String namespace;
 
 
-    public Configuration(String url, String username, String password, String name, ConfigurationType type, String namespace) {
+    public Configuration(String url, String username, String password, String name, ConfigurationType type) {
         this.url = url;
         this.username = username;
         this.password = password;
         this.name = name;
         this.type = type;
-        this.namespace = namespace;
     }
 
     public Configuration() {
@@ -65,15 +63,6 @@ public class Configuration {
 
     public void setType(ConfigurationType type) {
         this.type = type;
-    }
-
-
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public void setNamespace(String namespace) {
-        this.namespace = namespace;
     }
 
 

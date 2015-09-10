@@ -74,6 +74,7 @@
     controllers.controller('ImportCtrl', function($scope, $timeout, Config, Import) {
         $scope.importSuccess = false;
         $scope.importFail = false;
+        $scope.importing = false;
 
         var importFail = function() {
             $scope.importFail = true;
@@ -90,8 +91,9 @@
 
 
         $scope.import = function() {
+            $scope.importing = true;
             Import.get({name: $scope.selectedConfig.name}, function(success) {
-
+                $scope.importing = false;
                 if (success) {
                     $scope.importSuccess = true;
                     $timeout(function() {
@@ -103,6 +105,7 @@
 
             }, function(err) {
                 console.log(err);
+                $scope.importing = false;
                 importFail();
             });
         };

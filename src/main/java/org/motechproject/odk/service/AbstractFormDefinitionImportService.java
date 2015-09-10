@@ -72,7 +72,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
-        HttpGet request = new HttpGet(configuration.getUrl() + configuration.getNamespace() + FORM_LIST_PATH);
+        HttpGet request = new HttpGet(configuration.getUrl()  + FORM_LIST_PATH);
         HttpResponse response = client.execute(request);
         String responseBody = EntityUtils.toString(response.getEntity());
         return parseToUrlList(responseBody);

@@ -1,6 +1,10 @@
 package org.motechproject.odk.service.impl;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
+import org.apache.http.util.EntityUtils;
+import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
@@ -30,16 +34,21 @@ import java.util.Map;
 public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
 
-
     @Autowired
     public FormDefinitionImportServiceOna(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
         super(httpClientBuilderFactory, tasksService, formDefinitionService);
     }
 
+    @Override
+    protected List<String> getFormUrls(Configuration configuration) throws Exception {
+        HttpGet request = new HttpGet(configuration.getUrl() + "/" + configuration.getUsername()  + FORM_LIST_PATH);
+        HttpResponse response = getClient().execute(request);
+        String responseBody = EntityUtils.toString(response.getEntity());
+        return parseToUrlList(responseBody);
+    }
 
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
-
         for (FormDefinition formDefinition: formDefinitions) {
             List<FormElement> formElements = formDefinition.getFormElements();
 
@@ -47,7 +56,6 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
                 String formFieldName = formElement.getName();
                 String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
                 formElement.setName(name);
-
             }
 
             formElements.add(new FormElement(OnaConstants.NOTES,OnaConstants.NOTES, FieldTypeConstants.STRING_ARRAY));
@@ -65,7 +73,6 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
     }
 
     protected List<String> parseToUrlList(String responseBody) throws XPathException {
-
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();
         SimpleNamespaceContext namespaces = new SimpleNamespaceContext();
@@ -82,8 +89,6 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             Node node = nodeList.item(i).getFirstChild();
             urls.add(node.getNodeValue());
         }
-
         return urls;
     }
-
 }

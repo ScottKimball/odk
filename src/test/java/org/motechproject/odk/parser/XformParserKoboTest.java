@@ -33,9 +33,6 @@ public class XformParserKoboTest {
 
         File f = new File("odk/src/test/resources/koboform2.xml");
         String xml = FileUtils.readFileToString(f);
-      //  DOMParser parser = new DOMParser();
-       // parser.parse(xml);
-       // Document document = parser.getDocument();
         xml = xml.replace("&lt;", "<")
                 .replace("&gt;", ">")
                 .replace("<root><?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "")

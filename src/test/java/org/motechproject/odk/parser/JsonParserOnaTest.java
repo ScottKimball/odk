@@ -21,7 +21,7 @@ public class JsonParserOnaTest {
         String json = FileUtils.readFileToString(f);
 
         FormDefinition formDefinition = createFormDefinition();
-        Configuration configuration = new Configuration("http://domainname.com", "username", "password", "configname", ConfigurationType.ONA, "namespace");
+        Configuration configuration = new Configuration("http://domainname.com", "username", "password", "configname", ConfigurationType.ONA);
         JsonParser parser = new JsonParserOna(json, formDefinition, configuration);
         MotechEvent motechEvent = parser.createEventFromJson();
     }

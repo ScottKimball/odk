@@ -26,7 +26,7 @@ public class JsonParserODKTest {
         String json = FileUtils.readFileToString(f);
 
         FormDefinition formDefinition = createFormDefinition();
-        Configuration configuration = new Configuration("http://domainname.com", "username", "password", "configname", ConfigurationType.ONA, "namespace");
+        Configuration configuration = new Configuration("http://domainname.com", "username", "password", "configname", ConfigurationType.ONA);
 
         JsonParser parser = new JsonParserODK(json, formDefinition,configuration);
 
