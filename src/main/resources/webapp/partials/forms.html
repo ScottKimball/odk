@@ -1,0 +1,16 @@
+<h3>{{msg('odk.forms.import.importFormDefinitions')}}</h3>
+
+<div class="form-inline form-group">
+    <label  for="configs">{{msg('odk.settings.label.configName')}}</label>
+        <select class="largeCombobox form-control" ng-model="selectedConfig" ng-options="config.name for config in configs" id="configs" ng-change="getFormDefinitions()"></select>
+</div>
+<button ng-if="selectedConfig" ng-disabled="importing" type="button" class="btn btn-success" ng-click="import()">{{msg('odk.forms.import')}}</button>
+
+<div ng-if="importSuccess" class="alert alert-success" role="alert" id="importSuccess">{{msg('odk.forms.import.success')}}</div>
+<div ng-if="importFail" class="alert alert-danger" role="alert" id="importFail">{{msg('odk.forms.import.error')}}</div>
+<div ng-if="importing" class="alert alert-info" role="alert" id="importing">{{msg('odk.forms.import.importing')}}</div>
+
+
+
+
+

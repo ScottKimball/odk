@@ -13,4 +13,10 @@
         return $resource('../odk/import/:name');
     });
 
+    services.factory('FormDefinition', function($resource) {
+        return $resource('../odk/formDefinitions/:name');
+    });
+
+
+
 }());

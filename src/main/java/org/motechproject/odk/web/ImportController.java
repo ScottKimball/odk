@@ -2,6 +2,7 @@ package org.motechproject.odk.web;
 
 
 import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.domain.ImportStatus;
 import org.motechproject.odk.service.factory.FormDefinitionImportServiceFactory;
 import org.motechproject.odk.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ImportController {
     @RequestMapping(value = "/import/{config}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public boolean syncForms (@PathVariable("config") String config) {
+    public ImportStatus syncForms (@PathVariable("config") String config) {
         Configuration configuration = settingsService.getConfigByName(config);
         return formDefinitionImportServiceFactory.getService(configuration.getType()).importForms(configuration);
     }

@@ -13,6 +13,7 @@ import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.domain.ImportStatus;
 import org.motechproject.odk.parser.factory.XformParserFactory;
 import org.motechproject.odk.parser.XformParser;
 import org.slf4j.Logger;
@@ -20,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.xml.xpath.XPathException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
     @Override
-    public boolean importForms (Configuration config) {
+    public ImportStatus importForms (Configuration config) {
 
         try {
             List<String> formUrls = getFormUrls(config);
@@ -54,11 +54,11 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
             modifyFormDefinitionForImplementation(formDefinitions);
             updateFormDefinitions(formDefinitions, config.getName());
             tasksService.updateTasksChannel();
-            return true;
+            return new ImportStatus(true);
 
         } catch (Exception e) {
             LOGGER.error(e.toString());
-            return false;
+            return new ImportStatus(false);
         }
     }
 

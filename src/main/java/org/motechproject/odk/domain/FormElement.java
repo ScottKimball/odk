@@ -1,5 +1,6 @@
 package org.motechproject.odk.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
@@ -20,6 +21,7 @@ public class FormElement {
     @Field
     private List<FormElement> children;
 
+    @JsonIgnore
     @Field
     private FormElement parent;
 

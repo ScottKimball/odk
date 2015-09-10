@@ -71,7 +71,7 @@
         };
     });
 
-    controllers.controller('ImportCtrl', function($scope, $timeout, Config, Import) {
+    controllers.controller('FormsCtrl', function($scope, $timeout, Config, Import, FormDefinition) {
         $scope.importSuccess = false;
         $scope.importFail = false;
         $scope.importing = false;
@@ -79,7 +79,7 @@
         var importFail = function() {
             $scope.importFail = true;
             $timeout(function() {
-                $scope.importSuccess = false;
+                $scope.importFail = false;
             }, 5000);
         };
 
@@ -92,9 +92,10 @@
 
         $scope.import = function() {
             $scope.importing = true;
-            Import.get({name: $scope.selectedConfig.name}, function(success) {
+            Import.get({name: $scope.selectedConfig.name}, function(status) {
                 $scope.importing = false;
-                if (success) {
+                if (status.imported == true) {
+                    $scope.getFormDefinitions();
                     $scope.importSuccess = true;
                     $timeout(function() {
                         $scope.importSuccess = false;
@@ -109,6 +110,16 @@
                 importFail();
             });
         };
+
+        $scope.getFormDefinitions = function() {
+            FormDefinition.query({name : $scope.selectedConfig.name} , function(data) {
+                $scope.formDefinitions = data;
+            }, function(err) {
+               console.log(err)
+            });
+        };
+
     });
+
 
 }());

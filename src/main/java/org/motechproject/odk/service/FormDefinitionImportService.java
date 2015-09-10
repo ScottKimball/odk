@@ -2,8 +2,9 @@ package org.motechproject.odk.service;
 
 
 import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.domain.ImportStatus;
 
 public interface FormDefinitionImportService {
 
-    boolean importForms(Configuration config);
+    ImportStatus importForms(Configuration config);
 }
