@@ -8,4 +8,9 @@
     services.factory('Config', function($resource) {
         return $resource('../odk/configs/:name');
     });
+
+    services.factory('Import', function($resource) {
+        return $resource('../odk/import/:name');
+    });
+
 }());

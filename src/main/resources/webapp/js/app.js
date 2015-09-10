@@ -10,6 +10,10 @@
                 when('/odk/settings', {
                     templateUrl: '../odk/resources/partials/settings.html',
                     controller: 'SettingsCtrl'
+                }).
+                when('/odk/import', {
+                    templateUrl: '../odk/resources/partials/import.html',
+                    controller: 'ImportCtrl'
                 });
     }]);
 }());

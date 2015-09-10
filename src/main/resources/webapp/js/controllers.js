@@ -69,11 +69,43 @@
                 }, 5000);
             });
         };
-
-
-
-
-
-
     });
+
+    controllers.controller('ImportCtrl', function($scope, $timeout, Config, Import) {
+        $scope.importSuccess = false;
+        $scope.importFail = false;
+
+        var importFail = function() {
+            $scope.importFail = true;
+            $timeout(function() {
+                $scope.importSuccess = false;
+            }, 5000);
+        };
+
+        Config.query (function(configs) {
+            $scope.configs = configs;
+        },function (err) {
+            console.log(err);
+        });
+
+
+        $scope.import = function() {
+            Import.get({name: $scope.selectedConfig.name}, function(success) {
+
+                if (success) {
+                    $scope.importSuccess = true;
+                    $timeout(function() {
+                        $scope.importSuccess = false;
+                    }, 5000);
+                } else {
+                  importFail();
+                }
+
+            }, function(err) {
+                console.log(err);
+                importFail();
+            });
+        };
+    });
+
 }());
