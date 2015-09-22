@@ -62,4 +62,14 @@ public class XformParserODKTest {
             System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
     }
+
+    @Test
+    public void testNestedRepeatGroups() throws Exception {
+        Configuration configuration = new Configuration();
+        configuration.setName("configName");
+
+        File f = new File("odk/src/test/resources/nested_repeat.xml");
+        String xml = FileUtils.readFileToString(f);
+        FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
+    }
 }

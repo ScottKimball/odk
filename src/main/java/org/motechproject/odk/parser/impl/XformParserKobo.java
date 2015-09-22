@@ -44,14 +44,14 @@ public class XformParserKobo extends XformParserODK implements XformParser {
     private void findGroupLabels(FormDefinition formDefinition, Node root) throws XPathExpressionException {
         Map<String, FormElement> formElementMap = listToMap(formDefinition.getFormElements());
         NodeList groups = (NodeList) getxPath().compile(GROUPS_PATH).evaluate(root, XPathConstants.NODESET);
-        recursivelyFindGroupRefs(groups, formElementMap, "/" + formDefinition.getTitle() + "/");
+        recursivelyFindGroupRefs(groups, formElementMap, "/");
     }
 
     private void recursivelyFindGroupRefs(NodeList groups, Map<String, FormElement> formElementMap, String uri) {
         for (int i = 0; i < groups.getLength(); i++) {
             Node element = groups.item(i);
 
-            if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals(GROUP) || element.getNodeName().equals(INPUT))) {
+            if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals(GROUP)  || element.getNodeName().equals(INPUT))) {
 
                 Node refAttribute = element.getAttributes().getNamedItem(REF);
 
@@ -71,12 +71,14 @@ public class XformParserKobo extends XformParserODK implements XformParser {
                 if (element.hasChildNodes()) {
                     recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, localUri + "/");
                 }
+            } else if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals("repeat"))) {
+
+                if (element.hasChildNodes()) {
+                    recursivelyFindGroupRefs(element.getChildNodes(),formElementMap,uri);
+                }
             }
         }
     }
-
-
-
 
 
     private Map<String, FormElement> listToMap (List<FormElement> formElements) {
@@ -109,7 +111,7 @@ public class XformParserKobo extends XformParserODK implements XformParser {
                 String childName = child.getName();
                 String label = formElement.getLabel() +"/" + childName.substring(childName.lastIndexOf("/") + 1);
                 child.setLabel(label);
-                recursivelySetLabelForFormElementChildren(child);
+              //  recursivelySetLabelForFormElementChildren(child);
             }
         }
     }

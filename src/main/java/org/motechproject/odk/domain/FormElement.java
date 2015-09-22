@@ -3,6 +3,7 @@ package org.motechproject.odk.domain;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
+import org.motechproject.odk.constant.FieldTypeConstants;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class FormElement {
         return name;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -87,4 +89,13 @@ public class FormElement {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    public boolean isPartOfRepeatGroup() {
+        return hasParent() && (getParent().isRepeatGroup() || getParent().isPartOfRepeatGroup());
+    }
+
+    public boolean isRepeatGroup() {
+        return getType().equals(FieldTypeConstants.REPEAT_GROUP);
+    }
+
 }

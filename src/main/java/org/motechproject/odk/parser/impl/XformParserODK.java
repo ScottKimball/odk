@@ -58,7 +58,10 @@ public class XformParserODK implements XformParser {
         } catch (XPathExpressionException e) {
             throw new XformParserException("Error parsing xForm", e);
         }
+    }
 
+    public XPath getxPath() {
+        return xPath;
     }
 
     protected FormDefinition parseXForm( String configurationName, Node root) throws XPathExpressionException{
@@ -74,6 +77,7 @@ public class XformParserODK implements XformParser {
         recursivelyAddFormElements(formElementMap, formElementsList,"/" + uri);
         NodeList binds = (NodeList) xPath.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
+        removeFormNameFromLabel(formElementMap);
         formDefinition.setFormElements(createFormElementListFromMap(formElementMap));
         return formDefinition;
     }
@@ -136,6 +140,7 @@ public class XformParserODK implements XformParser {
 
                 if (element.hasAttributes()) {
                     FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                    formElement.setLabel(formElement.getName());
                     formElementMap.put(formElement.getName(), formElement);
                     formElement.setType(FieldTypeConstants.REPEAT_GROUP);
                     formElement.setChildren(new ArrayList<FormElement>());
@@ -148,11 +153,11 @@ public class XformParserODK implements XformParser {
 
             } else if (element.getNodeType() == Node.ELEMENT_NODE){
                 FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
+                formElement.setLabel(formElement.getName());
                 group.add(formElement);
                 formElementMap.put(formElement.getName(), formElement);
             }
         }
-
         for (FormElement child : group) {
             child.setParent(parent);
         }
@@ -170,14 +175,20 @@ public class XformParserODK implements XformParser {
     private List<FormElement> createFormElementListFromMap(Map<String, FormElement> formElementMap) {
         List<FormElement> formElements = new ArrayList<>();
         for (FormElement formElement : formElementMap.values()) {
-            if (!(formElement.hasParent() && formElement.getParent().getType().equals(FieldTypeConstants.REPEAT_GROUP))) {
+            if(formElement.getType().equals(FieldTypeConstants.REPEAT_GROUP) || !formElement.isPartOfRepeatGroup()) {
                 formElements.add(formElement);
             }
         }
         return formElements;
     }
 
-    public XPath getxPath() {
-        return xPath;
+    private void removeFormNameFromLabel (Map<String, FormElement> formElementMap) {
+        for (String key : formElementMap.keySet()) {
+            FormElement element = formElementMap.get(key);
+            String label = element.getLabel();
+            element.setLabel(label.substring(label.substring(1).indexOf('/') + 1));
+        }
     }
 }
+
+

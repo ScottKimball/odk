@@ -8,32 +8,32 @@ import java.util.Map;
 
 public class TypeMapper {
 
-    private static final Map<String, String> TYPE_MAP = new HashMap<String,String>(){{
-        put(FieldTypeConstants.STRING, TasksDataTypes.UNICODE);
-       // put(FieldTypeConstants.DATE_TIME,TasksDataTypes.DATE);
-        put(FieldTypeConstants.DATE_TIME,TasksDataTypes.UNICODE);
-
-     //   put(FieldTypeConstants.BOOLEAN, TasksDataTypes.BOOLEAN);
-        put(FieldTypeConstants.BOOLEAN, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.INT, TasksDataTypes.INTEGER);
-        put(FieldTypeConstants.DECIMAL, TasksDataTypes.DOUBLE);
-       // put(FieldTypeConstants.DATE, TasksDataTypes.DATE);
-        put(FieldTypeConstants.DATE, TasksDataTypes.UNICODE);
-
-        //put(FieldTypeConstants.TIME,TasksDataTypes.TIME);
-        put(FieldTypeConstants.TIME,TasksDataTypes.UNICODE);
-
-        put(FieldTypeConstants.SELECT, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.SELECT_1, TasksDataTypes.LIST);
-        put(FieldTypeConstants.GEOPOINT, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.GEOTRACE, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.GEOSHAPE, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.DOUBLE_ARRAY, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.STRING_ARRAY, TasksDataTypes.UNICODE);
-        put(FieldTypeConstants.REPEAT_GROUP, TasksDataTypes.UNICODE);
-    }};
-
     public static String getType(String type) {
-        return TYPE_MAP.get(type);
+
+        switch (type) {
+            case FieldTypeConstants.INT:
+                return  TasksDataTypes.INTEGER;
+
+            case FieldTypeConstants.DATE_TIME:
+                return TasksDataTypes.UNICODE; // TODO
+
+            case FieldTypeConstants.BOOLEAN:
+                return TasksDataTypes.UNICODE; // TODO
+
+            case FieldTypeConstants.DECIMAL:
+                return TasksDataTypes.DOUBLE;
+
+            case FieldTypeConstants.DATE:
+                return TasksDataTypes.UNICODE; // TODO
+
+            case FieldTypeConstants.TIME:
+                return TasksDataTypes.UNICODE; //TODO
+
+            case FieldTypeConstants.SELECT_1:
+                return TasksDataTypes.LIST;
+
+            default:
+                return TasksDataTypes.UNICODE;
+        }
     }
 }

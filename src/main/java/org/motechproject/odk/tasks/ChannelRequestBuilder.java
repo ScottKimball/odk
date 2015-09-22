@@ -1,22 +1,13 @@
 package org.motechproject.odk.tasks;
 
 import org.motechproject.odk.constant.DisplayNames;
-import org.motechproject.odk.constant.FieldTypeConstants;
-import org.motechproject.odk.constant.TasksDataTypes;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormElement;
-import org.motechproject.odk.constant.EventParameters;
-import org.motechproject.odk.constant.EventSubjects;
 import org.motechproject.tasks.contract.ActionEventRequest;
 import org.motechproject.tasks.contract.ChannelRequest;
-import org.motechproject.tasks.contract.EventParameterRequest;
 import org.motechproject.tasks.contract.TriggerEventRequest;
 import org.osgi.framework.BundleContext;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ChannelRequestBuilder {
 
@@ -31,8 +22,10 @@ public class ChannelRequestBuilder {
     }
 
     public ChannelRequest build () {
-        TriggerBuilder triggerBuilder = new TriggerBuilder(formDefinitions);
+        FormTriggerBuilder triggerBuilder = new FormTriggerBuilder(formDefinitions);
         List<TriggerEventRequest> triggers = triggerBuilder.buildTriggers();
+        RepeatGroupTriggerBuilder repeatGroupTriggerBuilder = new RepeatGroupTriggerBuilder(formDefinitions);
+        triggers.addAll(repeatGroupTriggerBuilder.buildTriggers());
         ActionBuilder actionBuilder = new ActionBuilder(formDefinitions);
         List<ActionEventRequest> actions = actionBuilder.build();
         return new ChannelRequest(DisplayNames.CHANNEL_DISPLAY_NAME, bundleContext.getBundle().getSymbolicName(),

@@ -12,21 +12,22 @@ import org.motechproject.tasks.contract.TriggerEventRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TriggerBuilder {
+public class FormTriggerBuilder {
 
     private List<FormDefinition> formDefinitions;
 
 
-    public TriggerBuilder( List<FormDefinition> formDefinitions) {
+    public FormTriggerBuilder(List<FormDefinition> formDefinitions) {
         this.formDefinitions = formDefinitions;
     }
 
     public List<TriggerEventRequest> buildTriggers () {
         List<TriggerEventRequest> triggerEventRequests = new ArrayList<>();
 
+
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
-            TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.TRIGGER_DISPLAY_NAME + " [Configuration: " +
+            TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.FORM_TRIGGER_DISPLAY_NAME + " [Configuration: " +
                     formDefinition.getConfigurationName() + "] " + "[Title: " + formDefinition.getTitle() + "]",
                     EventSubjects.RECEIVED_FORM + "." +  formDefinition.getConfigurationName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
             triggerEventRequests.add(eventRequest);
@@ -40,10 +41,11 @@ public class TriggerBuilder {
     private List<EventParameterRequest> buildEventParameterRequests(FormDefinition formDefinition) {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
         for (FormElement formElement : formDefinition.getFormElements()) {
-            String type = TypeMapper.getType(formElement.getType());
 
-            if (type != null) {
-                EventParameterRequest request = new EventParameterRequest(formElement.getLabel(), formElement.getName(),type);
+
+            if (!formElement.isPartOfRepeatGroup()) {
+                String type = TypeMapper.getType(formElement.getType());
+                EventParameterRequest request = new EventParameterRequest(formElement.getLabel(), formElement.getName(), type);
                 eventParameterRequests.add(request);
             }
         }
@@ -53,8 +55,8 @@ public class TriggerBuilder {
 
     private List<EventParameterRequest> addTitleAndConfigFields(FormDefinition formDefinition) {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE, EventParameters.FORM_TITLE,TasksDataTypes.UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.CONFIGURATION_NAME,EventParameters.CONFIGURATION_NAME,TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE, EventParameters.FORM_TITLE, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.CONFIGURATION_NAME, EventParameters.CONFIGURATION_NAME, TasksDataTypes.UNICODE));
         return eventParameterRequests;
     }
 
@@ -69,4 +71,5 @@ public class TriggerBuilder {
 
         return new TriggerEventRequest(DisplayNames.FORM_FAIL,EventSubjects.FORM_FAIL,null,eventParameterRequests);
     }
+
 }
