@@ -22,6 +22,7 @@ public class XformParserKobo extends XformParserODK implements XformParser {
     private static final String GROUP = "group";
     private static final String LABEL = "label";
     private static final String INPUT = "input";
+    private static final String REPEAT = "repeat";
 
     public XformParserKobo() {
         super();
@@ -64,14 +65,14 @@ public class XformParserKobo extends XformParserODK implements XformParser {
 
                     if (formElement != null) {
                         formElement.setLabel(localUri);
-                        recursivelySetLabelForFormElementChildren(formElement);
+                        setLabelForFormElementChildren(formElement);
                     }
                 }
 
                 if (element.hasChildNodes()) {
                     recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, localUri + "/");
                 }
-            } else if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals("repeat"))) {
+            } else if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals(REPEAT))) {
 
                 if (element.hasChildNodes()) {
                     recursivelyFindGroupRefs(element.getChildNodes(),formElementMap,uri);
@@ -86,9 +87,7 @@ public class XformParserKobo extends XformParserODK implements XformParser {
         for (FormElement formElement : formElements) {
             formElementMap.put(formElement.getName(),formElement);
         }
-
         return formElementMap;
-
     }
 
     private String getLabel (Node element) {
@@ -104,14 +103,13 @@ public class XformParserKobo extends XformParserODK implements XformParser {
         return null;
     }
 
-    private void recursivelySetLabelForFormElementChildren(FormElement formElement) {
+    private void setLabelForFormElementChildren(FormElement formElement) {
         if (formElement.getChildren() != null) {
 
             for (FormElement child : formElement.getChildren()) {
                 String childName = child.getName();
                 String label = formElement.getLabel() +"/" + childName.substring(childName.lastIndexOf("/") + 1);
                 child.setLabel(label);
-              //  recursivelySetLabelForFormElementChildren(child);
             }
         }
     }
