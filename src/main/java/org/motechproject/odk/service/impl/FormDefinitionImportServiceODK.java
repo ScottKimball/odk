@@ -1,7 +1,9 @@
 package org.motechproject.odk.service.impl;
 
+import org.motechproject.odk.constant.OnaConstants;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
+import org.motechproject.odk.domain.builder.FormElementBuilder;
 import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
@@ -65,12 +67,17 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
             List<FormElement> formElements = formDefinition.getFormElements();
             modifyFormElements(formElements);
 
-            //  formElements.add(new FormElement(ODKConstants.META_INSTANCE_ID,ODKConstants.META_INSTANCE_ID, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_MODEL_VERSION,ODKConstants.META_MODEL_VERSION, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_UI_VERSION,ODKConstants.META_UI_VERSION, FieldTypeConstants.STRING));
-            formElements.add(new FormElement(ODKConstants.META_SUBMISSION_DATE,ODKConstants.META_SUBMISSION_DATE, FieldTypeConstants.DATE_TIME));
-            formElements.add(new FormElement(ODKConstants.META_IS_COMPLETE,ODKConstants.META_IS_COMPLETE, FieldTypeConstants.BOOLEAN));
-            formElements.add(new FormElement(ODKConstants.META_DATE_MARKED_AS_COMPLETE, ODKConstants.META_DATE_MARKED_AS_COMPLETE, FieldTypeConstants.DATE_TIME));
+            formElements.add(new FormElementBuilder().setName(ODKConstants.META_MODEL_VERSION)
+                    .setLabel(ODKConstants.META_MODEL_VERSION).setType(FieldTypeConstants.STRING).createFormElement());
+            formElements.add(new FormElementBuilder().setName(ODKConstants.META_UI_VERSION)
+                    .setLabel(ODKConstants.META_UI_VERSION).setType(FieldTypeConstants.STRING).createFormElement());
+            formElements.add(new FormElementBuilder().setName(ODKConstants.META_SUBMISSION_DATE)
+                    .setLabel(ODKConstants.META_SUBMISSION_DATE).setType(FieldTypeConstants.DATE_TIME).createFormElement());
+            formElements.add(new FormElementBuilder().setName(ODKConstants.META_IS_COMPLETE)
+                    .setLabel(ODKConstants.META_IS_COMPLETE).setType(FieldTypeConstants.BOOLEAN).createFormElement());
+            formElements.add(new FormElementBuilder().setName(ODKConstants.META_DATE_MARKED_AS_COMPLETE)
+                    .setLabel(ODKConstants.META_DATE_MARKED_AS_COMPLETE).setType(FieldTypeConstants.DATE_TIME).createFormElement());
+
         }
     }
 
@@ -102,9 +109,10 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
         formElement.setName(name + LATITUDE);
         formElement.setLabel(formElement.getName());
         formElements.add(formElement);
-        formElements.add(new FormElement(name + LONGITUDE, name + LONGITUDE, type ));
-        formElements.add(new FormElement(name + ALTITUDE,name + ALTITUDE, type ));
-        formElements.add(new FormElement(name + ACCURACY,name + ACCURACY, type ));
+        formElements.add(new FormElementBuilder().setName(name + LONGITUDE).setLabel(name + LONGITUDE).setType(type).createFormElement());
+        formElements.add(new FormElementBuilder().setName(name + ALTITUDE).setLabel(name + ALTITUDE).setType(type).createFormElement());
+        formElements.add(new FormElementBuilder().setName(name + ACCURACY).setLabel(name + ACCURACY).setType(type).createFormElement());
+
         return formElements;
     }
 }

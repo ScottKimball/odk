@@ -2,56 +2,28 @@ package org.motechproject.odk.parser.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.motechproject.event.MotechEvent;
+import org.motechproject.event.listener.EventRelay;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
+import org.motechproject.odk.parser.AbstractJsonParser;
 import org.motechproject.odk.parser.JsonParser;
 import org.motechproject.odk.parser.JsonParserUtils;
 import org.motechproject.odk.constant.FieldTypeConstants;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JsonParserODK implements JsonParser {
+public class JsonParserODK extends AbstractJsonParser implements JsonParser {
 
-    private String json;
-    private FormDefinition formDefinition;
-    private Configuration configuration;
+    private static final String URL = "url";
 
-    public JsonParserODK(String json, FormDefinition formDefinition, Configuration configuration) {
-        this.json = json;
-        this.formDefinition = formDefinition;
-        this.configuration = configuration;
-    }
-
-    @Override
-    public MotechEvent createEventFromJson() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> params = new HashMap<>();
-        OdkJsonFormPublication publication = mapper.readValue(json,OdkJsonFormPublication.class );
-        Map<String, Object> data = publication.getData()[0];
-        for (FormElement formElement : formDefinition.getFormElements()) {
-
-            Object value = data.get(formElement.getName());
-            if (value != null) {
-                value = formatValue(formElement.getType(), value);
-                params.put(formElement.getName(), value);
-            }
-        }
-
-        params.put(EventParameters.FORM_TITLE,formDefinition.getTitle());
-        params.put(EventParameters.CONFIGURATION_NAME, configuration.getName());
-
-        String subject = EventSubjects.RECEIVED_FORM + "." +  configuration.getName() + "." + formDefinition.getTitle();
-        return new MotechEvent(subject, params);
-
-    }
-
-    private Object formatValue(String type, Object value) {
+    protected Object formatValue(String type, Object value) {
 
         switch (type) {
             case FieldTypeConstants.SELECT:
@@ -69,7 +41,7 @@ public class JsonParserODK implements JsonParser {
     }
 
     private String formatUrl(Map<String,String> value) {
-        return value.get("url");
+        return value.get(URL);
     }
 
 

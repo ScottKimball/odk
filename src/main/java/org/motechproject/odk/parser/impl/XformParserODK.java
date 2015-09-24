@@ -2,6 +2,7 @@ package org.motechproject.odk.parser.impl;
 
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
+import org.motechproject.odk.domain.builder.FormElementBuilder;
 import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.XformParserException;
 import org.motechproject.odk.constant.FieldTypeConstants;
@@ -113,19 +114,25 @@ public class XformParserODK implements XformParser {
             if (hasChildElements(element)) {
 
                 if (element.hasAttributes()) { // repeat group
-                    FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
-                    formElement.setLabel(formElement.getName());
-                    formElementMap.put(formElement.getName(), formElement);
-                    formElement.setType(FieldTypeConstants.REPEAT_GROUP);
-                    formElement.setChildren(new ArrayList<FormElement>());
+                    String localUri = uri + "/" + element.getNodeName();
+                    FormElement formElement = new FormElementBuilder()
+                            .setName(localUri)
+                            .setLabel(localUri)
+                            .setType(FieldTypeConstants.REPEAT_GROUP)
+                            .setChildren(new ArrayList<FormElement>())
+                            .createFormElement();
+
                     recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
                 } else {
                     recursivelyAddFormElements(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
 
                 }
             } else if (element.getNodeType() == Node.ELEMENT_NODE) {
-                FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
-                formElement.setLabel(formElement.getName());
+                String localUri =  uri + "/" + element.getNodeName();
+                FormElement formElement = new FormElementBuilder()
+                        .setName(localUri)
+                        .setLabel(localUri)
+                        .createFormElement();
                 formElementMap.put(formElement.getName(), formElement);
             }
         }
@@ -139,11 +146,14 @@ public class XformParserODK implements XformParser {
             if (element.hasChildNodes()) {
 
                 if (element.hasAttributes()) {
-                    FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
-                    formElement.setLabel(formElement.getName());
+                    String localUri =  uri + "/" + element.getNodeName();
+                    FormElement formElement = new FormElementBuilder()
+                            .setName(localUri)
+                            .setLabel(localUri)
+                            .setChildren(new ArrayList<FormElement>())
+                            .setType(FieldTypeConstants.REPEAT_GROUP)
+                            .createFormElement();
                     formElementMap.put(formElement.getName(), formElement);
-                    formElement.setType(FieldTypeConstants.REPEAT_GROUP);
-                    formElement.setChildren(new ArrayList<FormElement>());
                     group.add(formElement);
                     recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
 
@@ -152,14 +162,18 @@ public class XformParserODK implements XformParser {
                 }
 
             } else if (element.getNodeType() == Node.ELEMENT_NODE){
-                FormElement formElement = new FormElement( uri + "/" + element.getNodeName());
-                formElement.setLabel(formElement.getName());
+                String localUri =  uri + "/" + element.getNodeName();
+                FormElement formElement = new FormElementBuilder()
+                        .setName(localUri)
+                        .setLabel(localUri)
+                        .createFormElement();
                 group.add(formElement);
                 formElementMap.put(formElement.getName(), formElement);
             }
         }
         for (FormElement child : group) {
             child.setParent(parent);
+            child.setPartOfRepeatGroup(parent.isRepeatGroup() || parent.isPartOfRepeatGroup());
         }
     }
 

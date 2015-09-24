@@ -116,7 +116,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
     protected abstract List<String> parseToUrlList(String responseBody) throws Exception;
 
-    public HttpClient getClient() {
+    protected HttpClient getClient() {
         return client;
     }
 

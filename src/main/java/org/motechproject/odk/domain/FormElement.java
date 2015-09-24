@@ -5,6 +5,9 @@ import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 import org.motechproject.odk.constant.FieldTypeConstants;
 
+import javax.jdo.annotations.FetchGroup;
+import javax.jdo.annotations.FetchPlan;
+import javax.jdo.annotations.Persistent;
 import java.util.List;
 
 @Entity
@@ -22,26 +25,26 @@ public class FormElement {
     @Field
     private List<FormElement> children;
 
-    @JsonIgnore
     @Field
+    private boolean partOfRepeatGroup;
+
     private FormElement parent;
 
 
-    public FormElement(String name, String label, String type) {
+
+    public FormElement(String name, String label, String type, List<FormElement> children, boolean partOfRepeatGroup, FormElement parent) {
         this.name = name;
         this.label = label;
         this.type = type;
+        this.children = children;
+        this.partOfRepeatGroup = partOfRepeatGroup;
+        this.parent = parent;
     }
+
+    public FormElement () {}
 
     public boolean hasChildren () {
         return children != null;
-    }
-
-    public FormElement(String name) {
-        this.name = name;
-    }
-
-    public FormElement() {
     }
 
     public String getName() {
@@ -91,11 +94,15 @@ public class FormElement {
     }
 
     public boolean isPartOfRepeatGroup() {
-        return hasParent() && (getParent().isRepeatGroup() || getParent().isPartOfRepeatGroup());
+        return partOfRepeatGroup;
     }
 
     public boolean isRepeatGroup() {
         return getType().equals(FieldTypeConstants.REPEAT_GROUP);
     }
 
+
+    public void setPartOfRepeatGroup(boolean partOfRepeatGroup) {
+        this.partOfRepeatGroup = partOfRepeatGroup;
+    }
 }
