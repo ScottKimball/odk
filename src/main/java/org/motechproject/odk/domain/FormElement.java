@@ -28,17 +28,13 @@ public class FormElement {
     @Field
     private boolean partOfRepeatGroup;
 
-    private FormElement parent;
 
-
-
-    public FormElement(String name, String label, String type, List<FormElement> children, boolean partOfRepeatGroup, FormElement parent) {
+    public FormElement(String name, String label, String type, List<FormElement> children, boolean partOfRepeatGroup) {
         this.name = name;
         this.label = label;
         this.type = type;
         this.children = children;
         this.partOfRepeatGroup = partOfRepeatGroup;
-        this.parent = parent;
     }
 
     public FormElement () {}
@@ -73,18 +69,6 @@ public class FormElement {
         this.children = children;
     }
 
-    public FormElement getParent() {
-        return parent;
-    }
-
-    public void setParent(FormElement parent) {
-        this.parent = parent;
-    }
-
-    public boolean hasParent() {
-        return getParent() != null;
-    }
-
     public String getLabel() {
         return label;
     }
@@ -100,7 +84,6 @@ public class FormElement {
     public boolean isRepeatGroup() {
         return getType().equals(FieldTypeConstants.REPEAT_GROUP);
     }
-
 
     public void setPartOfRepeatGroup(boolean partOfRepeatGroup) {
         this.partOfRepeatGroup = partOfRepeatGroup;

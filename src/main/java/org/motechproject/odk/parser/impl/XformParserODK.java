@@ -121,7 +121,7 @@ public class XformParserODK implements XformParser {
                             .setType(FieldTypeConstants.REPEAT_GROUP)
                             .setChildren(new ArrayList<FormElement>())
                             .createFormElement();
-
+                    formElementMap.put(formElement.getName(), formElement);
                     recursivelyAddGroup(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName(), formElement.getChildren(), formElement);
                 } else {
                     recursivelyAddFormElements(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
@@ -152,6 +152,7 @@ public class XformParserODK implements XformParser {
                             .setLabel(localUri)
                             .setChildren(new ArrayList<FormElement>())
                             .setType(FieldTypeConstants.REPEAT_GROUP)
+                            .setPartOfRepeatGroup(parent.isRepeatGroup() || parent.isPartOfRepeatGroup())
                             .createFormElement();
                     formElementMap.put(formElement.getName(), formElement);
                     group.add(formElement);
@@ -166,15 +167,13 @@ public class XformParserODK implements XformParser {
                 FormElement formElement = new FormElementBuilder()
                         .setName(localUri)
                         .setLabel(localUri)
+                        .setPartOfRepeatGroup(parent.isRepeatGroup() || parent.isPartOfRepeatGroup())
                         .createFormElement();
                 group.add(formElement);
                 formElementMap.put(formElement.getName(), formElement);
             }
         }
-        for (FormElement child : group) {
-            child.setParent(parent);
-            child.setPartOfRepeatGroup(parent.isRepeatGroup() || parent.isPartOfRepeatGroup());
-        }
+
     }
 
     protected boolean hasChildElements (Node element) {

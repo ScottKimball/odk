@@ -11,7 +11,6 @@ public class FormElementBuilder {
     private String type;
     private List<FormElement> children;
     private boolean partOfRepeatGroup;
-    private FormElement parent;
 
 
     public FormElementBuilder setName(String name) {
@@ -39,12 +38,8 @@ public class FormElementBuilder {
         return this;
     }
 
-    public FormElementBuilder setParent(FormElement parent) {
-        this.parent = parent;
-        return this;
-    }
 
     public FormElement createFormElement() {
-        return new FormElement(name,label,type,children,partOfRepeatGroup, parent);
+        return new FormElement(name,label,type,children,partOfRepeatGroup);
     }
 }

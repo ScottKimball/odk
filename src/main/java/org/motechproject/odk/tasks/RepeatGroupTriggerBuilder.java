@@ -13,31 +13,31 @@ import java.util.List;
 public class RepeatGroupTriggerBuilder {
 
     private List<FormDefinition> formDefinitions;
+    private List<TriggerEventRequest> triggerEventRequests;
 
 
     public RepeatGroupTriggerBuilder(List<FormDefinition> formDefinitions) {
         this.formDefinitions = formDefinitions;
+        this.triggerEventRequests = new ArrayList<>();
+
     }
 
     public List<TriggerEventRequest> buildTriggers() {
-        List<TriggerEventRequest> triggerEventRequests = new ArrayList<>();
 
         for (FormDefinition formDefinition : formDefinitions) {
-            triggerEventRequests.addAll(buildTriggersForFormDef(formDefinition));
+            buildTriggersForFormDef(formDefinition);
         }
         return triggerEventRequests;
     }
 
-    private List<TriggerEventRequest> buildTriggersForFormDef(FormDefinition formDefinition) {
-        List<TriggerEventRequest> triggerEventRequests = new ArrayList<>();
+    private void buildTriggersForFormDef(FormDefinition formDefinition) {
         List<FormElement> rootScope = getRootScope(formDefinition);
 
         for(FormElement formElement : formDefinition.getFormElements()) {
-            if(formElement.isRepeatGroup()) {
-                triggerEventRequests.add(buildTriggerForRepeatGroup(formElement, rootScope, formDefinition.getTitle(), formDefinition.getConfigurationName()));
+            if(formElement.isRepeatGroup() && !formElement.isPartOfRepeatGroup()) {
+                buildTriggerForRepeatGroup(formElement, rootScope, formDefinition.getTitle(), formDefinition.getConfigurationName());
             }
         }
-        return triggerEventRequests;
     }
 
     private List<FormElement> getRootScope(FormDefinition formDefinition) {
@@ -52,31 +52,33 @@ public class RepeatGroupTriggerBuilder {
     }
 
 
-    private TriggerEventRequest buildTriggerForRepeatGroup(FormElement repeatGroup, List<FormElement> rootScope, String title, String configName) {
-        List<FormElement> scope = addFieldsToScope(repeatGroup,rootScope);
+    private void buildTriggerForRepeatGroup(FormElement repeatGroup, List<FormElement> scope, String title, String configName) {
+        List<FormElement> localScope = addFieldsToScope(repeatGroup,scope);
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
-        for(FormElement field : scope) {
+
+        for(FormElement field : localScope) {
             eventParameterRequests.add(new EventParameterRequest(field.getLabel(),field.getName(),TypeMapper.getType(field.getType())));
         }
 
-        return new TriggerEventRequest(formatDisplayName(repeatGroup,title,configName),formatEventSubject(repeatGroup, title, configName), null,eventParameterRequests);
+         triggerEventRequests.add(new TriggerEventRequest(formatDisplayName(repeatGroup,title,configName),formatEventSubject(repeatGroup, title, configName), null,eventParameterRequests));
+
+        for(FormElement child : repeatGroup.getChildren()) {
+            if (child.isRepeatGroup()) {
+                buildTriggerForRepeatGroup(child,localScope,title,configName);
+            }
+        }
     }
 
-    private List<FormElement> addFieldsToScope(FormElement formElement, List<FormElement> rootScope) {
-        List<FormElement> scope = new ArrayList<>();
-        scope.addAll(rootScope);
+    private List<FormElement> addFieldsToScope(FormElement formElement, List<FormElement> scope) {
+        List<FormElement> localScope = new ArrayList<>();
+        localScope.addAll(scope);
 
-        while(formElement != null) {
-            if(formElement.hasChildren()) {
-                for(FormElement child : formElement.getChildren()) {
-                    if(!child.isRepeatGroup()) {
-                        scope.add(child);
-                    }
-                }
+        for(FormElement child : formElement.getChildren()) {
+            if(!child.isRepeatGroup()) {
+                localScope.add(child);
             }
-            formElement = formElement.getParent();
         }
-        return scope;
+        return localScope;
     }
 
     private String formatDisplayName(FormElement repeatGroup, String title, String configName) {
