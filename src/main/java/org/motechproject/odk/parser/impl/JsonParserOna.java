@@ -8,6 +8,7 @@ import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.constant.EventSubjects;
+import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.parser.AbstractJsonParser;
 import org.motechproject.odk.parser.JsonParser;
 import org.motechproject.odk.parser.JsonParserUtils;
@@ -71,4 +72,8 @@ public class JsonParserOna extends AbstractJsonParser implements JsonParser {
         throw new RuntimeException("Error constructing media url:" + value);
     }
 
+    @Override
+    protected Map<String, Object> getData(String json) throws Exception{
+        return new ObjectMapper().readValue(json,new TypeReference<HashMap<String,Object>>() {} );
+    }
 }

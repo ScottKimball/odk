@@ -1,6 +1,7 @@
 package org.motechproject.odk.parser.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.motechproject.event.MotechEvent;
 import org.motechproject.event.listener.EventRelay;
 import org.motechproject.odk.domain.Configuration;
@@ -44,5 +45,9 @@ public class JsonParserODK extends AbstractJsonParser implements JsonParser {
         return value.get(URL);
     }
 
-
+    @Override
+    protected Map<String, Object> getData(String json) throws Exception {
+        OdkJsonFormPublication publication = new ObjectMapper().readValue(json,OdkJsonFormPublication.class );
+        return  publication.getData()[0];
+    }
 }

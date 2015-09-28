@@ -18,10 +18,9 @@ public abstract class AbstractJsonParser implements JsonParser {
 
     @Override
     public void parse(String json, EventRelay eventRelay, FormDefinition formDefinition, Configuration configuration) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> params = new HashMap<>();
-        OdkJsonFormPublication publication = mapper.readValue(json,OdkJsonFormPublication.class );
-        Map<String, Object> data = publication.getData()[0];
+
+        Map<String, Object> data = getData(json);
         for (FormElement formElement : formDefinition.getFormElements()) {
 
             Object value = data.get(formElement.getName());
@@ -40,6 +39,7 @@ public abstract class AbstractJsonParser implements JsonParser {
     }
 
     protected abstract Object formatValue(String type, Object value);
+    protected abstract Map<String,Object> getData (String json) throws Exception;
 
 
 }
