@@ -1,26 +1,20 @@
-package org.motechproject.odk.parser.impl;
+package org.motechproject.odk.event.builder.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.motechproject.event.MotechEvent;
-import org.motechproject.event.listener.EventRelay;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormElement;
-import org.motechproject.odk.constant.EventSubjects;
-import org.motechproject.odk.domain.OdkJsonFormPublication;
-import org.motechproject.odk.parser.AbstractJsonParser;
-import org.motechproject.odk.parser.JsonParser;
-import org.motechproject.odk.parser.JsonParserUtils;
 import org.motechproject.odk.constant.FieldTypeConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.motechproject.odk.event.builder.AbstractEventBuilder;
+import org.motechproject.odk.event.builder.EventBuilderUtils;
+import org.motechproject.odk.event.builder.FormEventBuilder;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JsonParserOna extends AbstractJsonParser implements JsonParser {
+public class EventBuilderOna extends AbstractEventBuilder implements FormEventBuilder {
 
     private static final String ATTACHMENTS = "_attachments";
     private static final String FILENAME = "filename";
@@ -30,29 +24,31 @@ public class JsonParserOna extends AbstractJsonParser implements JsonParser {
 
 
     @Override
-    public void parse(String json, EventRelay eventRelay, FormDefinition formDefinition, Configuration configuration) throws Exception {
+    public MotechEvent build(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
         Map<String,Object> data = new ObjectMapper().readValue(json,new TypeReference<HashMap<String,Object>>() {} );
         attachments =(List<Map<String,String>>) data.get(ATTACHMENTS);
-        super.parse(json,eventRelay,formDefinition,configuration);
+        return super.build(json, formDefinition, configuration);
     }
+
+
 
     protected Object formatValue(String type, Object value) {
 
         switch (type) {
             case FieldTypeConstants.SELECT:
-                return JsonParserUtils.formatStringList(value);
+                return EventBuilderUtils.formatStringList(value);
 
             case FieldTypeConstants.STRING_ARRAY:
-                return JsonParserUtils.formatStringArray((List<String>) value);
+                return EventBuilderUtils.formatStringArray((List<String>) value);
 
             case FieldTypeConstants.DOUBLE_ARRAY:
-                return JsonParserUtils.formatDoubleArray((List<Double>) value);
+                return EventBuilderUtils.formatDoubleArray((List<Double>) value);
 
             case FieldTypeConstants.BINARY:
                 return formatUrl((String) value);
 
             case FieldTypeConstants.REPEAT_GROUP:
-                return JsonParserUtils.formatAsJson(value);
+                return EventBuilderUtils.formatAsJson(value);
 
             default:
                 return value;
