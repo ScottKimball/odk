@@ -94,11 +94,9 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
             if (formElement.hasChildren()) {
                 modifyFormElements(formElement.getChildren());
             }
+
         }
-
         formElements.addAll(additionalFields);
-
-
     }
 
     private List<FormElement> addGeopointFields (FormElement formElement) {

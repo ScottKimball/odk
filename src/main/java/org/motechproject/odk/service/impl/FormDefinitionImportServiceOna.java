@@ -54,9 +54,7 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             List<FormElement> formElements = formDefinition.getFormElements();
 
             for (FormElement formElement : formElements) {
-                String formFieldName = formElement.getName();
-                String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
-                formElement.setName(name);
+               alterFormElementName(formElement);
             }
 
             formElements.add(new FormElementBuilder().setName(OnaConstants.NOTES).setLabel(OnaConstants.NOTES).setType(FieldTypeConstants.STRING_ARRAY).createFormElement());
@@ -69,6 +67,18 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             formElements.add(new FormElementBuilder().setName(OnaConstants.VERSION).setLabel(OnaConstants.VERSION).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.GEOLOCATION).setLabel(OnaConstants.GEOLOCATION).setType(FieldTypeConstants.DOUBLE_ARRAY).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMITTED_BY).setLabel(OnaConstants.SUBMITTED_BY).setType(FieldTypeConstants.STRING).createFormElement());
+        }
+    }
+
+    private void alterFormElementName(FormElement formElement) {
+        String formFieldName = formElement.getName();
+        String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
+        formElement.setName(name);
+
+        if (formElement.hasChildren()) {
+            for (FormElement child : formElement.getChildren()) {
+                alterFormElementName(child);
+            }
         }
     }
 

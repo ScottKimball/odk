@@ -72,9 +72,9 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
             List<FormElement> formElements = formDefinition.getFormElements();
 
             for (FormElement formElement : formElements) {
-                String formFieldName = formElement.getName();
-                String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
-                formElement.setName(name);
+                if (!formElement.isPartOfRepeatGroup()) {
+                    alterFormElementName(formElement);
+                }
 
             }
             formElements.add(new FormElementBuilder().setName(OnaConstants.NOTES).setLabel(OnaConstants.NOTES).setType(FieldTypeConstants.STRING).createFormElement());
@@ -95,9 +95,21 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
         }
     }
 
+    private void alterFormElementName(FormElement formElement) {
+        String formFieldName = formElement.getName();
+        String name = formFieldName.substring(formFieldName.indexOf("/", 1) + 1, formFieldName.length()); // removes form title from URI
+        formElement.setName(name);
+
+        if (formElement.hasChildren()) {
+            for (FormElement child : formElement.getChildren()) {
+                alterFormElementName(child);
+            }
+        }
+    }
+
     @Override
     protected List<String> parseToUrlList(String responseBody) throws Exception {
-        List<KoboFormInfo> koboFormInfoList = objectMapper.readValue(responseBody,type);
+        List<KoboFormInfo> koboFormInfoList = objectMapper.readValue(responseBody, type);
 
         List<String> urls = new ArrayList<>();
         for (KoboFormInfo koboFormInfo : koboFormInfoList) {

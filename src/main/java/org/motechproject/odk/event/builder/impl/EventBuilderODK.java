@@ -19,8 +19,6 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
     private static final String URL = "url";
 
 
-
-
     protected Object formatValue(String type, Object value) {
 
         switch (type) {
@@ -38,20 +36,14 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
         }
     }
 
-    private String formatUrl(Map<String,String> value) {
+    private String formatUrl(Map<String, String> value) {
         return value.get(URL);
     }
 
     @Override
     protected Map<String, Object> getData(String json) throws Exception {
-        OdkJsonFormPublication publication = new ObjectMapper().readValue(json,OdkJsonFormPublication.class );
-        return  publication.getData()[0];
+        OdkJsonFormPublication publication = new ObjectMapper().readValue(json, OdkJsonFormPublication.class);
+        return publication.getData()[0];
     }
-
-    @Override
-    protected List<FormValue> getRootScope(Map<String, Object> data, FormDefinition formDefinition) {
-        return null;
-    }
-
-
 }
+

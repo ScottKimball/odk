@@ -32,10 +32,6 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
         return super.createEvents(json, formDefinition, configuration);
     }
 
-    @Override
-    protected List<FormValue> getRootScope(Map<String, Object> data, FormDefinition formDefinition) {
-        return null;
-    }
 
     protected Object formatValue(String type, Object value) {
 
