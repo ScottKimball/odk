@@ -6,15 +6,16 @@ import org.motechproject.event.MotechEvent;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.event.builder.AbstractEventBuilder;
 import org.motechproject.odk.event.builder.EventBuilderUtils;
-import org.motechproject.odk.event.builder.FormEventBuilder;
+import org.motechproject.odk.event.builder.EventBuilder;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventBuilderOna extends AbstractEventBuilder implements FormEventBuilder {
+public class EventBuilderOna extends AbstractEventBuilder implements EventBuilder {
 
     private static final String ATTACHMENTS = "_attachments";
     private static final String FILENAME = "filename";
@@ -23,14 +24,18 @@ public class EventBuilderOna extends AbstractEventBuilder implements FormEventBu
     private List<Map<String, String>> attachments;
 
 
+
     @Override
-    public MotechEvent build(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
+    public List<MotechEvent> createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
         Map<String,Object> data = new ObjectMapper().readValue(json,new TypeReference<HashMap<String,Object>>() {} );
         attachments =(List<Map<String,String>>) data.get(ATTACHMENTS);
-        return super.build(json, formDefinition, configuration);
+        return super.createEvents(json, formDefinition, configuration);
     }
 
-
+    @Override
+    protected List<FormValue> getRootScope(Map<String, Object> data, FormDefinition formDefinition) {
+        return null;
+    }
 
     protected Object formatValue(String type, Object value) {
 

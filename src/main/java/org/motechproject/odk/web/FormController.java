@@ -7,8 +7,8 @@ import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
-import org.motechproject.odk.parser.JsonParser;
-import org.motechproject.odk.parser.factory.JsonParserFactory;
+import org.motechproject.odk.event.builder.EventBuilder;
+import org.motechproject.odk.event.factory.FormEventBuilderFactory;
 import org.motechproject.odk.service.SettingsService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.slf4j.Logger;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -63,10 +64,14 @@ public class FormController {
     }
 
     private void publishEvent (String body, Configuration configuration, FormDefinition formDefinition) {
-        JsonParser parser = new JsonParserFactory().getParser(configuration.getType());
+        EventBuilder builder = new FormEventBuilderFactory().getBuilder(configuration.getType());
 
         try {
-            parser.parse(body,eventRelay,formDefinition,configuration);
+            List<MotechEvent> events = builder.createEvents(body,formDefinition,configuration);
+
+            for (MotechEvent event : events) {
+                eventRelay.sendEventMessage(event);
+            }
 
         } catch (Exception e) {
             LOGGER.error("Publishing form reciept failure event:\n" + e.toString());

@@ -5,8 +5,10 @@ import org.motechproject.event.listener.EventRelay;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 
+import java.util.List;
+
 public interface EventBuilder {
 
-    MotechEvent createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception;
+    List<MotechEvent> createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception;
 
 }

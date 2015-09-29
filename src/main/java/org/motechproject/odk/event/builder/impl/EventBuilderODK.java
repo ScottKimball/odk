@@ -4,6 +4,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.motechproject.event.MotechEvent;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.event.builder.AbstractEventBuilder;
@@ -18,10 +19,7 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
     private static final String URL = "url";
 
 
-    @Override
-    public MotechEvent createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
-        return super.createEvents(json,formDefinition,configuration);
-    }
+
 
     protected Object formatValue(String type, Object value) {
 
@@ -49,4 +47,11 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
         OdkJsonFormPublication publication = new ObjectMapper().readValue(json,OdkJsonFormPublication.class );
         return  publication.getData()[0];
     }
+
+    @Override
+    protected List<FormValue> getRootScope(Map<String, Object> data, FormDefinition formDefinition) {
+        return null;
+    }
+
+
 }
