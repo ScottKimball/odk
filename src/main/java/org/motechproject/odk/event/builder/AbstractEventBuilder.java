@@ -54,7 +54,7 @@ public abstract class AbstractEventBuilder implements EventBuilder {
         for(FormElement repeatGroup : repeatGroups) {
             List<Map<String, Object>> repeatGroupInstances = (List<Map<String,Object>>) data.get(repeatGroup.getName());
             for (Map<String,Object> repeatGroupInstance : repeatGroupInstances ) {
-                createRepeatGroupEvents(repeatGroup, events, formDefinition, repeatGroupInstance, rootScopeValues, configuration.getName());
+                createRepeatGroupEvent(repeatGroup, events, formDefinition, repeatGroupInstance, rootScopeValues, configuration.getName());
             }
         }
         return events;
@@ -85,31 +85,31 @@ public abstract class AbstractEventBuilder implements EventBuilder {
         return formElements;
     }
 
-    private void createRepeatGroupEvents(FormElement repeatGroup, List<MotechEvent> events, FormDefinition formDefinition, Map<String, Object> data,
-                                         Map<String, Object> scope, String configName) {
-        
+    private void createRepeatGroupEvent(FormElement repeatGroup, List<MotechEvent> events, FormDefinition formDefinition, Map<String, Object> data,
+                                        Map<String, Object> scope, String configName) {
+
         List<FormElement> childRepeatGroups = new ArrayList<>();
+        Map<String,Object> localScope = new HashMap<>();
+        localScope.putAll(scope);
 
         for (FormElement child : repeatGroup.getChildren()) {
             if (child.isRepeatGroup()) {
                 childRepeatGroups.add(child);
             } else {
                 Object value = data.get(child.getName());
-                scope.put(child.getName(), formatValue(child.getType(), value));
+                localScope.put(child.getName(), formatValue(child.getType(), value));
             }
         }
 
-        Map<String,Object> params = new HashMap<>();
-        params.putAll(scope);
         String subject = EventSubjects.REPEAT_GROUP + "." + configName + "." + formDefinition.getTitle() + "." + repeatGroup.getName();
-        events.add(new MotechEvent(subject, params));
+        events.add(new MotechEvent(subject, localScope));
 
         for(FormElement childRepeatGroup : childRepeatGroups) {
 
             List<Map<String, Object>> childRepeatGroupInstances = (List<Map<String,Object>>)data.get(childRepeatGroup.getName());
 
             for (Map<String,Object> childInstance : childRepeatGroupInstances) {
-                createRepeatGroupEvents(childRepeatGroup, events, formDefinition, childInstance, scope, configName);
+                createRepeatGroupEvent(childRepeatGroup, events, formDefinition, childInstance, localScope, configName);
             }
 
         }
