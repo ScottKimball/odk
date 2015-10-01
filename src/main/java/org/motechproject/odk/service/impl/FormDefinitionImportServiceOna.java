@@ -54,11 +54,13 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             List<FormElement> formElements = formDefinition.getFormElements();
 
             for (FormElement formElement : formElements) {
-               alterFormElementName(formElement);
+                if (!formElement.isPartOfRepeatGroup()) {
+                    alterFormElementName(formElement);
+                }
             }
 
             formElements.add(new FormElementBuilder().setName(OnaConstants.NOTES).setLabel(OnaConstants.NOTES).setType(FieldTypeConstants.STRING_ARRAY).createFormElement());
-            formElements.add(new FormElementBuilder().setName(OnaConstants.TAGS).setLabel(OnaConstants.TAGS).setType(FieldTypeConstants.SELECT).createFormElement());
+            formElements.add(new FormElementBuilder().setName(OnaConstants.TAGS).setLabel(OnaConstants.TAGS).setType(FieldTypeConstants.STRING_ARRAY).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.XFORM_ID_STRING).setLabel(OnaConstants.XFORM_ID_STRING).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.UUID).setLabel(OnaConstants.UUID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.STATUS).setLabel(OnaConstants.STATUS).setType(FieldTypeConstants.STRING).createFormElement());
