@@ -29,4 +29,11 @@ public class FormDefinitionController {
         return formDefinitions;
     }
 
+    @RequestMapping("/formdefinition/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public FormDefinition getFormDefById(@PathVariable("id") long id) {
+        return formDefinitionService.findById(id);
+    }
+
 }

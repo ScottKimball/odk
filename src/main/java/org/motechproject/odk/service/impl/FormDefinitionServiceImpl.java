@@ -44,11 +44,16 @@ public class FormDefinitionServiceImpl implements FormDefinitionService {
 
     @Override
     public FormDefinition findByConfigurationNameAndTitle(String configurationName, String title) {
-        return formDefinitionDataService.byConfigurationNameAndTitle(configurationName,title);
+        return formDefinitionDataService.byConfigurationNameAndTitle(configurationName, title);
     }
 
     @Override
     public List<FormDefinition> findAllByConfigName(String configName) {
         return formDefinitionDataService.byConfigurationName(configName);
+    }
+
+    @Override
+    public FormDefinition findById(long id) {
+        return formDefinitionDataService.findById(id);
     }
 }

@@ -83,7 +83,6 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
             formElements.add(new FormElementBuilder().setName(OnaConstants.TAGS).setLabel(OnaConstants.TAGS).setType(FieldTypeConstants.STRING_ARRAY).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMITTED_BY).setLabel(OnaConstants.SUBMITTED_BY).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.XFORM_ID_STRING).setLabel(OnaConstants.XFORM_ID_STRING).setType(FieldTypeConstants.STRING).createFormElement());
-           // formElements.add(new FormElementBuilder().setName(OnaConstants.META_INSTANCE_ID).setLabel(OnaConstants.META_INSTANCE_ID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.FORMHUB_UUID).setLabel(OnaConstants.FORMHUB_UUID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(KoboConstants.END).setLabel(KoboConstants.END).setType(FieldTypeConstants.DATE_TIME).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMISSION_TIME).setLabel(OnaConstants.SUBMISSION_TIME).setType(FieldTypeConstants.DATE_TIME).createFormElement());

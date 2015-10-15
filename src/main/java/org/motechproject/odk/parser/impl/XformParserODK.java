@@ -54,7 +54,7 @@ public class XformParserODK implements XformParser {
             InputSource inputSource = new InputSource(new ByteArrayInputStream(xForm.getBytes()));
             Node root = getRoot(inputSource);
             FormDefinition formDefinition = parseXForm(configurationName, root);
-            formDefinition.setxForm(xForm);
+            formDefinition.setXform(xForm);
             return formDefinition;
         } catch (XPathExpressionException e) {
             throw new XformParserException("Error parsing xForm", e);

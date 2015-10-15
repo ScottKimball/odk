@@ -12,9 +12,10 @@ public class Configuration {
     private String password;
     private String name;
     private ConfigurationType type;
+    private boolean verified;
 
 
-    public Configuration(String url, String username, String password, String name, ConfigurationType type) {
+    public Configuration(String url, String username, String password, String name, ConfigurationType type, boolean verified) {
         this.url = url;
         this.username = username;
         this.password = password;
@@ -65,5 +66,11 @@ public class Configuration {
         this.type = type;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
 
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 }

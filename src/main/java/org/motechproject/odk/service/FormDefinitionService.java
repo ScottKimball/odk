@@ -13,4 +13,5 @@ public interface FormDefinitionService {
     List<FormDefinition> findAll();
     FormDefinition findByConfigurationNameAndTitle(String configurationName, String title);
     List<FormDefinition> findAllByConfigName(String configName);
+    FormDefinition findById(long id);
 }

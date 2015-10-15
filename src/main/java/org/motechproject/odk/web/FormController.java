@@ -59,11 +59,11 @@ public class FormController {
             publishFailureEvent("Form " + form + " does not exist",null,config,form, body);
 
         } else {
-            publishEvent(body,configuration,formDefinition);
+            publishEvents(body, configuration, formDefinition);
         }
     }
 
-    private void publishEvent (String body, Configuration configuration, FormDefinition formDefinition) {
+    private void publishEvents(String body, Configuration configuration, FormDefinition formDefinition) {
         EventBuilder builder = new FormEventBuilderFactory().getBuilder(configuration.getType());
 
         try {

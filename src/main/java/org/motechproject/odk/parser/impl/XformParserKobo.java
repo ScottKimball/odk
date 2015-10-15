@@ -34,6 +34,7 @@ public class XformParserKobo extends XformParserODK implements XformParser {
             InputSource inputSource = new InputSource(new ByteArrayInputStream(xForm.getBytes()));
             Node root = getRoot(inputSource);
             FormDefinition formDefinition = parseXForm(configurationName, root);
+            formDefinition.setXform(xForm);
             findGroupLabels(formDefinition, root);
             return formDefinition;
         } catch (XPathExpressionException e) {

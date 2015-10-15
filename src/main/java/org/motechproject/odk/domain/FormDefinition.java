@@ -18,7 +18,7 @@ public class FormDefinition {
     private String configurationName;
 
     @Field(type = "TEXT")
-    private String xForm;
+    private String xform;
 
     public FormDefinition(String configurationName) {
         this.configurationName = configurationName;
@@ -51,11 +51,11 @@ public class FormDefinition {
         this.configurationName = configurationName;
     }
 
-    public String getxForm() {
-        return xForm;
+    public String getXform() {
+        return xform;
     }
 
-    public void setxForm(String xForm) {
-        this.xForm = xForm;
+    public void setXform(String xform) {
+        this.xform = xform;
     }
 }

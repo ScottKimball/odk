@@ -33,12 +33,10 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
     private HttpClient client;
     private TasksService tasksService;
-    private HttpClientBuilderFactory clientBuilderFactory;
     FormDefinitionService formDefinitionService;
 
     @Autowired
     public AbstractFormDefinitionImportService(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
-        this.clientBuilderFactory = httpClientBuilderFactory;
         this.client = httpClientBuilderFactory.newBuilder().build();
         this.tasksService = tasksService;
         this.formDefinitionService = formDefinitionService;
