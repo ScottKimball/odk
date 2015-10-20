@@ -49,29 +49,32 @@ public class XformParserKobo extends XformParserODK implements XformParser {
         for (int i = 0; i < groups.getLength(); i++) {
             Node element = groups.item(i);
 
-            if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals(GROUP) || element.getNodeName().equals(INPUT))) {
+            if (element.getNodeType() == Node.ELEMENT_NODE) {
+                if (!element.getNodeName().equals(REPEAT)) {
 
-                Node refAttribute = element.getAttributes().getNamedItem(REF);
+                    Node refAttribute = element.getAttributes().getNamedItem(REF);
 
-                String label = getLabel(element);
-                String localUri = uri + label;
+                    String label = getLabel(element);
+                    String localUri = uri + label;
 
-                if (refAttribute != null) {
-                    String ref = refAttribute.getNodeValue();
-                    FormElement formElement = formElementMap.get(ref);
+                    if (refAttribute != null) {
+                        String ref = refAttribute.getNodeValue();
+                        FormElement formElement = formElementMap.get(ref);
 
-                    if (formElement != null) {
-                        formElement.setLabel(localUri);
-                        setLabelForFormElementChildren(formElement);
+                        if (formElement != null) {
+                            formElement.setLabel(localUri);
+                            setLabelForFormElementChildren(formElement);
+                        }
                     }
-                }
 
-                if (element.hasChildNodes()) {
-                    recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, localUri + "/");
+                    if (element.hasChildNodes()) {
+                        recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, localUri + "/");
+                    }
+                } else  {
+                    recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, uri);
                 }
-            } else if (element.getNodeType() == Node.ELEMENT_NODE && (element.getNodeName().equals(REPEAT)) && element.hasChildNodes()) {
-                recursivelyFindGroupRefs(element.getChildNodes(), formElementMap, uri);
             }
+
         }
     }
 
