@@ -1,16 +1,16 @@
 package org.motechproject.odk.parser.impl;
 
+import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.builder.FormElementBuilder;
 import org.motechproject.odk.parser.XformParser;
-import org.motechproject.odk.parser.XformParserException;
-import org.motechproject.odk.constant.FieldTypeConstants;
 import org.springframework.util.xml.SimpleNamespaceContext;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -31,15 +31,15 @@ public class XformParserODK implements XformParser {
     protected static final String TYPE = "type";
     protected static final String STRING = "string";
 
-    private   XPath xPath;
-    private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() {{
+    private XPath xPath;
+    private static final HashMap<String, String> NAMESPACE_MAP = new HashMap<String, String>() { {
         put("xForms", "http://www.w3.org/2002/xforms");
         put("ev", "http://www.w3.org/2001/xml-events");
         put("h", "http://www.w3.org/1999/xhtml");
         put("jr", "http://openrosa.org/javarosa");
         put("orx", "http://openrosa.org/xforms");
         put("xsd", "http://www.w3.org/2001/XMLSchema");
-    }};
+    } };
 
     public XformParserODK() {
         XPathFactory xPathFactory = XPathFactory.newInstance();
@@ -49,33 +49,31 @@ public class XformParserODK implements XformParser {
         this.xPath.setNamespaceContext(namespaces);
     }
 
-    public  FormDefinition parse (String xForm, String configurationName) throws XformParserException {
-        try {
-            InputSource inputSource = new InputSource(new ByteArrayInputStream(xForm.getBytes()));
-            Node root = getRoot(inputSource);
-            FormDefinition formDefinition = parseXForm(configurationName, root);
-            formDefinition.setXform(xForm);
-            return formDefinition;
-        } catch (XPathExpressionException e) {
-            throw new XformParserException("Error parsing xForm", e);
-        }
+    public FormDefinition parse(String xForm, String configurationName) throws XPathExpressionException {
+
+        InputSource inputSource = new InputSource(new ByteArrayInputStream(xForm.getBytes()));
+        Node root = getRoot(inputSource);
+        FormDefinition formDefinition = parseXForm(configurationName, root);
+        formDefinition.setXform(xForm);
+        return formDefinition;
+
     }
 
     public XPath getxPath() {
         return xPath;
     }
 
-    protected FormDefinition parseXForm( String configurationName, Node root) throws XPathExpressionException{
-        Map<String,FormElement> formElementMap = new HashMap<>();
+    protected FormDefinition parseXForm(String configurationName, Node root) throws XPathExpressionException {
+        Map<String, FormElement> formElementMap = new HashMap<>();
         String title = xPath.compile(TITLE_PATH).evaluate(root);
         FormDefinition formDefinition = new FormDefinition(configurationName);
         formDefinition.setTitle(title);
 
-        Node node =(Node) xPath.compile(FORM_ELEMENTS_PARENT_PATH).evaluate(root, XPathConstants.NODE);
+        Node node = (Node) xPath.compile(FORM_ELEMENTS_PARENT_PATH).evaluate(root, XPathConstants.NODE);
         String uri = node.getNodeName();
         NodeList formElementsList = node.getChildNodes();
 
-        recursivelyAddFormElements(formElementMap, formElementsList,"/" + uri);
+        recursivelyAddFormElements(formElementMap, formElementsList, "/" + uri);
         NodeList binds = (NodeList) xPath.compile(BIND_ELEMENTS).evaluate(root, XPathConstants.NODESET);
         addBindInformationToFormFields(formElementMap, binds);
         removeFormNameFromLabel(formElementMap);
@@ -88,7 +86,7 @@ public class XformParserODK implements XformParser {
     }
 
 
-    private void addBindInformationToFormFields(Map<String, FormElement> formElementMap, NodeList binds ) {
+    private void addBindInformationToFormFields(Map<String, FormElement> formElementMap, NodeList binds) {
         for (int i = 0; i < binds.getLength(); i++) {
             Node bind = binds.item(i);
             NamedNodeMap attributes = bind.getAttributes();
@@ -128,7 +126,7 @@ public class XformParserODK implements XformParser {
 
                 }
             } else if (element.getNodeType() == Node.ELEMENT_NODE) {
-                String localUri =  uri + "/" + element.getNodeName();
+                String localUri = uri + "/" + element.getNodeName();
                 FormElement formElement = new FormElementBuilder()
                         .setName(localUri)
                         .setLabel(localUri)
@@ -139,14 +137,14 @@ public class XformParserODK implements XformParser {
     }
 
 
-    private void recursivelyAddGroup (Map<String, FormElement> formElementMap, NodeList nodeList, String uri, List<FormElement> group, FormElement parent) {
+    private void recursivelyAddGroup(Map<String, FormElement> formElementMap, NodeList nodeList, String uri, List<FormElement> group, FormElement parent) {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node element = nodeList.item(i);
 
             if (element.hasChildNodes()) {
 
                 if (element.hasAttributes()) {
-                    String localUri =  uri + "/" + element.getNodeName();
+                    String localUri = uri + "/" + element.getNodeName();
                     FormElement formElement = new FormElementBuilder()
                             .setName(localUri)
                             .setLabel(localUri)
@@ -162,8 +160,8 @@ public class XformParserODK implements XformParser {
                     recursivelyAddFormElements(formElementMap, element.getChildNodes(), uri + "/" + element.getNodeName());
                 }
 
-            } else if (element.getNodeType() == Node.ELEMENT_NODE){
-                String localUri =  uri + "/" + element.getNodeName();
+            } else if (element.getNodeType() == Node.ELEMENT_NODE) {
+                String localUri = uri + "/" + element.getNodeName();
                 FormElement formElement = new FormElementBuilder()
                         .setName(localUri)
                         .setLabel(localUri)
@@ -176,11 +174,12 @@ public class XformParserODK implements XformParser {
 
     }
 
-    protected boolean hasChildElements (Node element) {
+    protected boolean hasChildElements(Node element) {
         NodeList children = element.getChildNodes();
-        for (int i = 0;i < children.getLength();i++) {
-            if (children.item(i).getNodeType() == Node.ELEMENT_NODE)
+        for (int i = 0; i < children.getLength(); i++) {
+            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 return true;
+            }
         }
         return false;
     }
@@ -188,14 +187,14 @@ public class XformParserODK implements XformParser {
     private List<FormElement> createFormElementListFromMap(Map<String, FormElement> formElementMap) {
         List<FormElement> formElements = new ArrayList<>();
         for (FormElement formElement : formElementMap.values()) {
-            if(formElement.getType().equals(FieldTypeConstants.REPEAT_GROUP) || !formElement.isPartOfRepeatGroup()) {
+            if (formElement.getType().equals(FieldTypeConstants.REPEAT_GROUP) || !formElement.isPartOfRepeatGroup()) {
                 formElements.add(formElement);
             }
         }
         return formElements;
     }
 
-    private void removeFormNameFromLabel (Map<String, FormElement> formElementMap) {
+    private void removeFormNameFromLabel(Map<String, FormElement> formElementMap) {
         for (String key : formElementMap.keySet()) {
             FormElement element = formElementMap.get(key);
             String label = element.getLabel();

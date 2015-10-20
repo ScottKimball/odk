@@ -1,6 +1,8 @@
 package org.motechproject.odk.constant;
 
-public class DisplayNames {
+public final class DisplayNames {
+
+    private DisplayNames() { }
 
     public static final String CHANNEL_DISPLAY_NAME = "ODK Module";
     public static final String FORM_TRIGGER_DISPLAY_NAME = "Recieved Form";

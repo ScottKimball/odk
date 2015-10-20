@@ -6,6 +6,9 @@ import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
+import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.constant.KoboConstants;
+import org.motechproject.odk.constant.OnaConstants;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
@@ -15,9 +18,6 @@ import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
-import org.motechproject.odk.constant.FieldTypeConstants;
-import org.motechproject.odk.constant.KoboConstants;
-import org.motechproject.odk.constant.OnaConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
     public FormDefinitionImportServiceKobo(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
         super(httpClientBuilderFactory, tasksService, formDefinitionService);
         objectMapper = new ObjectMapper();
-        type = objectMapper.getTypeFactory(). constructCollectionType(List.class, KoboFormInfo.class);
+        type = objectMapper.getTypeFactory().constructCollectionType(List.class, KoboFormInfo.class);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
             return formDef.replace("&lt;", "<")
                     .replace("&gt;", ">")
                     .replace("<root><?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "")
-                    .replace("\n</root>" , "")
+                    .replace("\n</root>", "")
                     .replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "");
         } else {
             return formDef;
@@ -136,9 +136,6 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
 
 
     }
-
-
-
 
 
 }

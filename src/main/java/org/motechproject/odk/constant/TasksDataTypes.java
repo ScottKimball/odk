@@ -1,6 +1,9 @@
 package org.motechproject.odk.constant;
 
-public class TasksDataTypes {
+public final class TasksDataTypes {
+
+    private TasksDataTypes() { }
+
     public static final String UNICODE = "UNICODE";
     public static final String DATE = "DATE";
     public static final String BOOLEAN = "BOOLEAN";

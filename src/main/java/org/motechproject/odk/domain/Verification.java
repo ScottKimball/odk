@@ -2,7 +2,7 @@ package org.motechproject.odk.domain;
 
 public class Verification {
 
-    boolean verified;
+    private boolean verified;
 
     public Verification(boolean verified) {
         this.verified = verified;

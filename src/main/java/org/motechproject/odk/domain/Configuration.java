@@ -1,10 +1,5 @@
 package org.motechproject.odk.domain;
 
-import org.motechproject.mds.annotations.Entity;
-import org.motechproject.mds.annotations.Field;
-
-import javax.jdo.annotations.Persistent;
-import java.util.List;
 
 public class Configuration {
     private String url;

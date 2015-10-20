@@ -3,14 +3,14 @@ package org.motechproject.odk.web;
 
 import org.motechproject.event.MotechEvent;
 import org.motechproject.event.listener.EventRelay;
-import org.motechproject.odk.domain.Configuration;
-import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
+import org.motechproject.odk.domain.Configuration;
+import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.event.builder.EventBuilder;
 import org.motechproject.odk.event.factory.FormEventBuilderFactory;
-import org.motechproject.odk.service.SettingsService;
 import org.motechproject.odk.service.FormDefinitionService;
+import org.motechproject.odk.service.SettingsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +42,21 @@ public class FormController {
     private EventRelay eventRelay;
 
 
-    @RequestMapping(value = "/{config}/{form}" ,method = RequestMethod.POST )
+    @RequestMapping(value = "/{config}/{form}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void receiveForm(@PathVariable("config") String config, @PathVariable("form") String form, @RequestBody String body) {
-        LOGGER.debug("Received form: " + form + " Configuration: " + config );
+        LOGGER.debug("Received form: " + form + " Configuration: " + config);
 
         Configuration configuration = settingsService.getConfigByName(config);
-        FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(config,form);
+        FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(config, form);
 
         if (configuration == null) {
             LOGGER.error("Configuration " + config + " does not exist");
-            publishFailureEvent("Configuration " + config + " does not exist",null,config,form, body);
+            publishFailureEvent("Configuration " + config + " does not exist", null, config, form, body);
 
-        } else if  (formDefinition == null) {
+        } else if (formDefinition == null) {
             LOGGER.error("Form " + form + " does not exist");
-            publishFailureEvent("Form " + form + " does not exist",null,config,form, body);
+            publishFailureEvent("Form " + form + " does not exist", null, config, form, body);
 
         } else {
             publishEvents(body, configuration, formDefinition);
@@ -67,7 +67,7 @@ public class FormController {
         EventBuilder builder = new FormEventBuilderFactory().getBuilder(configuration.getType());
 
         try {
-            List<MotechEvent> events = builder.createEvents(body,formDefinition,configuration);
+            List<MotechEvent> events = builder.createEvents(body, formDefinition, configuration);
 
             for (MotechEvent event : events) {
                 eventRelay.sendEventMessage(event);
@@ -79,14 +79,14 @@ public class FormController {
         }
     }
 
-    private void publishFailureEvent (String message, String error, String configName, String formTitle, String body) {
+    private void publishFailureEvent(String message, String error, String configName, String formTitle, String body) {
         Map<String, Object> params = new HashMap<>();
         params.put(EventParameters.CONFIGURATION_NAME, configName);
         params.put(EventParameters.FORM_TITLE, formTitle);
         params.put(EventParameters.MESSAGE, message);
         params.put(EventParameters.EXCEPTION, error);
-        params.put(EventParameters.JSON_CONTENT,body);
-        eventRelay.sendEventMessage(new MotechEvent(EventSubjects.FORM_FAIL,params));
+        params.put(EventParameters.JSON_CONTENT, body);
+        eventRelay.sendEventMessage(new MotechEvent(EventSubjects.FORM_FAIL, params));
     }
 
 }

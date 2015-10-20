@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Settings {
 
-    private List<Configuration>  configurations;
+    private List<Configuration> configurations;
 
     public Settings() {
         if (this.configurations == null) {
@@ -24,8 +24,6 @@ public class Settings {
     public void setConfigurations(List<Configuration> configurations) {
         this.configurations = configurations;
     }
-
-
 
 
 }

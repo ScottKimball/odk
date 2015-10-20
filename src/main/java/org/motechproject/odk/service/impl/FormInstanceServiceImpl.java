@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FormInstanceServiceImpl implements FormInstanceService{
+public class FormInstanceServiceImpl implements FormInstanceService {
 
     @Autowired
-    FormInstanceDataService formInstanceDataService;
+    private FormInstanceDataService formInstanceDataService;
 
     @Override
     public void create(FormInstance formInstance) {

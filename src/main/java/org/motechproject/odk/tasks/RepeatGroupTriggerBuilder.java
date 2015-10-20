@@ -33,8 +33,8 @@ public class RepeatGroupTriggerBuilder {
     private void buildTriggersForFormDef(FormDefinition formDefinition) {
         List<FormElement> rootScope = getRootScope(formDefinition);
 
-        for(FormElement formElement : formDefinition.getFormElements()) {
-            if(formElement.isRepeatGroup() && !formElement.isPartOfRepeatGroup()) {
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            if (formElement.isRepeatGroup() && !formElement.isPartOfRepeatGroup()) {
                 buildTriggerForRepeatGroup(formElement, rootScope, formDefinition.getTitle(), formDefinition.getConfigurationName());
             }
         }
@@ -44,7 +44,7 @@ public class RepeatGroupTriggerBuilder {
         List<FormElement> rootScope = new ArrayList<>();
 
         for (FormElement formElement : formDefinition.getFormElements()) {
-            if(!formElement.isRepeatGroup() && !formElement.isPartOfRepeatGroup()) {
+            if (!formElement.isRepeatGroup() && !formElement.isPartOfRepeatGroup()) {
                 rootScope.add(formElement);
             }
         }
@@ -53,18 +53,18 @@ public class RepeatGroupTriggerBuilder {
 
 
     private void buildTriggerForRepeatGroup(FormElement repeatGroup, List<FormElement> scope, String title, String configName) {
-        List<FormElement> localScope = addFieldsToScope(repeatGroup,scope);
+        List<FormElement> localScope = addFieldsToScope(repeatGroup, scope);
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
 
-        for(FormElement field : localScope) {
-            eventParameterRequests.add(new EventParameterRequest(field.getLabel(),field.getName(),TypeMapper.getType(field.getType())));
+        for (FormElement field : localScope) {
+            eventParameterRequests.add(new EventParameterRequest(field.getLabel(), field.getName(), TypeMapper.getType(field.getType())));
         }
 
-         triggerEventRequests.add(new TriggerEventRequest(formatDisplayName(repeatGroup,title,configName),formatEventSubject(repeatGroup, title, configName), null,eventParameterRequests));
+        triggerEventRequests.add(new TriggerEventRequest(formatDisplayName(repeatGroup, title, configName), formatEventSubject(repeatGroup, title, configName), null, eventParameterRequests));
 
-        for(FormElement child : repeatGroup.getChildren()) {
+        for (FormElement child : repeatGroup.getChildren()) {
             if (child.isRepeatGroup()) {
-                buildTriggerForRepeatGroup(child,localScope,title,configName);
+                buildTriggerForRepeatGroup(child, localScope, title, configName);
             }
         }
     }
@@ -73,8 +73,8 @@ public class RepeatGroupTriggerBuilder {
         List<FormElement> localScope = new ArrayList<>();
         localScope.addAll(scope);
 
-        for(FormElement child : formElement.getChildren()) {
-            if(!child.isRepeatGroup()) {
+        for (FormElement child : formElement.getChildren()) {
+            if (!child.isRepeatGroup()) {
                 localScope.add(child);
             }
         }

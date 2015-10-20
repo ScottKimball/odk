@@ -12,7 +12,7 @@ import java.util.List;
 public class FormDefinitionServiceImpl implements FormDefinitionService {
 
     @Autowired
-    FormDefinitionDataService formDefinitionDataService;
+    private FormDefinitionDataService formDefinitionDataService;
 
     @Override
     public FormDefinition findByTitle(String title) {
@@ -31,7 +31,7 @@ public class FormDefinitionServiceImpl implements FormDefinitionService {
 
     @Override
     public void deleteFormDefinitionsByConfigurationName(String configName) {
-        List<FormDefinition> formDefinitions =  formDefinitionDataService.byConfigurationName(configName);
+        List<FormDefinition> formDefinitions = formDefinitionDataService.byConfigurationName(configName);
         for (FormDefinition formDefinition : formDefinitions) {
             formDefinitionDataService.delete(formDefinition);
         }

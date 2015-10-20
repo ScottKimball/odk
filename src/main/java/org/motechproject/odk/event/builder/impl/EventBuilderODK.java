@@ -1,15 +1,11 @@
 package org.motechproject.odk.event.builder.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.motechproject.event.MotechEvent;
-import org.motechproject.odk.domain.Configuration;
-import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.domain.FormValue;
-import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.domain.OdkJsonFormPublication;
 import org.motechproject.odk.event.builder.AbstractEventBuilder;
-import org.motechproject.odk.event.builder.EventBuilderUtils;
 import org.motechproject.odk.event.builder.EventBuilder;
+import org.motechproject.odk.event.builder.EventBuilderUtils;
 
 import java.util.List;
 import java.util.Map;

@@ -4,13 +4,15 @@ import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.constant.TasksDataTypes;
 
 
-public class TypeMapper {
+public final class TypeMapper {
+
+    private TypeMapper() { }
 
     public static String getType(String type) {
 
         switch (type) {
             case FieldTypeConstants.INT:
-                return  TasksDataTypes.INTEGER;
+                return TasksDataTypes.INTEGER;
 
             case FieldTypeConstants.DATE_TIME:
                 return TasksDataTypes.UNICODE;

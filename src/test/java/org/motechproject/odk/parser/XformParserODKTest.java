@@ -12,50 +12,51 @@ import java.io.File;
 public class XformParserODKTest {
 
     @Test
-    public void testRepeatWithCount () throws Exception {
+    public void testRepeatWithCount() throws Exception {
 
         Configuration configuration = new Configuration();
         configuration.setName("configName");
 
-        File f = new File("odk/src/test/resources/tutorialRepeatWithCount.xml");
+        File f = new File(getClass().getResource("/tutorialRepeatWithCount.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
 
     }
 
     @Test
-    public void testWidgets () throws Exception {
+    public void testWidgets() throws Exception {
         Configuration configuration = new Configuration();
         configuration.setName("configName");
 
-        File f = new File("odk/src/test/resources/widgets.xml");
-        String xml = FileUtils.readFileToString(f);
-        FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
+        File f = new File(getClass().getResource("/widgets.xml").getFile());
 
-    }
-
-    @Test
-    public void testTestDoc () throws Exception {
-        Configuration configuration = new Configuration();
-        configuration.setName("configName");
-
-        File f = new File("odk/src/test/resources/test.xml");
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
         for (FormElement formElement : formDefinition.getFormElements()) {
             System.out.println(formElement.getName() + "\t" + formElement.getType());
         }
+
     }
 
     @Test
-    public void testDemoForm () throws Exception {
+    public void testTestDoc() throws Exception {
         Configuration configuration = new Configuration();
         configuration.setName("configName");
 
-        File f = new File("odk/src/test/resources/demoForm.xml");
+        File f = new File(getClass().getResource("/test.xml").getFile());
+        String xml = FileUtils.readFileToString(f);
+        FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
+        for (FormElement formElement : formDefinition.getFormElements()) {
+            System.out.println(formElement.getName() + "\t" + formElement.getType());
+        }
+    }
+
+    @Test
+    public void testDemoForm() throws Exception {
+        Configuration configuration = new Configuration();
+        configuration.setName("configName");
+
+        File f = new File(getClass().getResource("/demoForm.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
         for (FormElement formElement : formDefinition.getFormElements()) {
@@ -68,7 +69,7 @@ public class XformParserODKTest {
         Configuration configuration = new Configuration();
         configuration.setName("configName");
 
-        File f = new File("odk/src/test/resources/nested_repeat.xml");
+        File f = new File(getClass().getResource("/nested_repeat.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
     }

@@ -14,8 +14,8 @@ import org.apache.http.util.EntityUtils;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.ImportStatus;
-import org.motechproject.odk.parser.factory.XformParserFactory;
 import org.motechproject.odk.parser.XformParser;
+import org.motechproject.odk.parser.factory.XformParserFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
     private HttpClient client;
     private TasksService tasksService;
-    FormDefinitionService formDefinitionService;
+    private FormDefinitionService formDefinitionService;
 
     @Autowired
     public AbstractFormDefinitionImportService(HttpClientBuilderFactory httpClientBuilderFactory, TasksService tasksService, FormDefinitionService formDefinitionService) {
@@ -43,11 +43,11 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
     @Override
-    public ImportStatus importForms (Configuration config) {
+    public ImportStatus importForms(Configuration config) {
 
         try {
             List<String> formUrls = getFormUrls(config);
-            List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls,config);
+            List<String> xmlFormDefinitions = getXmlFormDefinitions(formUrls, config);
             List<FormDefinition> formDefinitions = parseXmlFormDefinitions(xmlFormDefinitions, config);
             modifyFormDefinitionForImplementation(formDefinitions);
             updateFormDefinitions(formDefinitions, config.getName());
@@ -60,7 +60,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         }
     }
 
-    protected List<FormDefinition> parseXmlFormDefinitions (List<String> xmlFormDefinitions, Configuration configuration) throws Exception {
+    protected List<FormDefinition> parseXmlFormDefinitions(List<String> xmlFormDefinitions, Configuration configuration) throws Exception {
         List<FormDefinition> formDefinitions = new ArrayList<>();
         XformParser parser = new XformParserFactory().getParser(configuration.getType());
         for (String def : xmlFormDefinitions) {
@@ -70,7 +70,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
-        HttpGet request = new HttpGet(configuration.getUrl()  + FORM_LIST_PATH);
+        HttpGet request = new HttpGet(configuration.getUrl() + FORM_LIST_PATH);
         HttpResponse response = client.execute(request);
         String responseBody = EntityUtils.toString(response.getEntity());
         return parseToUrlList(responseBody);
@@ -112,6 +112,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
 
 
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
+
     protected abstract List<String> parseToUrlList(String responseBody) throws Exception;
 
     protected HttpClient getClient() {

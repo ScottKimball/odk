@@ -3,13 +3,12 @@ package org.motechproject.odk.event.builder.impl;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.motechproject.event.MotechEvent;
+import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
-import org.motechproject.odk.constant.FieldTypeConstants;
-import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.event.builder.AbstractEventBuilder;
-import org.motechproject.odk.event.builder.EventBuilderUtils;
 import org.motechproject.odk.event.builder.EventBuilder;
+import org.motechproject.odk.event.builder.EventBuilderUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +23,11 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
     private List<Map<String, String>> attachments;
 
 
-
     @Override
     public List<MotechEvent> createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
-        Map<String,Object> data = new ObjectMapper().readValue(json,new TypeReference<HashMap<String,Object>>() {} );
-        attachments =(List<Map<String,String>>) data.get(ATTACHMENTS);
+        Map<String, Object> data = new ObjectMapper().readValue(json, new TypeReference<HashMap<String, Object>>() {
+        });
+        attachments = (List<Map<String, String>>) data.get(ATTACHMENTS);
         return super.createEvents(json, formDefinition, configuration);
     }
 
@@ -58,7 +57,7 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
 
     private Object formatUrl(String value) {
 
-        for (Map<String,String> attachment : attachments) {
+        for (Map<String, String> attachment : attachments) {
             String filename = attachment.get(FILENAME);
             filename = filename.substring(filename.lastIndexOf('/') + 1);
 
@@ -70,7 +69,8 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
     }
 
     @Override
-    protected Map<String, Object> getData(String json) throws Exception{
-        return new ObjectMapper().readValue(json,new TypeReference<HashMap<String,Object>>() {} );
+    protected Map<String, Object> getData(String json) throws Exception {
+        return new ObjectMapper().readValue(json, new TypeReference<HashMap<String, Object>>() {
+        });
     }
 }

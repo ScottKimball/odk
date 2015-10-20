@@ -1,7 +1,8 @@
 package org.motechproject.odk.constant;
 
-public class KoboConstants {
+public final class KoboConstants {
 
+    private KoboConstants() { }
 
     public static final String BAMBOO_DATASET_ID = "_bamboo_dataset_id";
     public static final String START = "start";

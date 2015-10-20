@@ -1,6 +1,9 @@
 package org.motechproject.odk.constant;
 
-public class EventParameters {
+public final class EventParameters {
+
+
+    private EventParameters() { }
 
     public static final String CONFIGURATION_NAME = "ConfigurationName";
     public static final String FORM_TITLE = "formName";

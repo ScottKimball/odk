@@ -1,11 +1,9 @@
 package org.motechproject.odk.service.impl;
 
-import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
 import org.motechproject.odk.tasks.ChannelRequestBuilder;
-import org.motechproject.tasks.contract.ChannelRequest;
 import org.motechproject.tasks.service.ChannelService;
 import org.osgi.framework.BundleContext;
 import org.springframework.beans.factory.annotation.Autowired;

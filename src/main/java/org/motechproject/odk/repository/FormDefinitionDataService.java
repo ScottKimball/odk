@@ -13,7 +13,7 @@ public interface FormDefinitionDataService extends MotechDataService<FormDefinit
     FormDefinition byTitle(@LookupField(name = "title") String title);
 
     @Lookup
-    List<FormDefinition> byConfigurationName (@LookupField(name = "configurationName") String configurationName);
+    List<FormDefinition> byConfigurationName(@LookupField(name = "configurationName") String configurationName);
 
     @Lookup
     FormDefinition byConfigurationNameAndTitle(@LookupField(name = "configurationName") String configurationName, @LookupField(name = "title") String title);

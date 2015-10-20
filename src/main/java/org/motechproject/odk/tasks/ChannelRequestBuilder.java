@@ -15,13 +15,12 @@ public class ChannelRequestBuilder {
     private List<FormDefinition> formDefinitions;
 
 
-
     public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {
         this.bundleContext = bundleContext;
         this.formDefinitions = formDefinitions;
     }
 
-    public ChannelRequest build () {
+    public ChannelRequest build() {
         FormTriggerBuilder triggerBuilder = new FormTriggerBuilder(formDefinitions);
         List<TriggerEventRequest> triggers = triggerBuilder.buildTriggers();
         RepeatGroupTriggerBuilder repeatGroupTriggerBuilder = new RepeatGroupTriggerBuilder(formDefinitions);
@@ -29,6 +28,6 @@ public class ChannelRequestBuilder {
         ActionBuilder actionBuilder = new ActionBuilder(formDefinitions);
         List<ActionEventRequest> actions = actionBuilder.build();
         return new ChannelRequest(DisplayNames.CHANNEL_DISPLAY_NAME, bundleContext.getBundle().getSymbolicName(),
-                bundleContext.getBundle().getVersion().toString(), null, triggers,actions);
+                bundleContext.getBundle().getVersion().toString(), null, triggers, actions);
     }
 }

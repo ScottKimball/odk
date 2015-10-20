@@ -1,8 +1,6 @@
 package org.motechproject.odk.service.impl;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.Header;
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
@@ -32,7 +30,7 @@ public class VerificationServiceImpl implements VerificationService {
 
     @Override
     public Verification verifyKobo(Configuration configuration) {
-        HttpGet request = new HttpGet(configuration.getUrl()  + "/" + configuration.getUsername() + FORM_LIST);
+        HttpGet request = new HttpGet(configuration.getUrl() + "/" + configuration.getUsername() + FORM_LIST);
         request.addHeader(generateBasicAuthHeader(request, configuration));
         return new Verification(executeRequest(request));
     }

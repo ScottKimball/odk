@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class VerifyController {
 
     @Autowired
-    VerificationService verificationService;
+    private VerificationService verificationService;
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)

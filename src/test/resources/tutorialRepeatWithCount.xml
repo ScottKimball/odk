@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms"
+        xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa"
+        >
     <h:head>
         <h:title>tutorialRepeatWithCount</h:title>
         <model>
@@ -34,29 +36,41 @@
             </instance>
             <bind calculate="3" nodeset="/tutorialRepeatWithCount/child_repeat_count" readonly="true()" type="string"/>
             <bind nodeset="/tutorialRepeatWithCount/child_repeat/name" required="true()" type="string"/>
-            <bind constraint=" /tutorialRepeatWithCount/child_repeat/age  &gt; 0 and  /tutorialRepeatWithCount/child_repeat/age  &lt; 120" jr:constraintMsg="That's not a valid age!" nodeset="/tutorialRepeatWithCount/child_repeat/age" required="true()" type="int"/>
+            <bind constraint=" /tutorialRepeatWithCount/child_repeat/age  &gt; 0 and  /tutorialRepeatWithCount/child_repeat/age  &lt; 120"
+                  jr:constraintMsg="That's not a valid age!" nodeset="/tutorialRepeatWithCount/child_repeat/age"
+                  required="true()" type="int"/>
             <bind nodeset="/tutorialRepeatWithCount/child_repeat/gender" type="select1"/>
             <bind nodeset="/tutorialRepeatWithCount/photo" type="binary"/>
             <bind nodeset="/tutorialRepeatWithCount/date" type="date"/>
             <bind nodeset="/tutorialRepeatWithCount/location" type="geopoint"/>
             <bind nodeset="/tutorialRepeatWithCount/pizza_fan" type="select1"/>
-            <bind nodeset="/tutorialRepeatWithCount/pizza_hater" readonly="true()" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'no'" type="string"/>
-            <bind nodeset="/tutorialRepeatWithCount/pizza_type" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'" type="select1"/>
-            <bind nodeset="/tutorialRepeatWithCount/favorite_toppings" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'" type="select"/>
+            <bind nodeset="/tutorialRepeatWithCount/pizza_hater" readonly="true()"
+                  relevant=" /tutorialRepeatWithCount/pizza_fan  = 'no'" type="string"/>
+            <bind nodeset="/tutorialRepeatWithCount/pizza_type" relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'"
+                  type="select1"/>
+            <bind nodeset="/tutorialRepeatWithCount/favorite_toppings"
+                  relevant=" /tutorialRepeatWithCount/pizza_fan  = 'yes'" type="select"/>
             <bind nodeset="/tutorialRepeatWithCount/thanks" readonly="true()" type="string"/>
-            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/tutorialRepeatWithCount/start_time" type="dateTime"/>
-            <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/tutorialRepeatWithCount/end_time" type="dateTime"/>
+            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/tutorialRepeatWithCount/start_time"
+                  type="dateTime"/>
+            <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/tutorialRepeatWithCount/end_time"
+                  type="dateTime"/>
             <bind jr:preload="date" jr:preloadParams="today" nodeset="/tutorialRepeatWithCount/today" type="date"/>
-            <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/tutorialRepeatWithCount/imei" type="string"/>
-            <bind jr:preload="property" jr:preloadParams="phonenumber" nodeset="/tutorialRepeatWithCount/phonenumber" type="string"/>
-            <bind calculate="concat('uuid:', uuid())" nodeset="/tutorialRepeatWithCount/meta/instanceID" readonly="true()" type="string"/>
-            <bind calculate="'01edbad75c52455fa7e67135b355f1ad'" nodeset="/tutorialRepeatWithCount/formhub/uuid" type="string"/>
+            <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/tutorialRepeatWithCount/imei"
+                  type="string"/>
+            <bind jr:preload="property" jr:preloadParams="phonenumber" nodeset="/tutorialRepeatWithCount/phonenumber"
+                  type="string"/>
+            <bind calculate="concat('uuid:', uuid())" nodeset="/tutorialRepeatWithCount/meta/instanceID"
+                  readonly="true()" type="string"/>
+            <bind calculate="'01edbad75c52455fa7e67135b355f1ad'" nodeset="/tutorialRepeatWithCount/formhub/uuid"
+                  type="string"/>
         </model>
     </h:head>
     <h:body>
         <group ref="/tutorialRepeatWithCount/child_repeat">
             <label/>
-            <repeat jr:count=" /tutorialRepeatWithCount/child_repeat_count " nodeset="/tutorialRepeatWithCount/child_repeat">
+            <repeat jr:count=" /tutorialRepeatWithCount/child_repeat_count "
+                    nodeset="/tutorialRepeatWithCount/child_repeat">
                 <input ref="/tutorialRepeatWithCount/child_repeat/name">
                     <label>What's your name?</label>
                 </input>
@@ -139,7 +153,8 @@
             </item>
         </select>
         <input ref="/tutorialRepeatWithCount/thanks">
-            <label>Thanks for your time <output value=" /tutorialRepeatWithCount/child_repeat/name "/>!</label>
+            <label>Thanks for your time<output value=" /tutorialRepeatWithCount/child_repeat/name "/>!
+            </label>
         </input>
     </h:body>
 </h:html>

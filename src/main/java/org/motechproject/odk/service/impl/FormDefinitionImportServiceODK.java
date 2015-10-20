@@ -1,6 +1,8 @@
 package org.motechproject.odk.service.impl;
 
-import org.motechproject.odk.constant.OnaConstants;
+import org.apache.http.osgi.services.HttpClientBuilderFactory;
+import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.constant.ODKConstants;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.builder.FormElementBuilder;
@@ -8,15 +10,14 @@ import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
-import org.motechproject.odk.constant.FieldTypeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
@@ -24,7 +25,6 @@ import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import org.motechproject.odk.constant.ODKConstants;
 
 
 @Service
@@ -63,7 +63,7 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
 
-        for (FormDefinition formDefinition: formDefinitions) {
+        for (FormDefinition formDefinition : formDefinitions) {
             List<FormElement> formElements = formDefinition.getFormElements();
             modifyFormElements(formElements);
 
@@ -99,7 +99,7 @@ public class FormDefinitionImportServiceODK extends AbstractFormDefinitionImport
         formElements.addAll(additionalFields);
     }
 
-    private List<FormElement> addGeopointFields (FormElement formElement) {
+    private List<FormElement> addGeopointFields(FormElement formElement) {
         List<FormElement> formElements = new ArrayList<>();
         String name = formElement.getName();
         String type = formElement.getType();

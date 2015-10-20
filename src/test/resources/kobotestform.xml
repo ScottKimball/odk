@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms"
+        xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa"
+        >
     <h:head>
         <h:title>KoboTestform</h:title>
         <model>
@@ -26,7 +28,8 @@
             <bind nodeset="/KoboTestform/group_su8of31/group_rr5fo58/Age" required="true()" type="string"/>
             <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/KoboTestform/start" type="dateTime"/>
             <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/KoboTestform/end" type="dateTime"/>
-            <bind calculate="concat('uuid:', uuid())" nodeset="/KoboTestform/meta/instanceID" readonly="true()" type="string"/>
+            <bind calculate="concat('uuid:', uuid())" nodeset="/KoboTestform/meta/instanceID" readonly="true()"
+                  type="string"/>
         </model>
     </h:head>
     <h:body>

@@ -6,7 +6,6 @@ import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
-import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.builder.FormInstanceBuilder;
 
 import java.util.ArrayList;
@@ -31,10 +30,7 @@ public class FormInstanceBuilderTest {
 
         FormDefinition formDefinition = buildFormDefWithGroups();
         Map<String, Object> params = buildParams();
-        FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition,params,"instanceID");
-        FormInstance formInstance = builder.build();
-        System.out.println();
-
+        FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition, params, "instanceID");
 
     }
 
@@ -94,7 +90,7 @@ public class FormInstanceBuilderTest {
 
     }
 
-    private Map<String,Object> buildParams() throws Exception{
+    private Map<String, Object> buildParams() throws Exception {
         Map<String, Object> innerGroup = new HashMap<>();
         innerGroup.put(CHILD_1, "child 1");
         innerGroup.put(CHILD_2, "child 2");

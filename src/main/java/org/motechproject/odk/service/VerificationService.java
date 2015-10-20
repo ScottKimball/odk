@@ -6,7 +6,9 @@ import org.motechproject.odk.domain.Verification;
 public interface VerificationService {
 
     Verification verifyKobo(Configuration configuration);
+
     Verification verifyOna(Configuration configuration);
+
     Verification verifyOdk(Configuration configuration);
 
 

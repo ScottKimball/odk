@@ -1,13 +1,9 @@
 package org.motechproject.odk.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 import org.motechproject.odk.constant.FieldTypeConstants;
 
-import javax.jdo.annotations.FetchGroup;
-import javax.jdo.annotations.FetchPlan;
-import javax.jdo.annotations.Persistent;
 import java.util.List;
 
 @Entity
@@ -37,9 +33,10 @@ public class FormElement {
         this.partOfRepeatGroup = partOfRepeatGroup;
     }
 
-    public FormElement () {}
+    public FormElement() {
+    }
 
-    public boolean hasChildren () {
+    public boolean hasChildren() {
         return children != null;
     }
 

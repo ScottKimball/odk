@@ -1,6 +1,9 @@
 package org.motechproject.odk.constant;
 
-public class ODKConstants {
+public final class ODKConstants {
+
+    private ODKConstants() { }
+
     public static final String META_INSTANCE_ID = "*meta-instance-id*";
     public static final String META_MODEL_VERSION = "*meta-model-version*";
     public static final String META_UI_VERSION = "*meta-ui-version*";

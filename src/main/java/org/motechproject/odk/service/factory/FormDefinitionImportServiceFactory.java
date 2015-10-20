@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 public class FormDefinitionImportServiceFactory {
 
     @Autowired
-    FormDefinitionImportServiceODK formDefinitionImportServiceODK;
+    private FormDefinitionImportServiceODK formDefinitionImportServiceODK;
 
     @Autowired
-    FormDefinitionImportServiceOna formDefinitionImportServiceOna;
+    private FormDefinitionImportServiceOna formDefinitionImportServiceOna;
 
     @Autowired
-    FormDefinitionImportServiceKobo formDefinitionImportServiceKobo;
+    private FormDefinitionImportServiceKobo formDefinitionImportServiceKobo;
 
 
-    public FormDefinitionImportService getService (ConfigurationType type) {
+    public FormDefinitionImportService getService(ConfigurationType type) {
 
         switch (type) {
             case ODK:

@@ -19,32 +19,29 @@ import java.util.Map;
 public class EventHandler {
 
     @Autowired
-    FormDefinitionService formDefinitionService;
+    private FormDefinitionService formDefinitionService;
 
     @Autowired
-    FormInstanceService formInstanceService;
+    private FormInstanceService formInstanceService;
 
 
     @MotechListener(subjects = EventSubjects.PERSIST_FORM_INSTANCE)
     public void handlePersistForm(MotechEvent event) {
-        Map<String,Object> params = event.getParameters();
+        Map<String, Object> params = event.getParameters();
         String title = (String) params.get(EventParameters.FORM_TITLE);
         String configName = (String) params.get(EventParameters.CONFIGURATION_NAME);
         String instanceId = (String) params.get(EventParameters.INSTANCE_ID);
 
         if (title != null && configName != null && instanceId != null) {
-            FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName,title);
+            FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName, title);
 
             if (formDefinition != null) {
-                FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition,params, instanceId);
+                FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition, params, instanceId);
                 FormInstance instance = builder.build();
                 formInstanceService.create(instance);
             }
         }
     }
-
-
-
 
 
 }

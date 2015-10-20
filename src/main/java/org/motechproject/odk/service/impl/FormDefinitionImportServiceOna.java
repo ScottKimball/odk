@@ -4,6 +4,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.osgi.services.HttpClientBuilderFactory;
 import org.apache.http.util.EntityUtils;
+import org.motechproject.odk.constant.FieldTypeConstants;
+import org.motechproject.odk.constant.OnaConstants;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
@@ -12,8 +14,6 @@ import org.motechproject.odk.service.AbstractFormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionImportService;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.TasksService;
-import org.motechproject.odk.constant.FieldTypeConstants;
-import org.motechproject.odk.constant.OnaConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.xml.SimpleNamespaceContext;
@@ -42,7 +42,7 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
 
     @Override
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
-        HttpGet request = new HttpGet(configuration.getUrl() + "/" + configuration.getUsername()  + FORM_LIST_PATH);
+        HttpGet request = new HttpGet(configuration.getUrl() + "/" + configuration.getUsername() + FORM_LIST_PATH);
         HttpResponse response = getClient().execute(request);
         String responseBody = EntityUtils.toString(response.getEntity());
         return parseToUrlList(responseBody);
@@ -50,7 +50,7 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
 
     @Override
     protected void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions) {
-        for (FormDefinition formDefinition: formDefinitions) {
+        for (FormDefinition formDefinition : formDefinitions) {
             List<FormElement> formElements = formDefinition.getFormElements();
 
             for (FormElement formElement : formElements) {
@@ -88,7 +88,7 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();
         SimpleNamespaceContext namespaces = new SimpleNamespaceContext();
-        Map<String,String> namespaceMap = new HashMap<String, String>();
+        Map<String, String> namespaceMap = new HashMap<String, String>();
         namespaceMap.put("x", "http://openrosa.org/xforms/xformsList");
         namespaces.setBindings(namespaceMap);
         xPath.setNamespaceContext(namespaces);

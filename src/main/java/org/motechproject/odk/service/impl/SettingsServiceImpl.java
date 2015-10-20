@@ -3,10 +3,8 @@ package org.motechproject.odk.service.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
-import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.motechproject.odk.domain.Configuration;
-import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.domain.Settings;
 import org.motechproject.odk.service.SettingsService;
 import org.motechproject.server.config.SettingsFacade;
@@ -15,8 +13,6 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -81,8 +77,7 @@ public class SettingsServiceImpl implements SettingsService {
             if (settings == null) {
                 settings = new Settings();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new JsonIOException("Malformed " + CONFIG_FILE_NAME + " file? " + e.toString(), e);
         }
     }

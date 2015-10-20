@@ -2,8 +2,8 @@ package org.motechproject.odk.parser.factory;
 
 import org.motechproject.odk.domain.ConfigurationType;
 import org.motechproject.odk.parser.XformParser;
-import org.motechproject.odk.parser.impl.XformParserODK;
 import org.motechproject.odk.parser.impl.XformParserKobo;
+import org.motechproject.odk.parser.impl.XformParserODK;
 
 public class XformParserFactory {
 

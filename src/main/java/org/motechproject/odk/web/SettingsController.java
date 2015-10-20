@@ -20,13 +20,13 @@ import java.util.List;
 public class SettingsController {
 
     @Autowired
-    SettingsService settingsService;
+    private SettingsService settingsService;
 
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Configuration> getConfigs() {
-        return  settingsService.getAllConfigs();
+        return settingsService.getAllConfigs();
     }
 
     @RequestMapping(method = RequestMethod.POST)

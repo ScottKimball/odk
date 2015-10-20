@@ -29,7 +29,7 @@ public class ActionBuilder {
     public List<ActionEventRequest> build() {
         List<ActionEventRequest> actionEventRequests = new ArrayList<>();
 
-        for(FormDefinition formDefinition : formDefinitions) {
+        for (FormDefinition formDefinition : formDefinitions) {
 
             SortedSet<ActionParameterRequest> actionParameterRequests = createParameterRequestsForFormDef(formDefinition);
             ActionEventRequestBuilder builder = new ActionEventRequestBuilder();
@@ -37,7 +37,7 @@ public class ActionBuilder {
                     .setDisplayName(DisplayNames.SAVE_FORM_INSTANCE + " [Configuration : " + formDefinition.getConfigurationName() + "]" + "[Title: " + formDefinition.getTitle() + "]")
                     .setActionParameters(actionParameterRequests)
                     .setSubject(EventSubjects.PERSIST_FORM_INSTANCE)
-                    .setName(formDefinition.getConfigurationName() + "_"  + formDefinition.getTitle() + "_" + EventSubjects.PERSIST_FORM_INSTANCE);
+                    .setName(formDefinition.getConfigurationName() + "_" + formDefinition.getTitle() + "_" + EventSubjects.PERSIST_FORM_INSTANCE);
             actionEventRequests.add(builder.createActionEventRequest());
         }
 
@@ -45,11 +45,10 @@ public class ActionBuilder {
     }
 
     private SortedSet<ActionParameterRequest> createParameterRequestsForFormDef(FormDefinition formDefinition) {
-        ;
         SortedSet<ActionParameterRequest> actionParameterRequests = createRequiredFields();
         List<FormElement> formElements = formDefinition.getFormElements();
         ActionParameterRequestBuilder builder;
-        for(FormElement formElement : formElements) {
+        for (FormElement formElement : formElements) {
             builder = new ActionParameterRequestBuilder();
             builder
                     .setDisplayName(formElement.getLabel())

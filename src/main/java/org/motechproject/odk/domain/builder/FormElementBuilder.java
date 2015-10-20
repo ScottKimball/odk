@@ -40,6 +40,6 @@ public class FormElementBuilder {
 
 
     public FormElement createFormElement() {
-        return new FormElement(name,label,type,children,partOfRepeatGroup);
+        return new FormElement(name, label, type, children, partOfRepeatGroup);
     }
 }

@@ -4,8 +4,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.List;
 
-public class EventBuilderUtils {
+public final class EventBuilderUtils {
 
+    private EventBuilderUtils() { }
 
     public static String formatStringList(Object value) {
         String s = (String) value;

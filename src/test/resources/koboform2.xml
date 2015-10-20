@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root><?xml version="1.0" encoding="utf-8"?>
-    <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <h:html xmlns="http://www.w3.org/2002/xforms"
+            xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa"
+            >
         <h:head>
             <h:title>KoboForm2</h:title>
             <model>
@@ -34,10 +36,14 @@
                 <bind nodeset="/uploaded_form_x08lao/group_ok5jl66/Text_001" required="true()" type="string"/>
                 <bind nodeset="/uploaded_form_x08lao/group_ok5jl66/Date" required="true()" type="date"/>
                 <bind nodeset="/uploaded_form_x08lao/Number" required="true()" type="int"/>
-                <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/uploaded_form_x08lao/start" type="dateTime"/>
-                <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/uploaded_form_x08lao/end" type="dateTime"/>
-                <bind calculate="concat('uuid:', uuid())" nodeset="/uploaded_form_x08lao/meta/instanceID" readonly="true()" type="string"/>
-                <bind calculate="'83db7cc30e1349b3a3e316e0f3eb8f1d'" nodeset="/uploaded_form_x08lao/formhub/uuid" type="string"/>
+                <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/uploaded_form_x08lao/start"
+                      type="dateTime"/>
+                <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/uploaded_form_x08lao/end"
+                      type="dateTime"/>
+                <bind calculate="concat('uuid:', uuid())" nodeset="/uploaded_form_x08lao/meta/instanceID"
+                      readonly="true()" type="string"/>
+                <bind calculate="'83db7cc30e1349b3a3e316e0f3eb8f1d'" nodeset="/uploaded_form_x08lao/formhub/uuid"
+                      type="string"/>
             </model>
         </h:head>
         <h:body>

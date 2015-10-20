@@ -18,7 +18,7 @@ import java.util.List;
 public class FormDefinitionController {
 
     @Autowired
-    FormDefinitionService formDefinitionService;
+    private FormDefinitionService formDefinitionService;
 
 
     @RequestMapping(value = "/{configName}")

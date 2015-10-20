@@ -1,6 +1,9 @@
 package org.motechproject.odk.constant;
 
-public class OnaConstants {
+public final class OnaConstants {
+
+    private OnaConstants() { }
+
     public static final String NOTES = "_notes";
     public static final String TAGS = "_tags";
     public static final String XFORM_ID_STRING = "_xform_id_string";

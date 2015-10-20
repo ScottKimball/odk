@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface SettingsService {
 
-    Configuration getConfigByName (String name);
+    Configuration getConfigByName(String name);
+
     void addOrUpdateConfiguration(Configuration configuration);
-    void removeConfiguration (String configName);
+
+    void removeConfiguration(String configName);
+
     List<Configuration> getAllConfigs();
 }

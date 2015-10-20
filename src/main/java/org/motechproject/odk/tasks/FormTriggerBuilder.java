@@ -21,7 +21,7 @@ public class FormTriggerBuilder {
         this.formDefinitions = formDefinitions;
     }
 
-    public List<TriggerEventRequest> buildTriggers () {
+    public List<TriggerEventRequest> buildTriggers() {
         List<TriggerEventRequest> triggerEventRequests = new ArrayList<>();
 
 
@@ -29,7 +29,7 @@ public class FormTriggerBuilder {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
             TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.FORM_TRIGGER_DISPLAY_NAME + " [Configuration: " +
                     formDefinition.getConfigurationName() + "] " + "[Title: " + formDefinition.getTitle() + "]",
-                    EventSubjects.RECEIVED_FORM + "." +  formDefinition.getConfigurationName() + "." + formDefinition.getTitle(),null,eventParameterRequests);
+                    EventSubjects.RECEIVED_FORM + "." + formDefinition.getConfigurationName() + "." + formDefinition.getTitle(), null, eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }
 
@@ -63,13 +63,13 @@ public class FormTriggerBuilder {
 
     private TriggerEventRequest buildFailureEventTrigger() {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.CONFIGURATION_NAME,EventParameters.CONFIGURATION_NAME,TasksDataTypes.UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.EXCEPTION,EventParameters.EXCEPTION,TasksDataTypes.UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE,EventParameters.FORM_TITLE,TasksDataTypes.UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.MESSAGE,EventParameters.MESSAGE,TasksDataTypes.UNICODE));
-        eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT,EventParameters.JSON_CONTENT, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.CONFIGURATION_NAME, EventParameters.CONFIGURATION_NAME, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.EXCEPTION, EventParameters.EXCEPTION, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE, EventParameters.FORM_TITLE, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.MESSAGE, EventParameters.MESSAGE, TasksDataTypes.UNICODE));
+        eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT, EventParameters.JSON_CONTENT, TasksDataTypes.UNICODE));
 
-        return new TriggerEventRequest(DisplayNames.FORM_FAIL,EventSubjects.FORM_FAIL,null,eventParameterRequests);
+        return new TriggerEventRequest(DisplayNames.FORM_FAIL, EventSubjects.FORM_FAIL, null, eventParameterRequests);
     }
 
 }
