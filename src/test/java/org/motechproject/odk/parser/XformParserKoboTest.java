@@ -40,8 +40,6 @@ public class XformParserKoboTest {
                 .replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "");
 
         FormDefinition formDefinition = new XformParserKobo().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
+
     }
 }

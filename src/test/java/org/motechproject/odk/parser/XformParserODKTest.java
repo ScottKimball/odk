@@ -32,10 +32,7 @@ public class XformParserODKTest {
 
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
-
+        
     }
 
     @Test
@@ -46,9 +43,7 @@ public class XformParserODKTest {
         File f = new File(getClass().getResource("/test.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
+
     }
 
     @Test
@@ -59,9 +54,7 @@ public class XformParserODKTest {
         File f = new File(getClass().getResource("/demoForm.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
+
     }
 
     @Test
