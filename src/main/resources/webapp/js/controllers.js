@@ -81,6 +81,7 @@
                     }, function (err) {
                         error(err)
                     });
+                    break;
 
                 case "ONA":
                     Verify.ona($scope.selectedConfig, function (data) {
@@ -88,6 +89,7 @@
                     }, function (err) {
                         error(err)
                     });
+                    break;
 
                 case "ODK":
                     Verify.odk($scope.selectedConfig, function (data) {
