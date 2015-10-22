@@ -48,7 +48,6 @@ public class FormElement {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -60,7 +59,6 @@ public class FormElement {
     public void setType(String type) {
         this.type = type;
     }
-
 
     public List<FormElement> getChildren() {
         return children;
