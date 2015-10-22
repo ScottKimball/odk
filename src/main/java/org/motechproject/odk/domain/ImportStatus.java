@@ -1,5 +1,8 @@
 package org.motechproject.odk.domain;
 
+/**
+ * Represents the status of a form definition import.
+ */
 public class ImportStatus {
 
     private boolean imported;

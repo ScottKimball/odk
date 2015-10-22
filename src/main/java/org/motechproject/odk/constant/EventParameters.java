@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values for event parameters
+ */
 public final class EventParameters {
 
 

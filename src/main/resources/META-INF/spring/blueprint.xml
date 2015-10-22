@@ -32,7 +32,7 @@
 
     <osgi:reference id="eventRelay" interface="org.motechproject.event.listener.EventRelay"/>
 
-    <osgi:service ref="odkSettingsService" interface="org.motechproject.odk.service.SettingsService"/>
+    <osgi:service ref="odkConfigurationService" interface="org.motechproject.odk.service.ConfigurationService"/>
 
 
 </beans>

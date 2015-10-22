@@ -8,6 +8,9 @@ import org.motechproject.odk.service.impl.FormDefinitionImportServiceOna;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory class for {@link FormDefinitionImportService}
+ */
 
 @Component
 public class FormDefinitionImportServiceFactory {
@@ -22,6 +25,11 @@ public class FormDefinitionImportServiceFactory {
     private FormDefinitionImportServiceKobo formDefinitionImportServiceKobo;
 
 
+    /**
+     * Returns the appropriate {@link FormDefinitionImportService} bean for the configuration type.
+     * @param type The {@link ConfigurationType} associated with the form definition.
+     * @return {@link FormDefinitionImportService}
+     */
     public FormDefinitionImportService getService(ConfigurationType type) {
 
         switch (type) {

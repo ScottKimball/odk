@@ -32,7 +32,7 @@ public class XformParserODKTest {
 
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-        
+
     }
 
     @Test

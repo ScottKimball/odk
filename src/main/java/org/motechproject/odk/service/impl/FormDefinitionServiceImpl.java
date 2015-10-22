@@ -14,10 +14,6 @@ public class FormDefinitionServiceImpl implements FormDefinitionService {
     @Autowired
     private FormDefinitionDataService formDefinitionDataService;
 
-    @Override
-    public FormDefinition findByTitle(String title) {
-        return formDefinitionDataService.byTitle(title);
-    }
 
     @Override
     public void create(FormDefinition formDefinition) {

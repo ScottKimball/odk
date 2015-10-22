@@ -3,6 +3,9 @@ package org.motechproject.odk.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains all of the configurations for the ODK module.
+ */
 public class Settings {
 
     private List<Configuration> configurations;

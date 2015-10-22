@@ -10,7 +10,7 @@ import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.event.builder.EventBuilder;
 import org.motechproject.odk.event.factory.FormEventBuilderFactory;
 import org.motechproject.odk.service.FormDefinitionService;
-import org.motechproject.odk.service.SettingsService;
+import org.motechproject.odk.service.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller that maps to /forms. Receives forms from external applications and publishes the appropriate events
+ * upon successful reciept and processing of the form.
+ */
 @Controller
 @RequestMapping(value = "/forms")
 public class FormController {
@@ -33,7 +37,7 @@ public class FormController {
     private static final Logger LOGGER = LoggerFactory.getLogger(FormController.class);
 
     @Autowired
-    private SettingsService settingsService;
+    private ConfigurationService configurationService;
 
     @Autowired
     private FormDefinitionService formDefinitionService;
@@ -42,12 +46,18 @@ public class FormController {
     private EventRelay eventRelay;
 
 
+    /**
+     * Recieves the form data from the external application and publishes the appropriate events.
+     * @param config The name of the {@link Configuration}
+     * @param form The title of the form.
+     * @param body The JSON representation of the form instance data.
+     */
     @RequestMapping(value = "/{config}/{form}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void receiveForm(@PathVariable("config") String config, @PathVariable("form") String form, @RequestBody String body) {
         LOGGER.debug("Received form: " + form + " Configuration: " + config);
 
-        Configuration configuration = settingsService.getConfigByName(config);
+        Configuration configuration = configurationService.getConfigByName(config);
         FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(config, form);
 
         if (configuration == null) {

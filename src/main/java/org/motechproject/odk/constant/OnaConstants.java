@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values common to Ona JSON form publication
+ */
 public final class OnaConstants {
 
     private OnaConstants() { }

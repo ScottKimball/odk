@@ -5,6 +5,9 @@ import org.motechproject.mds.annotations.Field;
 
 import java.util.List;
 
+/**
+ * Represents a form definition
+ */
 @Entity
 public class FormDefinition {
 

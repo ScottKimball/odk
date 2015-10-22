@@ -2,6 +2,10 @@ package org.motechproject.odk.domain;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+/**
+ * Contains the url for a particular KoboToolBox form.
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KoboFormInfo {
 

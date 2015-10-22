@@ -6,6 +6,9 @@ import org.motechproject.mds.annotations.Field;
 import javax.jdo.annotations.Unique;
 import java.util.List;
 
+/**
+ * Represents an instance of a form.
+ */
 @Entity
 public class FormInstance {
 

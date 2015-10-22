@@ -3,7 +3,9 @@ package org.motechproject.odk.domain;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
-
+/**
+ * Base class for a value in a form instance.
+ */
 @Entity
 public class FormValue {
 

@@ -44,7 +44,6 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
 
     @Override
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
-
         HttpGet request = new HttpGet(buildFormsQuery(configuration));
         request.addHeader(generateBasicAuthHeader(request, configuration));
         HttpResponse response = getClient().execute(request);
@@ -75,7 +74,6 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
                 if (!formElement.isPartOfRepeatGroup()) {
                     alterFormElementName(formElement);
                 }
-
             }
             formElements.add(new FormElementBuilder().setName(OnaConstants.NOTES).setLabel(OnaConstants.NOTES).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.UUID).setLabel(OnaConstants.UUID).setType(FieldTypeConstants.STRING).createFormElement());
@@ -109,12 +107,11 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
     @Override
     protected List<String> parseToUrlList(String responseBody) throws Exception {
         List<KoboFormInfo> koboFormInfoList = objectMapper.readValue(responseBody, type);
-
         List<String> urls = new ArrayList<>();
+
         for (KoboFormInfo koboFormInfo : koboFormInfoList) {
             urls.add(koboFormInfo.getUrl());
         }
-
         return urls;
     }
 

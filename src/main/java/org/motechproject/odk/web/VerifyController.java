@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Controller that maps to /verify. Allows users to verfiy that their configuration can
+ * connect to an external application.
+ */
 @Controller
 @RequestMapping("/verify")
 public class VerifyController {
@@ -20,6 +24,11 @@ public class VerifyController {
     @Autowired
     private VerificationService verificationService;
 
+    /**
+     * Verifies that a {@link Configuration} can connect to a KoboToolbox implementation
+     * @param configuration {@link Configuration}
+     * @return {@link Verification} True if successful; false otherwise.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/kobo", method = RequestMethod.POST)
@@ -28,6 +37,11 @@ public class VerifyController {
     }
 
 
+    /**
+     * Verifies that a {@link Configuration} can connect to an Ona implementation
+     * @param configuration {@link Configuration}
+     * @return {@link Verification} True if successful; false otherwise.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/ona", method = RequestMethod.POST)
@@ -35,6 +49,11 @@ public class VerifyController {
         return verificationService.verifyOna(configuration);
     }
 
+    /**
+     * Verifies that a {@link Configuration} can connect to an ODK implementation
+     * @param configuration {@link Configuration}
+     * @return {@link Verification} True if successful; false otherwise.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/odk", method = RequestMethod.POST)

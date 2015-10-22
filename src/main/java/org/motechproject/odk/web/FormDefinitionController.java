@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
+/**
+ * Controller that maps to /formDefinitions. Provides an API endpoint to access form definition records.
+ */
 @Controller
 @RequestMapping("/formDefinitions")
 public class FormDefinitionController {
@@ -20,7 +23,11 @@ public class FormDefinitionController {
     @Autowired
     private FormDefinitionService formDefinitionService;
 
-
+    /**
+     * Finds all form definitions by configuration name.
+     * @param configName The name of the configuration.
+     * @return A list of {@link FormDefinition}
+     */
     @RequestMapping(value = "/{configName}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
@@ -29,6 +36,11 @@ public class FormDefinitionController {
         return formDefinitions;
     }
 
+    /**
+     * Gets a particular form uniquely identified by the ID.
+     * @param id The ID of the form.
+     * @return {@link FormDefinition}
+     */
     @RequestMapping("/formdefinition/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)

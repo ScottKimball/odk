@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values for all Tasks data types
+ */
 public final class TasksDataTypes {
 
     private TasksDataTypes() { }

@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values for event subject names
+ */
 public final class EventSubjects {
 
     private EventSubjects() { }

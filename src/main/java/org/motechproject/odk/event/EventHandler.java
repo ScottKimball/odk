@@ -15,6 +15,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+/**
+ * This handles any incoming {@link org.motechproject.event.MotechEvent} that contains event subjects
+ * relevant to the module.
+ */
+
 @Component
 public class EventHandler {
 
@@ -25,6 +30,10 @@ public class EventHandler {
     private FormInstanceService formInstanceService;
 
 
+    /**
+     * Creates {@link FormInstance} from the event payload and saves it.
+     * @param event {@link MotechEvent}
+     */
     @MotechListener(subjects = EventSubjects.PERSIST_FORM_INSTANCE)
     public void handlePersistForm(MotechEvent event) {
         Map<String, Object> params = event.getParameters();

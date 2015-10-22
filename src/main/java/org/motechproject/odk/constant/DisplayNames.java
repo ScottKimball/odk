@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values for display names in Tasks
+ */
 public final class DisplayNames {
 
     private DisplayNames() { }

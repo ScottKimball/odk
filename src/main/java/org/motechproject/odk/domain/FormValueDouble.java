@@ -3,6 +3,9 @@ package org.motechproject.odk.domain;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
+/**
+ * Represents a double value in a form instance
+ */
 @Entity
 public class FormValueDouble extends FormValue {
 

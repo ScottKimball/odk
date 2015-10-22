@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Component
 public abstract class AbstractFormDefinitionImportService implements FormDefinitionImportService {
 
@@ -42,6 +41,9 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         this.formDefinitionService = formDefinitionService;
     }
 
+    /**
+     * Template method for importing form definitions.
+     */
     @Override
     public ImportStatus importForms(Configuration config) {
 
@@ -60,15 +62,31 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         }
     }
 
+    /**
+     * Hook method that may be overridden by an implementing subclass. Parses a list of XML form definitions and
+     * returns a list of {@link FormDefinition}
+     * @param xmlFormDefinitions a List of XML form definitions
+     * @param configuration The {@link Configuration} associated with the form defintions
+     * @return A list of {@link FormDefinition}
+     * @throws Exception If form definitions are malformed.
+     */
     protected List<FormDefinition> parseXmlFormDefinitions(List<String> xmlFormDefinitions, Configuration configuration) throws Exception {
         List<FormDefinition> formDefinitions = new ArrayList<>();
         XformParser parser = new XformParserFactory().getParser(configuration.getType());
+
         for (String def : xmlFormDefinitions) {
             formDefinitions.add(parser.parse(def, configuration.getName()));
         }
         return formDefinitions;
     }
 
+    /**
+     * Hook method that may be overridden by an implementing subclass. Makes an HTTP request to the external
+     * application and returns a list of URLs for the form definitions.
+     * @param configuration {@link Configuration}
+     * @return A list of strings containing the URLs for each form definition.
+     * @throws Exception If HTTP request fails or returns a malformed XML list of URLs.
+     */
     protected List<String> getFormUrls(Configuration configuration) throws Exception {
         HttpGet request = new HttpGet(configuration.getUrl() + FORM_LIST_PATH);
         HttpResponse response = client.execute(request);
@@ -76,6 +94,15 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
         return parseToUrlList(responseBody);
     }
 
+    /**
+     * Hook method that may be overriden by an implementing subclass. For each URL in the list of
+     * URLs, this makes an HTTP request to the external application to fetch an XML form definition. This returns
+     * a list of XML form definitions.
+     * @param formUrls A list of URLs for each form definition.
+     * @param configuration {@link Configuration}
+     * @return A list of XML form definitions represented as a list of strings.
+     * @throws Exception If any of the HTTP requests fail.
+     */
     protected List<String> getXmlFormDefinitions(List<String> formUrls, Configuration configuration) throws Exception {
         List<String> formDefinitions = new ArrayList<>();
 
@@ -91,6 +118,7 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     protected Header generateBasicAuthHeader(HttpUriRequest request, Configuration configuration) {
         Header basicAuthHeader;
         BasicScheme basicScheme = new BasicScheme();
+
         try {
             basicAuthHeader = basicScheme.authenticate(
                     new UsernamePasswordCredentials(configuration.getUsername(), configuration.getPassword()),
@@ -111,8 +139,20 @@ public abstract class AbstractFormDefinitionImportService implements FormDefinit
     }
 
 
+    /**
+     * Hook method that must be overridden by an implementing subclass. Modifies the form definition based on application
+     * specific details
+     * @param formDefinitions A list of form definitions associated with a configuration.
+     */
     protected abstract void modifyFormDefinitionForImplementation(List<FormDefinition> formDefinitions);
 
+    /**
+     * Hook method that must be overridden by an implementing subclass. Parses the response from the application
+     * and returns a list of strings representing the URLs for each form definition.
+     * @param responseBody
+     * @return
+     * @throws Exception
+     */
     protected abstract List<String> parseToUrlList(String responseBody) throws Exception;
 
     protected HttpClient getClient() {

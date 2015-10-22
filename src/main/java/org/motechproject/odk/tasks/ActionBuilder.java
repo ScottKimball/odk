@@ -16,10 +16,14 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Builds a list of {@link ActionEventRequest} from a list of {@link FormDefinition}
+ */
 public class ActionBuilder {
 
     private List<FormDefinition> formDefinitions;
     private int count;
+
 
     public ActionBuilder(List<FormDefinition> formDefinitions) {
         this.count = 0;
@@ -30,7 +34,6 @@ public class ActionBuilder {
         List<ActionEventRequest> actionEventRequests = new ArrayList<>();
 
         for (FormDefinition formDefinition : formDefinitions) {
-
             SortedSet<ActionParameterRequest> actionParameterRequests = createParameterRequestsForFormDef(formDefinition);
             ActionEventRequestBuilder builder = new ActionEventRequestBuilder();
             builder
@@ -40,7 +43,6 @@ public class ActionBuilder {
                     .setName(formDefinition.getConfigurationName() + "_" + formDefinition.getTitle() + "_" + EventSubjects.PERSIST_FORM_INSTANCE);
             actionEventRequests.add(builder.createActionEventRequest());
         }
-
         return actionEventRequests;
     }
 
@@ -48,6 +50,7 @@ public class ActionBuilder {
         SortedSet<ActionParameterRequest> actionParameterRequests = createRequiredFields();
         List<FormElement> formElements = formDefinition.getFormElements();
         ActionParameterRequestBuilder builder;
+
         for (FormElement formElement : formElements) {
             builder = new ActionParameterRequestBuilder();
             builder
@@ -57,7 +60,6 @@ public class ActionBuilder {
                     .setType(TypeMapper.getType(formElement.getType()));
             actionParameterRequests.add(builder.createActionParameterRequest());
         }
-
         return actionParameterRequests;
     }
 

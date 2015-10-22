@@ -6,6 +6,10 @@ import org.motechproject.odk.constant.FieldTypeConstants;
 
 import java.util.List;
 
+/**
+ * Represents an element in a form definition.
+ */
+
 @Entity
 public class FormElement {
 

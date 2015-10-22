@@ -4,7 +4,6 @@
     /* Controllers */
     var controllers = angular.module('odk.controllers', []);
 
-
     controllers.controller('SettingsCtrl', function ($scope, $timeout, Config, Verify) {
 
         $scope.saveSuccess = false;

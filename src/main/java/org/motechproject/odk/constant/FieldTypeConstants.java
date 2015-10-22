@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values for Openrosa field types
+ */
 public final class FieldTypeConstants {
 
     private FieldTypeConstants() { }

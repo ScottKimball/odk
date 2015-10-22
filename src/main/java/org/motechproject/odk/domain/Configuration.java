@@ -1,6 +1,9 @@
 package org.motechproject.odk.domain;
 
 
+/**
+ * Domain entity representation an ODK module user configuration.
+ */
 public class Configuration {
     private String url;
     private String username;

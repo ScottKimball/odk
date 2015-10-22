@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values common to KoboToolBox JSON form publication
+ */
 public final class KoboConstants {
 
     private KoboConstants() { }

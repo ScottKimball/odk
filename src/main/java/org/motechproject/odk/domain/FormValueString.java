@@ -3,6 +3,9 @@ package org.motechproject.odk.domain;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
+/**
+ * Represents a string value in a form instance
+ */
 @Entity
 public class FormValueString extends FormValue {
 

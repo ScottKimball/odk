@@ -4,6 +4,9 @@ import org.motechproject.odk.domain.FormElement;
 
 import java.util.List;
 
+/**
+ * Builder class for {@link org.motechproject.odk.domain.FormElement}
+ */
 public class FormElementBuilder {
 
     private String name;

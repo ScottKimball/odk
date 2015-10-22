@@ -5,6 +5,9 @@ import org.motechproject.mds.annotations.Field;
 
 import java.util.List;
 
+/**
+ * Represents a group value in a form instance
+ */
 @Entity
 public class FormValueGroup extends FormValue {
 

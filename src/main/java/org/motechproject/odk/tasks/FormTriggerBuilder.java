@@ -12,6 +12,9 @@ import org.motechproject.tasks.contract.TriggerEventRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Builds A list of {@link TriggerEventRequest } for full forms.
+ */
 public class FormTriggerBuilder {
 
     private List<FormDefinition> formDefinitions;
@@ -24,7 +27,6 @@ public class FormTriggerBuilder {
     public List<TriggerEventRequest> buildTriggers() {
         List<TriggerEventRequest> triggerEventRequests = new ArrayList<>();
 
-
         for (FormDefinition formDefinition : formDefinitions) {
             List<EventParameterRequest> eventParameterRequests = buildEventParameterRequests(formDefinition);
             TriggerEventRequest eventRequest = new TriggerEventRequest(DisplayNames.FORM_TRIGGER_DISPLAY_NAME + " [Configuration: " +
@@ -32,7 +34,6 @@ public class FormTriggerBuilder {
                     EventSubjects.RECEIVED_FORM + "." + formDefinition.getConfigurationName() + "." + formDefinition.getTitle(), null, eventParameterRequests);
             triggerEventRequests.add(eventRequest);
         }
-
         triggerEventRequests.add(buildFailureEventTrigger());
         return triggerEventRequests;
     }
@@ -40,9 +41,8 @@ public class FormTriggerBuilder {
 
     private List<EventParameterRequest> buildEventParameterRequests(FormDefinition formDefinition) {
         List<EventParameterRequest> eventParameterRequests = new ArrayList<>();
+
         for (FormElement formElement : formDefinition.getFormElements()) {
-
-
             if (!formElement.isPartOfRepeatGroup()) {
                 String type = TypeMapper.getType(formElement.getType());
                 EventParameterRequest request = new EventParameterRequest(formElement.getLabel(), formElement.getName(), type);
@@ -68,7 +68,6 @@ public class FormTriggerBuilder {
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.FORM_TITLE, EventParameters.FORM_TITLE, TasksDataTypes.UNICODE));
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.MESSAGE, EventParameters.MESSAGE, TasksDataTypes.UNICODE));
         eventParameterRequests.add(new EventParameterRequest(DisplayNames.JSON_CONTENT, EventParameters.JSON_CONTENT, TasksDataTypes.UNICODE));
-
         return new TriggerEventRequest(DisplayNames.FORM_FAIL, EventSubjects.FORM_FAIL, null, eventParameterRequests);
     }
 

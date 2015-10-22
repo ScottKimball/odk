@@ -2,6 +2,9 @@ package org.motechproject.odk.domain;
 
 import java.util.Map;
 
+/**
+ * Container for the form data in an ODK form publication.
+ */
 public class OdkJsonFormPublication {
 
     private String token;

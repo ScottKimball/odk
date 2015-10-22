@@ -3,6 +3,9 @@ package org.motechproject.odk.domain;
 import org.motechproject.mds.annotations.Entity;
 import org.motechproject.mds.annotations.Field;
 
+/**
+ * Represents an integer value in a form instance
+ */
 @Entity
 public class FormValueInteger extends FormValue {
 

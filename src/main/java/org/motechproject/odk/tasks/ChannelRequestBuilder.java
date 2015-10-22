@@ -9,12 +9,20 @@ import org.osgi.framework.BundleContext;
 
 import java.util.List;
 
+/**
+ * Builds a {@link ChannelRequest} for the module
+ */
 public class ChannelRequestBuilder {
 
     private BundleContext bundleContext;
     private List<FormDefinition> formDefinitions;
 
 
+    /**
+     * Constructor.
+     * @param bundleContext {@link BundleContext}
+     * @param formDefinitions List of {@link FormDefinition}
+     */
     public ChannelRequestBuilder(BundleContext bundleContext, List<FormDefinition> formDefinitions) {
         this.bundleContext = bundleContext;
         this.formDefinitions = formDefinitions;

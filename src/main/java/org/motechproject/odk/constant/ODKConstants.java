@@ -1,5 +1,8 @@
 package org.motechproject.odk.constant;
 
+/**
+ * Constant values common to ODK JSON form publication
+ */
 public final class ODKConstants {
 
     private ODKConstants() { }

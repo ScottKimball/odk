@@ -4,6 +4,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.List;
 
+/**
+ * Utility class for {@link org.motechproject.odk.event.builder.EventBuilder}
+ */
 public final class EventBuilderUtils {
 
     private EventBuilderUtils() { }

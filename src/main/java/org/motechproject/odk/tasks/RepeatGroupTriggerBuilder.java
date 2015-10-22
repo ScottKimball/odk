@@ -10,6 +10,11 @@ import org.motechproject.tasks.contract.TriggerEventRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+/**
+ * Builds A list of {@link TriggerEventRequest } for repeat groups.
+ */
 public class RepeatGroupTriggerBuilder {
 
     private List<FormDefinition> formDefinitions;

@@ -12,23 +12,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractEventBuilder implements EventBuilder {
 
+public abstract class AbstractEventBuilder implements EventBuilder {
 
     @Override
     public List<MotechEvent> createEvents(String json, FormDefinition formDefinition, Configuration configuration) throws Exception {
-
         Map<String, Object> data = getData(json);
         List<MotechEvent> events = createRepeatGroupEvents(data, formDefinition, configuration);
         events.add(createFormEvent(data, formDefinition, configuration));
-
         return events;
     }
 
     private MotechEvent createFormEvent(Map<String, Object> data, FormDefinition formDefinition, Configuration configuration) {
         Map<String, Object> params = new HashMap<>();
-
-
         for (FormElement formElement : formDefinition.getFormElements()) {
             Object value = data.get(formElement.getName());
             if (value != null) {
@@ -38,7 +34,6 @@ public abstract class AbstractEventBuilder implements EventBuilder {
 
         params.put(EventParameters.FORM_TITLE, formDefinition.getTitle());
         params.put(EventParameters.CONFIGURATION_NAME, configuration.getName());
-
         String subject = EventSubjects.RECEIVED_FORM + "." + configuration.getName() + "." + formDefinition.getTitle();
         return new MotechEvent(subject, params);
     }
@@ -46,7 +41,6 @@ public abstract class AbstractEventBuilder implements EventBuilder {
 
     private List<MotechEvent> createRepeatGroupEvents(Map<String, Object> data, FormDefinition formDefinition, Configuration configuration) {
         List<MotechEvent> events = new ArrayList<>();
-
         Map<String, Object> rootScopeValues = getRootScope(data, formDefinition);
         List<FormElement> repeatGroups = getNonNestedRepeatGroups(formDefinition);
 
@@ -76,6 +70,7 @@ public abstract class AbstractEventBuilder implements EventBuilder {
 
     private List<FormElement> getNonNestedRepeatGroups(FormDefinition formDefinition) {
         List<FormElement> formElements = new ArrayList<>();
+
         for (FormElement formElement : formDefinition.getFormElements()) {
             if (!formElement.isPartOfRepeatGroup() && formElement.isRepeatGroup()) {
                 formElements.add(formElement);
@@ -86,7 +81,6 @@ public abstract class AbstractEventBuilder implements EventBuilder {
 
     private void createRepeatGroupEvent(FormElement repeatGroup, List<MotechEvent> events, FormDefinition formDefinition, Map<String, Object> data,
                                         Map<String, Object> scope, String configName) {
-
         List<FormElement> childRepeatGroups = new ArrayList<>();
         Map<String, Object> localScope = new HashMap<>();
         localScope.putAll(scope);
@@ -104,13 +98,11 @@ public abstract class AbstractEventBuilder implements EventBuilder {
         events.add(new MotechEvent(subject, localScope));
 
         for (FormElement childRepeatGroup : childRepeatGroups) {
-
             List<Map<String, Object>> childRepeatGroupInstances = (List<Map<String, Object>>) data.get(childRepeatGroup.getName());
 
             for (Map<String, Object> childInstance : childRepeatGroupInstances) {
                 createRepeatGroupEvent(childRepeatGroup, events, formDefinition, childInstance, localScope, configName);
             }
-
         }
     }
 

@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Builder class for {@link org.motechproject.odk.domain.FormInstance}
+ */
 public class FormInstanceBuilder {
 
     private FormDefinition formDefinition;
@@ -29,6 +32,10 @@ public class FormInstanceBuilder {
         this.instanceId = instanceId;
     }
 
+    /**
+     * Builds a {@link FormInstance}
+     * @return {@link FormInstance}
+     */
     public FormInstance build() {
         List<FormValue> formValues = new ArrayList<>();
         List<FormElement> formElements = formDefinition.getFormElements();
