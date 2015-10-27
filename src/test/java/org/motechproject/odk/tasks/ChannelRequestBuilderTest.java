@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.motechproject.odk.domain.Configuration;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.parser.impl.XformParserODK;
+import org.motechproject.tasks.contract.ChannelRequest;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Version;
@@ -52,6 +53,8 @@ public class ChannelRequestBuilderTest {
         formDefinitions.add(formDefinition);
 
         ChannelRequestBuilder builder = new ChannelRequestBuilder(bundleContext, formDefinitions);
-        builder.build();
+        ChannelRequest channelRequest = builder.build();
+        System.out.println();
+
     }
 }

@@ -9,7 +9,7 @@ public final class EventParameters {
     private EventParameters() { }
 
     public static final String CONFIGURATION_NAME = "ConfigurationName";
-    public static final String FORM_TITLE = "formName";
+    public static final String FORM_TITLE = "formTitle";
     public static final String INSTANCE_ID = "instanceId";
     public static final String MESSAGE = "message";
     public static final String EXCEPTION = "exception";

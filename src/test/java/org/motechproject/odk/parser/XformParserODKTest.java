@@ -20,12 +20,12 @@ public class XformParserODKTest {
     public void testWidgets() throws Exception {
         Configuration configuration = new Configuration();
         configuration.setName("configName");
-
         File f = new File(getClass().getResource("/widgets.xml").getFile());
-
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserODK().parse(xml, configuration.getName());
-
+        assertEquals(formDefinition.getConfigurationName(),"configName");
+        assertEquals(formDefinition.getTitle(),"Widgets");
+        assertEquals(formDefinition.getFormElements().size(),57);
     }
 
 
