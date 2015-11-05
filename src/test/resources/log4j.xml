@@ -15,4 +15,9 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
+    <logger name="org.motechproject.odk">
+        <level value="ALL"/>
+    </logger>
+
+
 </log4j:configuration>

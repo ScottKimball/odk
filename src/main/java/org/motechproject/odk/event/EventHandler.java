@@ -10,6 +10,8 @@ import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.builder.FormInstanceBuilder;
 import org.motechproject.odk.service.FormDefinitionService;
 import org.motechproject.odk.service.FormInstanceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ import java.util.Map;
 
 @Component
 public class EventHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventHandler.class);
 
     @Autowired
     private FormDefinitionService formDefinitionService;
@@ -40,6 +44,7 @@ public class EventHandler {
         String title = (String) params.get(EventParameters.FORM_TITLE);
         String configName = (String) params.get(EventParameters.CONFIGURATION_NAME);
         String instanceId = (String) params.get(EventParameters.INSTANCE_ID);
+        LOGGER.debug("Saving form instance.Title: " + title + " ConfigName: " + configName + " Instance ID: " + instanceId);
 
         if (title != null && configName != null && instanceId != null) {
             FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName, title);

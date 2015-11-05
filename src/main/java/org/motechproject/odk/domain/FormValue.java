@@ -18,8 +18,6 @@ public class FormValue {
     @Field
     private String type;
 
-
-    /*MDS doesn't seem to like collections of abstract classes so this is the workaround*/
     protected FormValue(String name, String label, String type) {
         this.name = name;
         this.label = label;
@@ -51,5 +49,12 @@ public class FormValue {
         this.type = type;
     }
 
-
+    @Override
+    public String toString() {
+        return "FormValue{" +
+                "name='" + name + '\'' +
+                ", label='" + label + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

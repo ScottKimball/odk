@@ -27,4 +27,11 @@ public class FormValueGroup extends FormValue {
     public void setChildren(List<FormValue> children) {
         this.children = children;
     }
+
+    @Override
+    public String toString() {
+        return "FormValueGroup{" +
+                "children=" + children +
+                '}';
+    }
 }

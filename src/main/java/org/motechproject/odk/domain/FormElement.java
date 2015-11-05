@@ -87,4 +87,15 @@ public class FormElement {
     public void setPartOfRepeatGroup(boolean partOfRepeatGroup) {
         this.partOfRepeatGroup = partOfRepeatGroup;
     }
+
+    @Override
+    public String toString() {
+        return "FormElement{" +
+                "name='" + name + '\'' +
+                ", label='" + label + '\'' +
+                ", type='" + type + '\'' +
+                ", children=" + children +
+                ", partOfRepeatGroup=" + partOfRepeatGroup +
+                '}';
+    }
 }

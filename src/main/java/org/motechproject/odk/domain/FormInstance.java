@@ -22,7 +22,7 @@ public class FormInstance {
     @Unique
     private String instanceId;
 
-    @Field
+    @Field(name = "form_values")
     private List<FormValue> formValues;
 
     public FormInstance(String title, String configName, String instanceId) {
@@ -67,4 +67,13 @@ public class FormInstance {
     }
 
 
+    @Override
+    public String toString() {
+        return "FormInstance{" +
+                "title='" + title + '\'' +
+                ", configName='" + configName + '\'' +
+                ", instanceId='" + instanceId + '\'' +
+                ", formValues=" + formValues +
+                '}';
+    }
 }

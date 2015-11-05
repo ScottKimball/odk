@@ -9,6 +9,10 @@ import org.motechproject.odk.parser.impl.XformParserKobo;
 
 import java.io.File;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 public class XformParserKoboTest {
 
     @Test
@@ -19,27 +23,28 @@ public class XformParserKoboTest {
         File f = new File(getClass().getResource("/kobotestform.xml").getFile());
         String xml = FileUtils.readFileToString(f);
         FormDefinition formDefinition = new XformParserKobo().parse(xml, configuration.getName());
-        for (FormElement formElement : formDefinition.getFormElements()) {
-            System.out.println(formElement.getName() + "\t" + formElement.getType());
-        }
-    }
 
-    @Test
-    public void testKoboTestForm2() throws Exception {
-        Configuration configuration = new Configuration();
-        configuration.setName("configName");
+        assertNotNull(formDefinition);
+        assertEquals(formDefinition.getFormElements().size(), 5);
+        assertEquals(formDefinition.getFormElements().get(0).getName(), "/KoboTestform/meta/instanceID");
+        assertEquals(formDefinition.getFormElements().get(0).getLabel(),"/meta/instanceID");
 
+        assertEquals(formDefinition.getFormElements().get(1).getName(),"/KoboTestform/group_su8of31/group_rr5fo58/Age");
+        assertEquals(formDefinition.getFormElements().get(1).getLabel(),"/OuterGroup/InnerGroup/Age");
 
-        File f = new File(getClass().getResource("/koboform2.xml").getFile());
-        String xml = FileUtils.readFileToString(f);
+        assertEquals(formDefinition.getFormElements().get(2).getName(),"/KoboTestform/end");
+        assertEquals(formDefinition.getFormElements().get(2).getLabel(),"/end");
 
-        xml = xml.replace("&lt;", "<")
-                .replace("&gt;", ">")
-                .replace("<root><?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "")
-                .replace("\n</root>", "")
-                .replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n", "");
+        assertEquals(formDefinition.getFormElements().get(3).getName(),"/KoboTestform/group_rz3vx17");
+        assertEquals(formDefinition.getFormElements().get(3).getLabel(),"/Names");
+        assertTrue(formDefinition.getFormElements().get(3).hasChildren());
+        assertEquals(formDefinition.getFormElements().get(3).getChildren().get(0).getName(), "/KoboTestform/group_rz3vx17/First_Name");
+        assertEquals(formDefinition.getFormElements().get(3).getChildren().get(0).getLabel(), "/Names/First_Name");
+        assertEquals(formDefinition.getFormElements().get(3).getChildren().get(1).getName(), "/KoboTestform/group_rz3vx17/Last_Name");
+        assertEquals(formDefinition.getFormElements().get(3).getChildren().get(1).getLabel(), "/Names/Last_Name");
 
-        FormDefinition formDefinition = new XformParserKobo().parse(xml, configuration.getName());
+        assertEquals(formDefinition.getFormElements().get(4).getName(),"/KoboTestform/start");
+        assertEquals(formDefinition.getFormElements().get(4).getLabel(),"/start");
 
     }
 }

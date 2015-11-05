@@ -18,6 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,7 +55,8 @@ public class ChannelRequestBuilderTest {
 
         ChannelRequestBuilder builder = new ChannelRequestBuilder(bundleContext, formDefinitions);
         ChannelRequest channelRequest = builder.build();
-        System.out.println();
+        assertEquals(channelRequest.getActionTaskEvents().size(), 1);
+        assertEquals(channelRequest.getTriggerTaskEvents().size(), 4);
 
     }
 }
