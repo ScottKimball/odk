@@ -4,6 +4,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -20,11 +21,18 @@ public class VerificationServiceImpl implements VerificationService {
 
     private static final String FORM_LIST = "/formList";
     private static final int STATUS_OK = 200;
+    private static final int TIMEOUT = 2000;
 
     private HttpClient client;
+    private RequestConfig config;
 
     @Autowired
     public VerificationServiceImpl(HttpClientBuilderFactory httpClientBuilderFactory) {
+        this.config = RequestConfig.custom()
+                .setConnectionRequestTimeout(TIMEOUT)
+                .setConnectTimeout(TIMEOUT)
+                .setSocketTimeout(TIMEOUT)
+                .build();
         this.client = httpClientBuilderFactory.newBuilder().build();
 
     }
@@ -48,6 +56,7 @@ public class VerificationServiceImpl implements VerificationService {
     }
 
     private boolean executeRequest(HttpGet request) {
+        request.setConfig(config);
         try {
             HttpResponse response = client.execute(request);
             return response.getStatusLine().getStatusCode() == STATUS_OK;
