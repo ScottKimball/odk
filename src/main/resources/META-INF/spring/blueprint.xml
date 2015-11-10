@@ -32,9 +32,7 @@
     <osgi:reference id="eventRelay" interface="org.motechproject.event.listener.EventRelay"/>
     <osgi:service ref="eventHandler" interface="org.motechproject.odk.event.EventHandler"  />
 
-
-
-
+    <osgi:service ref="formController" interface="org.motechproject.odk.web.FormController"/>
     <osgi:service ref="odkConfigurationService" interface="org.motechproject.odk.service.ConfigurationService"/>
 
 

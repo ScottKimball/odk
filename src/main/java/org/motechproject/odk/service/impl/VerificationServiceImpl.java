@@ -26,6 +26,7 @@ public class VerificationServiceImpl implements VerificationService {
     @Autowired
     public VerificationServiceImpl(HttpClientBuilderFactory httpClientBuilderFactory) {
         this.client = httpClientBuilderFactory.newBuilder().build();
+
     }
 
     @Override

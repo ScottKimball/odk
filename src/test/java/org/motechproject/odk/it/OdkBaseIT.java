@@ -14,6 +14,7 @@ import org.motechproject.odk.parser.XformParser;
 import org.motechproject.odk.parser.impl.XformParserODK;
 import org.motechproject.odk.repository.FormDefinitionDataService;
 import org.motechproject.odk.repository.FormInstanceDataService;
+import org.motechproject.odk.service.ConfigurationService;
 import org.motechproject.testing.osgi.BasePaxIT;
 
 import javax.inject.Inject;
@@ -23,25 +24,35 @@ import java.util.List;
 public abstract class OdkBaseIT extends BasePaxIT {
 
     @Inject
-    protected FormDefinitionDataService formDefinitionDataService;
+    private FormDefinitionDataService formDefinitionDataService;
     @Inject
-    protected FormInstanceDataService formInstanceDataService;
+    private FormInstanceDataService formInstanceDataService;
+    @Inject
+    private ConfigurationService configurationService;
 
-    protected static final String CONFIG_NAME = "configName";
+    private Configuration configuration;
+    private String json;
+
+    protected static final String CONFIG_NAME = "ona";
     protected static final String TITLE = "ona_nested_repeats";
+
 
 
     @Before
     public void baseSetup() throws Exception {
         clearDb();
-        Configuration configuration = new Configuration();
-        configuration.setName(CONFIG_NAME);
-        configuration.setType(ConfigurationType.ONA);
+        configuration = new Configuration("url","motech","motech",CONFIG_NAME,ConfigurationType.ONA,true);
+        configurationService.addOrUpdateConfiguration(configuration);
         String xml;
 
         try (InputStream in = getClass().getClassLoader().getResourceAsStream("/ona_nested_repeats.xml")) {
             xml = IOUtils.toString(in);
         }
+
+        try (InputStream in = getClass().getClassLoader().getResourceAsStream("/ona_nested_repeats.json")) {
+            json = IOUtils.toString(in);
+        }
+
 
         XformParser parser = new XformParserODK();
         FormDefinition formDefinition = parser.parse(xml, configuration.getName());
@@ -90,5 +101,23 @@ public abstract class OdkBaseIT extends BasePaxIT {
                 alterFormElementName(child);
             }
         }
+    }
+
+    public FormDefinitionDataService getFormDefinitionDataService() {
+        return formDefinitionDataService;
+    }
+
+
+    public FormInstanceDataService getFormInstanceDataService() {
+        return formInstanceDataService;
+    }
+
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public String getJson() {
+        return json;
     }
 }

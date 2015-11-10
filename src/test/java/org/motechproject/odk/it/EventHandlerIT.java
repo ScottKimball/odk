@@ -39,31 +39,17 @@ public class EventHandlerIT extends OdkBaseIT {
 
     @Inject
     private EventHandler eventHandler;
-
-
     private List<MotechEvent> events;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(EventHandlerIT.class);
-
     private FormDefinition formDefinition;
-
 
     @Before
     public void setup() throws Exception {
-        Configuration configuration = new Configuration();
-        configuration.setName(CONFIG_NAME);
-        configuration.setType(ConfigurationType.ONA);
-        String json;
 
-        try (InputStream in = getClass().getClassLoader().getResourceAsStream("/ona_nested_repeats.json")) {
-            json = IOUtils.toString(in);
-        }
-
-        formDefinition = formDefinitionDataService.byConfigurationNameAndTitle(CONFIG_NAME,TITLE);
-        assertEquals(formDefinitionDataService.retrieveAll().size(),1);
+        formDefinition = getFormDefinitionDataService().byConfigurationNameAndTitle(CONFIG_NAME,TITLE);
+        assertEquals(getFormDefinitionDataService().retrieveAll().size(),1);
         assertNotNull(formDefinition);
 
-        events = new EventBuilderOna().createEvents(json,formDefinition,configuration);
+        events = new EventBuilderOna().createEvents(getJson(),formDefinition,getConfiguration());
     }
 
 
@@ -71,7 +57,7 @@ public class EventHandlerIT extends OdkBaseIT {
     public void testPersistFormNestedRepeats() throws Exception{
         MotechEvent persistEvent = events.get(events.size() - 1);
         eventHandler.handlePersistForm(persistEvent);
-        FormInstance instance = formInstanceDataService.byConfigNameAndTitle(formDefinition.getConfigurationName(), formDefinition.getTitle());
+        FormInstance instance = getFormInstanceDataService().byConfigNameAndTitle(formDefinition.getConfigurationName(), formDefinition.getTitle());
         assertNotNull(instance);
         assertEquals(persistEvent.getParameters().get(EventParameters.INSTANCE_ID), instance.getInstanceId());
         assertEquals(persistEvent.getParameters().get(EventParameters.CONFIGURATION_NAME), instance.getConfigName());

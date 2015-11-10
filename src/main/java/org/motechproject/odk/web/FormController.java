@@ -99,4 +99,9 @@ public class FormController {
         eventRelay.sendEventMessage(new MotechEvent(EventSubjects.FORM_FAIL, params));
     }
 
+
+    /*For testing*/
+    public void setEventRelay(EventRelay eventRelay) {
+        this.eventRelay = eventRelay;
+    }
 }
