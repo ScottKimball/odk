@@ -28,11 +28,10 @@
     <osgi:reference id="channelService" interface="org.motechproject.tasks.service.ChannelService"/>
     <osgi:reference id="formDefinitionDataService" interface="org.motechproject.odk.repository.FormDefinitionDataService"/>
     <osgi:reference id="formInstanceDataService" interface="org.motechproject.odk.repository.FormInstanceDataService"/>
-
     <osgi:reference id="eventRelay" interface="org.motechproject.event.listener.EventRelay"/>
-    <osgi:service ref="eventHandler" interface="org.motechproject.odk.event.EventHandler"  />
+    <osgi:reference id="eventListenerRegistryService" interface="org.motechproject.event.listener.EventListenerRegistryService"/>
 
-    <osgi:service ref="formController" interface="org.motechproject.odk.web.FormController"/>
+    <osgi:service ref="eventHandler" interface="org.motechproject.odk.event.EventHandler"  />
     <osgi:service ref="odkConfigurationService" interface="org.motechproject.odk.service.ConfigurationService"/>
 
 

@@ -80,6 +80,7 @@ public class FormController {
             List<MotechEvent> events = builder.createEvents(body, formDefinition, configuration);
 
             for (MotechEvent event : events) {
+                LOGGER.debug("Publishing event with subject : " + event.getSubject());
                 eventRelay.sendEventMessage(event);
             }
 
@@ -99,9 +100,4 @@ public class FormController {
         eventRelay.sendEventMessage(new MotechEvent(EventSubjects.FORM_FAIL, params));
     }
 
-
-    /*For testing*/
-    public void setEventRelay(EventRelay eventRelay) {
-        this.eventRelay = eventRelay;
-    }
 }
