@@ -81,10 +81,7 @@ public class FormDefinitionImportServiceKobo extends AbstractFormDefinitionImpor
             formElements.add(new FormElementBuilder().setName(OnaConstants.TAGS).setLabel(OnaConstants.TAGS).setType(FieldTypeConstants.STRING_ARRAY).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMITTED_BY).setLabel(OnaConstants.SUBMITTED_BY).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.XFORM_ID_STRING).setLabel(OnaConstants.XFORM_ID_STRING).setType(FieldTypeConstants.STRING).createFormElement());
-            formElements.add(new FormElementBuilder().setName(OnaConstants.FORMHUB_UUID).setLabel(OnaConstants.FORMHUB_UUID).setType(FieldTypeConstants.STRING).createFormElement());
-            formElements.add(new FormElementBuilder().setName(KoboConstants.END).setLabel(KoboConstants.END).setType(FieldTypeConstants.DATE_TIME).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMISSION_TIME).setLabel(OnaConstants.SUBMISSION_TIME).setType(FieldTypeConstants.DATE_TIME).createFormElement());
-            formElements.add(new FormElementBuilder().setName(KoboConstants.START).setLabel(KoboConstants.START).setType(FieldTypeConstants.DATE_TIME).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.GEOLOCATION).setLabel(OnaConstants.GEOLOCATION).setType(FieldTypeConstants.DOUBLE_ARRAY).createFormElement());
             formElements.add(new FormElementBuilder().setName(KoboConstants.USERFORM_ID).setLabel(KoboConstants.USERFORM_ID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.STATUS).setLabel(OnaConstants.STATUS).setType(FieldTypeConstants.STRING).createFormElement());

@@ -41,7 +41,7 @@ public class ActionBuilderTest {
         ActionEventRequest request = requests.get(0);
         assertEquals(request.getName(),"configName_nested_repeat_persist_form_instance");
         assertEquals(request.getSubject(),"persist_form_instance");
-        assertEquals(request.getActionParameters().size(),8);
+        assertEquals(request.getActionParameters().size(),7);
         Iterator<ActionParameterRequest> itr = request.getActionParameters().iterator();
 
         ActionParameterRequest parameter = itr.next();

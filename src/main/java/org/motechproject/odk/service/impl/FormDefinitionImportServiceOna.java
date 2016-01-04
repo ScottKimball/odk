@@ -64,7 +64,6 @@ public class FormDefinitionImportServiceOna extends AbstractFormDefinitionImport
             formElements.add(new FormElementBuilder().setName(OnaConstants.XFORM_ID_STRING).setLabel(OnaConstants.XFORM_ID_STRING).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.UUID).setLabel(OnaConstants.UUID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.STATUS).setLabel(OnaConstants.STATUS).setType(FieldTypeConstants.STRING).createFormElement());
-            formElements.add(new FormElementBuilder().setName(OnaConstants.FORMHUB_UUID).setLabel(OnaConstants.FORMHUB_UUID).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.SUBMISSION_TIME).setLabel(OnaConstants.SUBMISSION_TIME).setType(FieldTypeConstants.DATE_TIME).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.VERSION).setLabel(OnaConstants.VERSION).setType(FieldTypeConstants.STRING).createFormElement());
             formElements.add(new FormElementBuilder().setName(OnaConstants.GEOLOCATION).setLabel(OnaConstants.GEOLOCATION).setType(FieldTypeConstants.DOUBLE_ARRAY).createFormElement());

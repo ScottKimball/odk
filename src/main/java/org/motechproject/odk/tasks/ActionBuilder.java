@@ -52,13 +52,15 @@ public class ActionBuilder {
         ActionParameterRequestBuilder builder;
 
         for (FormElement formElement : formElements) {
-            builder = new ActionParameterRequestBuilder();
-            builder
-                    .setDisplayName(formElement.getLabel())
-                    .setKey(formElement.getName())
-                    .setOrder(count++)
-                    .setType(TypeMapper.getType(formElement.getType()));
-            actionParameterRequests.add(builder.createActionParameterRequest());
+            if (!formElement.isPartOfRepeatGroup()) {
+                builder = new ActionParameterRequestBuilder();
+                builder
+                        .setDisplayName(formElement.getLabel())
+                        .setKey(formElement.getName())
+                        .setOrder(count++)
+                        .setType(TypeMapper.getType(formElement.getType()));
+                actionParameterRequests.add(builder.createActionParameterRequest());
+            }
         }
         return actionParameterRequests;
     }
