@@ -42,11 +42,8 @@ public class FormControllerIT extends OdkBaseIT {
     private static final String MOCK_ID_1 = "id1";
     private static final String MOCK_ID_2 = "id2";
 
-
-
     @Inject
     private EventListenerRegistryService registry;
-
 
     @Before
     public void setUp() throws IOException, InterruptedException {
@@ -59,8 +56,6 @@ public class FormControllerIT extends OdkBaseIT {
 
         login();
     }
-
-
 
     @Test
     public void testNestedRepeats() throws Exception{
@@ -135,6 +130,5 @@ public class FormControllerIT extends OdkBaseIT {
 
     private String createEventSubject(String base, String suffix) {
         return base + "." + CONFIG_NAME + "." + TITLE + "." + suffix;
-
     }
 }

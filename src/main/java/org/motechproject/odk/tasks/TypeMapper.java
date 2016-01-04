@@ -22,7 +22,7 @@ public final class TypeMapper {
                 return TasksDataTypes.INTEGER;
 
             case FieldTypeConstants.DATE_TIME:
-                return TasksDataTypes.UNICODE;
+                return TasksDataTypes.DATE;
 
             case FieldTypeConstants.BOOLEAN:
                 return TasksDataTypes.UNICODE;
@@ -31,10 +31,10 @@ public final class TypeMapper {
                 return TasksDataTypes.DOUBLE;
 
             case FieldTypeConstants.DATE:
-                return TasksDataTypes.UNICODE;
+                return TasksDataTypes.DATE;
 
             case FieldTypeConstants.TIME:
-                return TasksDataTypes.UNICODE;
+                return TasksDataTypes.TIME;
 
             case FieldTypeConstants.SELECT_1:
                 return TasksDataTypes.LIST;
