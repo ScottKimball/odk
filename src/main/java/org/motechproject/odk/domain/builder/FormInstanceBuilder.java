@@ -2,11 +2,13 @@ package org.motechproject.odk.domain.builder;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.joda.time.DateTime;
 import org.motechproject.odk.constant.FieldTypeConstants;
 import org.motechproject.odk.domain.FormDefinition;
 import org.motechproject.odk.domain.FormElement;
 import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.FormValue;
+import org.motechproject.odk.domain.FormValueDateTime;
 import org.motechproject.odk.domain.FormValueDouble;
 import org.motechproject.odk.domain.FormValueGroup;
 import org.motechproject.odk.domain.FormValueInteger;
@@ -34,6 +36,7 @@ public class FormInstanceBuilder {
 
     /**
      * Builds a {@link FormInstance}
+     *
      * @return {@link FormInstance}
      */
     public FormInstance build() {
@@ -43,7 +46,8 @@ public class FormInstanceBuilder {
         for (FormElement formElement : formElements) {
             Object value = params.get(formElement.getName());
 
-            if (value != null) {
+            if (value != null && !(formElement.getType().equals(FieldTypeConstants.SELECT)
+                    && ((List<String>) value).size() == 0)) {
                 formValues.add(buildFormElementValueByType(formElement, value));
             }
         }
@@ -65,6 +69,15 @@ public class FormInstanceBuilder {
 
             case FieldTypeConstants.DECIMAL:
                 return new FormValueDouble(formElement.getName(), formElement.getLabel(), formElement.getType(), (Double) value);
+
+            case FieldTypeConstants.DATE_TIME:
+                return new FormValueDateTime(formElement.getName(), formElement.getLabel(), formElement.getType(), (DateTime) value);
+
+            case FieldTypeConstants.DATE:
+                return new FormValueDateTime(formElement.getName(), formElement.getLabel(), formElement.getType(), (DateTime) value);
+
+            case FieldTypeConstants.TIME:
+                return new FormValueDateTime(formElement.getName(), formElement.getLabel(), formElement.getType(), (DateTime) value);
 
             default:
                 return new FormValueString(formElement.getName(), formElement.getLabel(), formElement.getType(), (String) value);

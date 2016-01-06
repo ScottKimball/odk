@@ -27,6 +27,9 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
             case FieldTypeConstants.REPEAT_GROUP:
                 return EventBuilderUtils.formatAsJson(value);
 
+            case FieldTypeConstants.DATE_TIME:
+                return EventBuilderUtils.formatDateTime((String) value);
+
             default:
                 return value;
         }

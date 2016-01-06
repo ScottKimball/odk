@@ -85,7 +85,7 @@ public class FormController {
             }
 
         } catch (Exception e) {
-            LOGGER.error("Publishing form reciept failure event:\n" + e.toString());
+            LOGGER.error("Publishing form receipt failure event:\n" + e.toString());
             publishFailureEvent("Error parsing JSON form data", e.toString(), configuration.getName(), formDefinition.getTitle(), body);
         }
     }

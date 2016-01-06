@@ -28,7 +28,10 @@ public abstract class AbstractEventBuilder implements EventBuilder {
         for (FormElement formElement : formDefinition.getFormElements()) {
             Object value = data.get(formElement.getName());
             if (value != null) {
-                params.put(formElement.getName(), formatValue(formElement.getType(), value));
+                Object formattedValue = formatValue(formElement.getType(), value);
+                if (formattedValue != null) {
+                    params.put(formElement.getName(), formattedValue);
+                }
             }
         }
 

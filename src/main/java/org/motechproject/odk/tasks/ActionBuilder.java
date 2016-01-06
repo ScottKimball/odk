@@ -52,7 +52,7 @@ public class ActionBuilder {
         ActionParameterRequestBuilder builder;
 
         for (FormElement formElement : formElements) {
-            if (!formElement.isPartOfRepeatGroup()) {
+            if (!formElement.isPartOfRepeatGroup() && !formElement.getName().equals(EventParameters.INSTANCE_ID)) {
                 builder = new ActionParameterRequestBuilder();
                 builder
                         .setDisplayName(formElement.getLabel())

@@ -11,11 +11,10 @@ import org.motechproject.odk.domain.FormInstance;
 public interface FormInstanceDataService extends MotechDataService<FormInstance> {
 
     @Lookup
-    FormInstance byInstanceId (@LookupField(name = "instanceId") String instanceId);
+    FormInstance byInstanceId(@LookupField(name = "instanceId") String instanceId);
 
     @Lookup
-    FormInstance byConfigNameAndTitle (@LookupField(name = "configName") String configName, @LookupField(name = "title") String title);
-
+    FormInstance byConfigNameAndTitle(@LookupField(name = "configName") String configName, @LookupField(name = "title") String title);
 
 
 }

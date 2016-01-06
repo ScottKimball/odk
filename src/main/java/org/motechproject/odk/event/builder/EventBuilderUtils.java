@@ -9,7 +9,11 @@ import java.util.List;
  */
 public final class EventBuilderUtils {
 
-    private EventBuilderUtils() { }
+    private static final int DATE_TIME_STRING_LENGTH = 29;
+    private static final String GMT_OFFSET = ".000-00:00";
+
+    private EventBuilderUtils() {
+    }
 
     public static String formatStringList(Object value) {
         String s = (String) value;
@@ -18,7 +22,7 @@ public final class EventBuilderUtils {
 
     public static String formatStringArray(List<String> value) {
         if (value.size() == 0 || value.get(0) == null) {
-            return "";
+            return null;
         }
 
         StringBuilder builder = new StringBuilder();
@@ -32,7 +36,7 @@ public final class EventBuilderUtils {
 
     public static String formatDoubleArray(List<Double> value) {
         if (value.size() == 0 || value.get(0) == null) {
-            return "";
+            return null;
         }
 
         StringBuilder builder = new StringBuilder();
@@ -51,6 +55,20 @@ public final class EventBuilderUtils {
             return null;
         }
     }
+
+
+    public static String formatDateTime(String value) {
+        if (value.length() != DATE_TIME_STRING_LENGTH) {
+            return addGMToffset(value);
+        } else {
+            return value;
+        }
+    }
+
+    private static String addGMToffset(String value) {
+        return value + GMT_OFFSET;
+    }
+
 
 
 }

@@ -20,6 +20,7 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
     private static final String FILENAME = "filename";
     private static final String DOWNLOAD_URL = "download_url";
 
+
     private List<Map<String, String>> attachments;
 
 
@@ -50,10 +51,16 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
             case FieldTypeConstants.REPEAT_GROUP:
                 return EventBuilderUtils.formatAsJson(value);
 
+            case FieldTypeConstants.DATE_TIME:
+                return EventBuilderUtils.formatDateTime((String) value);
+
             default:
                 return value;
         }
     }
+
+
+
 
     private Object formatUrl(String value) {
 

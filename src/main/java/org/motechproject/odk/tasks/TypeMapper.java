@@ -36,7 +36,7 @@ public final class TypeMapper {
             case FieldTypeConstants.TIME:
                 return TasksDataTypes.TIME;
 
-            case FieldTypeConstants.SELECT_1:
+            case FieldTypeConstants.SELECT:
                 return TasksDataTypes.LIST;
 
             default:
