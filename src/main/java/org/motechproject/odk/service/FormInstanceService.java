@@ -12,4 +12,5 @@ public interface FormInstanceService {
      * @param formInstance {@link FormInstance}
      */
     void create(FormInstance formInstance);
+    FormInstance getByInstanceId(String instanceId);
 }

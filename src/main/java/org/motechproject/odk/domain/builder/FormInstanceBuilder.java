@@ -10,9 +10,11 @@ import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.domain.FormValueDateTime;
 import org.motechproject.odk.domain.FormValueDouble;
+import org.motechproject.odk.domain.FormValueDoubleList;
 import org.motechproject.odk.domain.FormValueGroup;
 import org.motechproject.odk.domain.FormValueInteger;
 import org.motechproject.odk.domain.FormValueString;
+import org.motechproject.odk.domain.FormValueStringList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,11 +81,16 @@ public class FormInstanceBuilder {
             case FieldTypeConstants.TIME:
                 return new FormValueDateTime(formElement.getName(), formElement.getLabel(), formElement.getType(), (DateTime) value);
 
+            case FieldTypeConstants.SELECT:
+                return new FormValueStringList(formElement.getName(), formElement.getLabel(), formElement.getType(), (List<String>) value);
+
+            case FieldTypeConstants.STRING_ARRAY:
+                return new FormValueStringList(formElement.getName(), formElement.getLabel(), formElement.getType(), (List<String>) value);
+
+
             default:
                 return new FormValueString(formElement.getName(), formElement.getLabel(), formElement.getType(), (String) value);
         }
-
-
     }
 
     private FormValueGroup buildGroup(FormElement formElement, Object value) {

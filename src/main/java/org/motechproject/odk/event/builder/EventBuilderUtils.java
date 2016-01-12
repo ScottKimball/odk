@@ -11,11 +11,15 @@ public final class EventBuilderUtils {
 
     private static final int DATE_TIME_STRING_LENGTH = 29;
     private static final String GMT_OFFSET = ".000-00:00";
+    private static final String EMPTY_STRING = "";
 
     private EventBuilderUtils() {
     }
 
     public static String formatStringList(Object value) {
+        if (value == null) {
+            return null;
+        }
         String s = (String) value;
         return s.replace(' ', '\n');
     }
@@ -58,6 +62,10 @@ public final class EventBuilderUtils {
 
 
     public static String formatDateTime(String value) {
+        if (value == null) {
+            return null;
+        }
+
         if (value.length() != DATE_TIME_STRING_LENGTH) {
             return addGMToffset(value);
         } else {

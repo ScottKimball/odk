@@ -27,12 +27,10 @@ public abstract class AbstractEventBuilder implements EventBuilder {
         Map<String, Object> params = new HashMap<>();
         for (FormElement formElement : formDefinition.getFormElements()) {
             Object value = data.get(formElement.getName());
-            if (value != null) {
-                Object formattedValue = formatValue(formElement.getType(), value);
+            Object formattedValue = formatValue(formElement.getType(), value);
                 if (formattedValue != null) {
                     params.put(formElement.getName(), formattedValue);
                 }
-            }
         }
 
         params.put(EventParameters.FORM_TITLE, formDefinition.getTitle());
@@ -65,6 +63,8 @@ public abstract class AbstractEventBuilder implements EventBuilder {
                 Object value = data.get(formElement.getName());
                 if (value != null) {
                     values.put(formElement.getName(), formatValue(formElement.getType(), value));
+                } else {
+                    values.put(formElement.getName(), null);
                 }
             }
         }

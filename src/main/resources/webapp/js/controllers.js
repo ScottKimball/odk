@@ -14,7 +14,7 @@
         $scope.verifiedSuccess = false;
         $scope.verifiedFail = false;
         $scope.verifiedError = false;
-        $scope.configTypes = [{name: "ODK", type: "ODK"}, {name: "Ona", type: "ONA"}, {name: "Kobo", type: "KOBO"}];
+        $scope.configTypes = [{name: "ODK", type: "ODK"}, {name: "Ona", type: "ONA"}, {name: "Kobotoolbox", type: "KOBO"}];
 
 
         $scope.getConfigs = function () {

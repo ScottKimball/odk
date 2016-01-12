@@ -39,6 +39,9 @@ public final class TypeMapper {
             case FieldTypeConstants.SELECT:
                 return TasksDataTypes.LIST;
 
+            case FieldTypeConstants.STRING_ARRAY:
+                return TasksDataTypes.LIST;
+
             default:
                 return TasksDataTypes.UNICODE;
         }

@@ -44,16 +44,21 @@ public class EventHandler {
         String title = (String) params.get(EventParameters.FORM_TITLE);
         String configName = (String) params.get(EventParameters.CONFIGURATION_NAME);
         String instanceId = (String) params.get(EventParameters.INSTANCE_ID);
-        LOGGER.debug("Saving form instance.Title: " + title + " ConfigName: " + configName + " Instance ID: " + instanceId);
 
         if (title != null && configName != null && instanceId != null) {
-            FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName, title);
+            if (formInstanceService.getByInstanceId(instanceId) != null) {
+                LOGGER.error("Form Instance with ID: " + instanceId + " already exists. Discarding form instance data");
+            } else {
+                LOGGER.debug("Saving form instance.Title: " + title + " ConfigName: " + configName + " Instance ID: " + instanceId);
+                FormDefinition formDefinition = formDefinitionService.findByConfigurationNameAndTitle(configName, title);
 
-            if (formDefinition != null) {
-                FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition, params, instanceId);
-                FormInstance instance = builder.build();
-                formInstanceService.create(instance);
+                if (formDefinition != null) {
+                    FormInstanceBuilder builder = new FormInstanceBuilder(formDefinition, params, instanceId);
+                    FormInstance instance = builder.build();
+                    formInstanceService.create(instance);
+                }
             }
+
         }
     }
 

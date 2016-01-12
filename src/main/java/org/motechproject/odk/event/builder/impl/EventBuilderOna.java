@@ -63,6 +63,9 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
 
 
     private Object formatUrl(String value) {
+        if (value == null) {
+            return null;
+        }
 
         for (Map<String, String> attachment : attachments) {
             String filename = attachment.get(FILENAME);

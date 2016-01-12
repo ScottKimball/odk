@@ -30,12 +30,21 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
             case FieldTypeConstants.DATE_TIME:
                 return EventBuilderUtils.formatDateTime((String) value);
 
+            case FieldTypeConstants.STRING_ARRAY:
+                return EventBuilderUtils.formatStringArray((List<String>) value);
+
+            case FieldTypeConstants.DOUBLE_ARRAY:
+                return EventBuilderUtils.formatDoubleArray((List<Double>) value);
+
             default:
                 return value;
         }
     }
 
     private String formatUrl(Map<String, String> value) {
+        if (value == null) {
+            return null;
+        }
         return value.get(URL);
     }
 

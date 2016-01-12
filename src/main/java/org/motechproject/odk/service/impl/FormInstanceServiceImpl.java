@@ -17,4 +17,9 @@ public class FormInstanceServiceImpl implements FormInstanceService {
     public void create(FormInstance formInstance) {
         formInstanceDataService.create(formInstance);
     }
+
+    @Override
+    public FormInstance getByInstanceId(String instanceId) {
+        return formInstanceDataService.byInstanceId(instanceId);
+    }
 }
