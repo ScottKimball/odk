@@ -39,12 +39,6 @@ public class EventBuilderOna extends AbstractEventBuilder implements EventBuilde
             case FieldTypeConstants.SELECT:
                 return EventBuilderUtils.formatStringList(value);
 
-            case FieldTypeConstants.STRING_ARRAY:
-                return EventBuilderUtils.formatStringArray((List<String>) value);
-
-            case FieldTypeConstants.DOUBLE_ARRAY:
-                return EventBuilderUtils.formatDoubleArray((List<Double>) value);
-
             case FieldTypeConstants.BINARY:
                 return formatUrl((String) value);
 

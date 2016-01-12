@@ -7,7 +7,6 @@ import org.motechproject.odk.event.builder.AbstractEventBuilder;
 import org.motechproject.odk.event.builder.EventBuilder;
 import org.motechproject.odk.event.builder.EventBuilderUtils;
 
-import java.util.List;
 import java.util.Map;
 
 public class EventBuilderODK extends AbstractEventBuilder implements EventBuilder {
@@ -18,8 +17,6 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
     protected Object formatValue(String type, Object value) {
 
         switch (type) {
-            case FieldTypeConstants.SELECT:
-                return EventBuilderUtils.formatStringArray((List<String>) value);
 
             case FieldTypeConstants.BINARY:
                 return formatUrl((Map<String, String>) value);
@@ -29,12 +26,6 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
 
             case FieldTypeConstants.DATE_TIME:
                 return EventBuilderUtils.formatDateTime((String) value);
-
-            case FieldTypeConstants.STRING_ARRAY:
-                return EventBuilderUtils.formatStringArray((List<String>) value);
-
-            case FieldTypeConstants.DOUBLE_ARRAY:
-                return EventBuilderUtils.formatDoubleArray((List<Double>) value);
 
             default:
                 return value;

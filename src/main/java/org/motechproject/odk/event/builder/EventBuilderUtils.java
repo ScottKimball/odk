@@ -2,6 +2,7 @@ package org.motechproject.odk.event.builder;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,13 +17,16 @@ public final class EventBuilderUtils {
     private EventBuilderUtils() {
     }
 
-    public static String formatStringList(Object value) {
+    public static List<String> formatStringList(Object value) {
         if (value == null) {
             return null;
         }
         String s = (String) value;
-        return s.replace(' ', '\n');
+        String[] strings = s.split("\\s+");
+        return Arrays.asList(strings);
     }
+
+
 
     public static String formatStringArray(List<String> value) {
         if (value.size() == 0 || value.get(0) == null) {
