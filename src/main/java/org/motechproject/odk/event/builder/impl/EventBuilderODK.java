@@ -12,6 +12,7 @@ import java.util.Map;
 public class EventBuilderODK extends AbstractEventBuilder implements EventBuilder {
 
     private static final String URL = "url";
+    private static final int TIME_STRING_SIZE = 5;
 
 
     protected Object formatValue(String type, Object value) {
@@ -24,13 +25,18 @@ public class EventBuilderODK extends AbstractEventBuilder implements EventBuilde
             case FieldTypeConstants.REPEAT_GROUP:
                 return EventBuilderUtils.formatAsJson(value);
 
-            case FieldTypeConstants.DATE_TIME:
-                return EventBuilderUtils.formatDateTime((String) value);
+            case FieldTypeConstants.TIME:
+                return formatDate((String) value);
 
             default:
                 return value;
         }
     }
+
+    private String formatDate(String value) {
+        return value.substring(0, TIME_STRING_SIZE);
+    }
+
 
     private String formatUrl(Map<String, String> value) {
         if (value == null) {
