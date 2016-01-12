@@ -10,7 +10,6 @@ import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.FormValue;
 import org.motechproject.odk.domain.FormValueDateTime;
 import org.motechproject.odk.domain.FormValueDouble;
-import org.motechproject.odk.domain.FormValueDoubleList;
 import org.motechproject.odk.domain.FormValueGroup;
 import org.motechproject.odk.domain.FormValueInteger;
 import org.motechproject.odk.domain.FormValueString;
