@@ -86,7 +86,6 @@ public class FormInstanceBuilder {
             case FieldTypeConstants.STRING_ARRAY:
                 return new FormValueStringList(formElement.getName(), formElement.getLabel(), formElement.getType(), (List<String>) value);
 
-
             default:
                 return new FormValueString(formElement.getName(), formElement.getLabel(), formElement.getType(), (String) value);
         }

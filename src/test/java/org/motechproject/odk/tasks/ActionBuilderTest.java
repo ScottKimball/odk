@@ -36,7 +36,7 @@ public class ActionBuilderTest {
         ActionBuilder builder = new ActionBuilder(formDefinitions);
         List<ActionEventRequest> requests = builder.build();
         System.out.println();
-        assertEquals(requests.size(), 1);
+        assertEquals(requests.size(), 2);
 
         ActionEventRequest request = requests.get(0);
         assertEquals(request.getName(),"configName_nested_repeat_persist_form_instance");

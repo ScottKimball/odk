@@ -20,6 +20,7 @@ public final class DisplayNames {
     public static final String REPEAT_GROUP = "Repeat Group";
 
     public static final String SAVE_FORM_INSTANCE = "Save Form Instance";
+    public static final String SAVE_FORM_FAILURE = "Save Form Failure Event";
 
 
 }

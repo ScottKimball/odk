@@ -6,9 +6,11 @@ import org.motechproject.event.listener.annotations.MotechListener;
 import org.motechproject.odk.constant.EventParameters;
 import org.motechproject.odk.constant.EventSubjects;
 import org.motechproject.odk.domain.FormDefinition;
+import org.motechproject.odk.domain.FormFailure;
 import org.motechproject.odk.domain.FormInstance;
 import org.motechproject.odk.domain.builder.FormInstanceBuilder;
 import org.motechproject.odk.service.FormDefinitionService;
+import org.motechproject.odk.service.FormFailureService;
 import org.motechproject.odk.service.FormInstanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +35,13 @@ public class EventHandler {
     @Autowired
     private FormInstanceService formInstanceService;
 
+    @Autowired
+    private FormFailureService formFailureService;
+
 
     /**
      * Creates {@link FormInstance} from the event payload and saves it.
+     *
      * @param event {@link MotechEvent}
      */
     @MotechListener(subjects = EventSubjects.PERSIST_FORM_INSTANCE)
@@ -60,6 +66,25 @@ public class EventHandler {
             }
 
         }
+    }
+
+    /**
+     * Creates a {@link FormFailure} from the event payload and saves it.
+     *
+     * @param event {@link MotechEvent}
+     */
+    @MotechListener(subjects = EventSubjects.FORM_FAIL)
+    public void handlePersistFormFailure(MotechEvent event) {
+        Map<String, Object> params = event.getParameters();
+        String configName = (String) params.get(EventParameters.CONFIGURATION_NAME);
+        String formTitle = (String) params.get(EventParameters.FORM_TITLE);
+        String message = (String) params.get(EventParameters.MESSAGE);
+        String exception = (String) params.get(EventParameters.EXCEPTION);
+        String jsonContent = (String) params.get(EventParameters.JSON_CONTENT);
+
+        FormFailure formFailure = new FormFailure(configName, formTitle, message, exception, jsonContent);
+        LOGGER.debug("Saving Form Failure");
+        formFailureService.create(formFailure);
     }
 
 

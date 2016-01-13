@@ -55,7 +55,7 @@ public class ChannelRequestBuilderTest {
 
         ChannelRequestBuilder builder = new ChannelRequestBuilder(bundleContext, formDefinitions);
         ChannelRequest channelRequest = builder.build();
-        assertEquals(channelRequest.getActionTaskEvents().size(), 1);
+        assertEquals(channelRequest.getActionTaskEvents().size(), 2);
         assertEquals(channelRequest.getTriggerTaskEvents().size(), 4);
 
     }

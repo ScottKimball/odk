@@ -5,6 +5,10 @@ import org.motechproject.mds.annotations.Field;
 
 import java.util.List;
 
+
+/**
+ * Represents a collection of String values in a form instance
+ */
 @Entity
 public class FormValueStringList extends FormValue {
 
