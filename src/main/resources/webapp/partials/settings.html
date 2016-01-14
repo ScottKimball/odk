@@ -5,7 +5,7 @@
         <div class="form-inline form-group">
             <label for="configs">{{msg('odk.selectConfig')}}: </label>
             <select class="largeCombobox form-control" id="configs" ng-model="selectedConfig"
-                    ng-options="config.name for config in configs">
+                    ng-options="config.name for config in configs" ng-change="changeUrl()">
             </select>
         </div>
         <div class="btn-group form-group">
@@ -129,6 +129,12 @@
     </div>
     <div ng-if="deleteError" class="alert alert-danger" role="alert" id="deleteError">
         {{msg('odk.settings.delete.error')}}
+    </div>
+    
+    <div ng-show="selectedConfig != null">
+            <h4 >{{msg('odk.formsList.forwardingUrl')}}</h4>
+            <div>{{url}}</div>
+            <div>{{msg('odk.formsList.noSpaces')}}</div>
     </div>
 
 </div>

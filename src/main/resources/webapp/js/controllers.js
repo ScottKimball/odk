@@ -15,6 +15,8 @@
         $scope.verifiedFail = false;
         $scope.verifiedError = false;
         $scope.configTypes = [{name: "ODK", type: "ODK"}, {name: "Ona", type: "ONA"}, {name: "Kobotoolbox", type: "KOBO"}];
+        $scope.url = null;
+        var href = window.location.href.split("/server")[0] + "/odk/forms/";
 
 
         $scope.getConfigs = function () {
@@ -125,8 +127,11 @@
 
         $scope.unverify = function () {
             $scope.selectedConfig.verified = false;
-        }
+        };
 
+        $scope.changeUrl = function () {
+            $scope.url = href + $scope.selectedConfig.name + "/{Form Title}";
+        };
 
     });
 
@@ -135,6 +140,8 @@
         $scope.importFail = false;
         $scope.importing = false;
         $scope.formDefinitions = [];
+        $scope.href = window.location.href.split("/server")[0] + "/odk/forms/";
+
 
         var importFail = function () {
             $scope.importFail = true;
@@ -213,8 +220,5 @@
                 }
             }
         };
-
     });
-
-
 }());

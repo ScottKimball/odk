@@ -22,17 +22,28 @@
 
     <h3>{{msg('odk.formlist.forms')}}</h3>
     <br>
+    <div class="form-def-row">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2"><strong>{{msg('odk.formsList.title')}}</strong></div>
+            <div class="col-lg-6 col-md-6 col-sm-6"><strong>{{msg('odk.formsList.forwardingUrl')}}</strong></div>
+            <div class="col-lg-3 col-sm-5 col-md-4" align="left"><strong>{{msg('odk.formsList.details')}}</strong></div>
+        </div>
+    </div>
 
     <div ng-repeat="formDefinition in formDefinitions track by $index" class="form-def-row">
-        <div class="col-lg-9 col-md-8 col-sm-7">{{formDefinition.title}}</div>
-        <div class="col-lg-3 col-sm-5 col-md-4" align="left">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#xformModal"
-                        ng-click="selectFormDef(formDefinition)">{{msg('odk.formList.xform')}}
-                </button>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#viewModal"
-                        ng-click="selectFormDef(formDefinition)">{{msg('odk.formList.view')}}
-                </button>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">{{formDefinition.title}}</div>
+            <div class="col-lg-6 col-md-6 col-sm-6">{{href + formDefinition.configurationName + "/" + formDefinition.title}}</div>
+
+            <div class="col-lg-3 col-sm-5 col-md-4" align="left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#xformModal"
+                            ng-click="selectFormDef(formDefinition)">{{msg('odk.formList.xform')}}
+                    </button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#viewModal"
+                            ng-click="selectFormDef(formDefinition)">{{msg('odk.formList.view')}}
+                    </button>
+                </div>
             </div>
         </div>
 
